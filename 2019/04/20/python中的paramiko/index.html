@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>python中的paramiko模块 | Scorpio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="about paramiko~~">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中的paramiko模块">
+<meta property="og:url" content="https://www.Gsuhy.cn/2019/04/20/python中的paramiko/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="about paramiko~~">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T03:30:35.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python中的paramiko模块">
+<meta name="twitter:description" content="about paramiko~~">
+  
+    <link rel="alternate" href="/atom.xml" title="Scorpio" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Scorpio</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Gsuhy</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.Gsuhy.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python中的paramiko" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/20/python中的paramiko/" class="article-date">
+  <time datetime="2019-04-20T15:04:30.000Z" itemprop="datePublished">2019-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python中的paramiko模块
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>about paramiko~~<a id="more"></a></p>
+<h2 id="关于python中的paramiko模块"><a href="#关于python中的paramiko模块" class="headerlink" title="关于python中的paramiko模块"></a>关于python中的paramiko模块</h2><p>paramiko是基于python实现的ssh2远程安全连接，支持认证及秘钥方式远程执行命令、文件传输、中间ssh代理。<br>一个简单的远程ssh运行命令：</p>
+<pre><code>import paramiko
+
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect(&quot;ip&quot;,port,username=&quot;****&quot;,password=&quot;****&quot;)
+stdin,stdout,stderr = ssh.exec_command(&quot;df -h&quot;)
+result = stdout.read()
+print(result.decode())</code></pre><h2 id="paramiko核心组件"><a href="#paramiko核心组件" class="headerlink" title="paramiko核心组件"></a>paramiko核心组件</h2><h3 id="SSHClient类"><a href="#SSHClient类" class="headerlink" title="SSHClient类"></a>SSHClient类</h3><p><code>SSHClient</code>类是一个SSH服务会话的高级表示，该类封装了<code>传输(transport)、通道(channel)</code>以及<code>SFTPClient</code>的校验，建立的方法，通常用于执行远程命令。</p>
+<h4 id="connect方法"><a href="#connect方法" class="headerlink" title="connect方法"></a>connect方法</h4><p><code>connect(self, hostkey=None, username=&#39;&#39;, password=None, pkey=None,gss_host=None, gss_auth=False, gss_kex=False, gss_deleg_creds=True)</code></p>
+<ul>
+<li>hostname(str类型)：连接的目标主机地址</li>
+<li>port：端口</li>
+<li>username：str</li>
+<li>password：str</li>
+<li>pkey(PKey类型)：私钥方式，用于身份验证</li>
+<li>gass_host：kerberos数据库中目标的名称，默认为hostname</li>
+<li>gss_auth(bool)：是否使用GSS-API认证</li>
+<li>ss_kex=False(bool)：是否将GSS-API key和用户认证交换</li>
+<li>gss_deleg_creds(bool)：是否代表包含GSS-API客户端的凭据</li>
+</ul>
+<h4 id="exec-command方法"><a href="#exec-command方法" class="headerlink" title="exec_command方法"></a>exec_command方法</h4><p>远程执行命令方法，该命令的输入与输入流为标准输入(stdin)，输出(stdout)，错误(stderr)</p>
+<h4 id="load-system-host-keys方法"><a href="#load-system-host-keys方法" class="headerlink" title="load_system_host_keys方法"></a>load_system_host_keys方法</h4><p><code>load_host_keys(self, filename)</code>，filename（str类型）指定远程主机公钥记录文件<br>加载本地要校验文件，默认为<code>~/.ssh/known_hosts</code><br>非默认需要自己指定</p>
+<h3 id="set-missing-host-key-policy方法："><a href="#set-missing-host-key-policy方法：" class="headerlink" title="set_missing_host_key_policy方法："></a>set_missing_host_key_policy方法：</h3><p><code>set_missing_host_key_policy(self, policy)</code></p>
+<p>设置连接的远程主机没有本地主机秘钥或HostKeys对象时的策略，目前支持三种，分别是：AutoAddPolicy、RejectPolicy（默认）、WarningPolicy<br>三者的含义如下：</p>
+<ul>
+<li><p>AutoAddPolicy：自动添加主机名及主机秘钥到本地HostKeys对象，并将其保存，不依赖<code>load_system_host_keys()</code>的配置，即使<code>~/.ssh/known_hosts</code>不存在也不产生影响</p>
+</li>
+<li><p>RejectPolicy：自动拒绝位置的主机名和秘钥，依赖<code>load_system_host_keys()</code>的配置</p>
+</li>
+<li><p>WarningPolicy：用于记录一个位置的主机秘钥的python警告，并接受它，功能上与AutoAddPolicy相似，但未知主机会有警告</p>
+</li>
+</ul>
+<h3 id="SFTPClient类"><a href="#SFTPClient类" class="headerlink" title="SFTPClient类"></a>SFTPClient类</h3><p><code>SFTPClient</code>根据SSH传输协议的sftp命令会话，实现远程文件操作：文件的上传、下载、权限、状态等</p>
+<h4 id="from-transport方法"><a href="#from-transport方法" class="headerlink" title="from_transport方法"></a>from_transport方法</h4><p><code>from_transport(cls, t, window_size=None, max_packet_size=None)</code><br>其中上面的参数t是一个已经通过验证的传输对象</p>
+<h4 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h4><p>长传本地文件到远程SFTP服务端<br><code>put(self, localpath, remotepath, callback=None, confirm=True)</code><br>参数说明：</p>
+<ul>
+<li>localpath：需要上传的本地文件</li>
+<li>remotepath：目标文件路径</li>
+<li>callback(function(init,init))：获取已接收的字节数以及总传输字节数，一边回调函数调用，默认为None</li>
+<li>confirm：文件长传完毕后是否调用start()方法，以便缺文件大小</li>
+</ul>
+<h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><p><code>get(self,remotepath,localpath,callback=None)</code><br>从远程SFTP服务端下载本地<br>参数：</p>
+<ul>
+<li>remotepath（str类型）：需要下载的远程文件</li>
+<li>localpath（str类型）：本地路径</li>
+<li>callback（function(init,init)）: 获取已接收的字节数及总传输字节数，以便回调函数调用，默认为None</li>
+</ul>
+<h4 id="其他一些方法"><a href="#其他一些方法" class="headerlink" title="其他一些方法"></a>其他一些方法</h4><ul>
+<li><p>SFTPClient类其他常用方法：</p>
+</li>
+<li><p>Mkdir:在SFTP服务端创建目录</p>
+</li>
+<li><p>remove:删除SFTP服务端指定目录</p>
+</li>
+<li><p>rename:重命名SFTP服务端文件或目录</p>
+</li>
+<li><p>stat:获取远程SFTP服务端指定文件的信息</p>
+</li>
+<li><p>listdir:获取远程SFTP服务端指定目录列表，以Python的列表形式返回</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.Gsuhy.cn/2019/04/20/python中的paramiko/" data-id="cjzljifay000vioftr50u1evs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/21/IO多路复用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          python中IO多路复用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/20/关于python函数的小知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于python函数的小知识</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSP/">JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Link/">Link</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/内网渗透/">内网渗透</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WP/">WP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jSP/">jSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sites/">sites</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网渗透/">内网渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/11/javascript part1/">JavaScript part 1</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/24/内网渗透/">内网渗透思维导图</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/21/ubuntu配置nginx+php+mysql/">ubuntu or centos中配置nginx+php+mysql</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sqli-labs训练(11-20)/">sqli-labs训练（less11-20）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Gsuhy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

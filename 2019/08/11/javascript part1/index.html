@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JavaScript part 1 | Scorpio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript（一）现在基本上每一个网页都含有js的代码，所以我觉得应该去了解一下。最简单的js代码 &amp;lt;script&amp;gt; alert(&amp;quot;this is JavaScript&amp;quot;); &amp;lt;/script&amp;gt;浏览器会解释并执行位于&amp;lt;script&amp;gt;标签之间的js代码 语法输出js可以通过四种方式来输出数据：  window.alert()：弹出警告框">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript part 1">
+<meta property="og:url" content="https://www.Gsuhy.cn/2019/08/11/javascript part1/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="JavaScript（一）现在基本上每一个网页都含有js的代码，所以我觉得应该去了解一下。最简单的js代码 &amp;lt;script&amp;gt; alert(&amp;quot;this is JavaScript&amp;quot;); &amp;lt;/script&amp;gt;浏览器会解释并执行位于&amp;lt;script&amp;gt;标签之间的js代码 语法输出js可以通过四种方式来输出数据：  window.alert()：弹出警告框">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T03:30:35.836Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript part 1">
+<meta name="twitter:description" content="JavaScript（一）现在基本上每一个网页都含有js的代码，所以我觉得应该去了解一下。最简单的js代码 &amp;lt;script&amp;gt; alert(&amp;quot;this is JavaScript&amp;quot;); &amp;lt;/script&amp;gt;浏览器会解释并执行位于&amp;lt;script&amp;gt;标签之间的js代码 语法输出js可以通过四种方式来输出数据：  window.alert()：弹出警告框">
+  
+    <link rel="alternate" href="/atom.xml" title="Scorpio" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Scorpio</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Gsuhy</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.Gsuhy.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-javascript part1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/11/javascript part1/" class="article-date">
+  <time datetime="2019-08-11T15:04:30.000Z" itemprop="datePublished">2019-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript part 1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript（一）"><a href="#JavaScript（一）" class="headerlink" title="JavaScript（一）"></a>JavaScript（一）</h1><p>现在基本上每一个网页都含有js的代码，所以我觉得应该去了解一下。<br>最简单的js代码</p>
+<pre><code>&lt;script&gt;
+alert(&quot;this is JavaScript&quot;);
+&lt;/script&gt;</code></pre><p>浏览器会解释并执行位于<code>&lt;script&gt;</code>标签之间的js代码</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>js可以通过四种方式来输出数据：</p>
+<ul>
+<li>window.alert()：弹出警告框</li>
+<li>document.write()：将内容写到html文档</li>
+<li>innerHTML：写入到HTML元素</li>
+<li>console.log()：写入到浏览器控制台</li>
+</ul>
+<h4 id="window-alert"><a href="#window-alert" class="headerlink" title="window.alert()"></a>window.alert()</h4><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;test&lt;/h1&gt;
+&lt;p&gt;test&lt;/p&gt;
+
+&lt;script&gt;
+window.alert(5 + 6);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>这段代码会运行之后会进行弹窗，弹窗内容为11</p>
+<h3 id="操作HTML元素，innerHTML"><a href="#操作HTML元素，innerHTML" class="headerlink" title="操作HTML元素，innerHTML"></a>操作HTML元素，innerHTML</h3><p>如果需要从js访问某个HTML元素，可以用<code>document.getElementById(id)</code>方法，用id属性来标识html元素，并用innerHTML来获取或插入元素<br><strong>eg</strong></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;test&lt;/h1&gt;
+&lt;p id=&quot;demo&quot;&gt;我的第一个js。&lt;/p&gt;
+&lt;script&gt;
+document.getElementById(&quot;demo&quot;).innerHTML=&quot;welcome&quot;;
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+----------------------------
+结果
+test
+welcome</code></pre><p><code>document.getElementById(&quot;demo&quot;)</code> 是使用 id 属性来查找 HTML 元素的js代码 。</p>
+<p><code>innerHTML = &quot;welcome&quot;</code>是用于修改元素的 HTML 内容(innerHTML)的js代码。</p>
+<h3 id="写入HTML-document-write"><a href="#写入HTML-document-write" class="headerlink" title="写入HTML-document.write()"></a>写入HTML-document.write()</h3><p>可以用<code>documenti.write()</code>将想写入HTML中的js代码写进去</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;script&gt;
+document.write(Date());
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+----------------
+页面会显示当前时间</code></pre><p>而如果是在文档加载完后执行<code>documenti.write</code>，那么整个页面会被覆盖掉<br><strong>eg</strong></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;body&gt;
+
+&lt;button onclick=&quot;myFunction()&quot;&gt;点我&lt;/button&gt;
+&lt;script&gt;
+function myFunction()
+{
+    document.write(Date());
+}
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="写进控制台-console-log"><a href="#写进控制台-console-log" class="headerlink" title="写进控制台 console.log()"></a>写进控制台 console.log()</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;script&gt;
+a = 5;
+b = 6;
+c = a + b;
+console.log(c);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>在浏览器F12进入控制台，到console页面，会看到11被写了进去</p>
+<h3 id="一些基础的定义"><a href="#一些基础的定义" class="headerlink" title="一些基础的定义"></a>一些基础的定义</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p><code>[1,2,3,4]</code></p>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p><code>{first:&quot;G&quot;,last:&quot;suhy&quot;,age:20}</code><br>这里有两种方法去寻址，首先先定义一个js对象</p>
+<pre><code>var person={
+firstname : &quot;Gsuhy&quot;,
+lastname  : &quot;vip&quot;,
+id        :  666
+};</code></pre><p>如果要寻址的话</p>
+<ul>
+<li><code>name=person.firstname</code></li>
+<li><code>name=person[&quot;firstname]</code></li>
+</ul>
+<p>而且，在定义对象的时候还可以在对象中在内嵌一个函数，比如：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p&gt;创建和使用对象方法。&lt;/p&gt;
+&lt;p&gt;对象方法是一个函数定义,并作为一个属性值存储。&lt;/p&gt;
+&lt;p id=&quot;demo1&quot;&gt;&lt;/p&gt;
+&lt;p id=&quot;demo2&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+var person = {
+    firstName: &quot;John&quot;,
+    lastName : &quot;Doe&quot;,
+    id : 5566,
+    fullName : function()
+    {
+       return this.firstName + &quot; &quot; + this.lastName;
+    }
+};
+document.getElementById(&quot;demo1&quot;).innerHTML = &quot;不加括号输出函数表达式：&quot;  + person.fullName;
+document.getElementById(&quot;demo2&quot;).innerHTML = &quot;加括号输出函数执行结果：&quot;  +  person.fullName();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+--------------------
+结果
+创建和使用对象方法。
+
+对象方法是一个函数定义,并作为一个属性值存储。
+
+不加括号输出函数表达式：function() { return this.firstName + &quot; &quot; + this.lastName; }
+
+加括号输出函数执行结果：John Doe</code></pre><p>这么一看来，感觉挺方便的</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>关于Js中的函数，可以定义不带参数的函数<code>function myFunction(){alert(&quot;Hello World!&quot;);}</code>,也可以设置带参数的<code>function myfunction(a,b){return a+b;}</code><br><strong>eg</strong></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p&gt;点击这个按钮，来调用带参数的函数。&lt;/p&gt;
+&lt;button onclick=&quot;myFunction(&#39;Harry Potter&#39;,&#39;Wizard&#39;)&quot;&gt;点击这里&lt;/button&gt;
+&lt;script&gt;
+function myFunction(name,job){
+    alert(&quot;Welcome &quot; + name + &quot;, the &quot; + job);
+}
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>不过在ES6中新增了一种函数，叫做箭头函数(Arrow Function)<br><code>x=&gt;x*x</code><br>这个语句就相当于</p>
+<pre><code>function (x) {
+    return x * x;
+}</code></pre><p>这么一看那可不太方便了</p>
+<pre><code>// 两个参数:
+(x, y) =&gt; x * x + y * y
+
+// 无参数:
+() =&gt; 3.14
+
+// 可变参数:
+(x, y, ...rest) =&gt; {
+    var i, sum = x + y;
+    for (i=0; i&lt;rest.length; i++) {
+        sum += rest[i];
+    }
+    return sum;
+}</code></pre><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>在js中使用关键字var来定义变量</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+var length;
+length = 6;
+document.getElementById(&quot;demo&quot;).innerHTML = length;
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h4 id="Map和Set"><a href="#Map和Set" class="headerlink" title="Map和Set"></a>Map和Set</h4><p><code>Map</code>是一组键值对的结构，具有极快的查找速度。<br>举个例子，假设要根据同学的名字查找对应的成绩，如果用Array实现，需要两个Array：</p>
+<pre><code>var names = [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;];
+var scores = [95, 75, 85];</code></pre><p>而使用Map的话，js的语句就很简洁</p>
+<pre><code>var m = new Map([[&#39;Michael&#39;, 95], [&#39;Bob&#39;, 75], [&#39;Tracy&#39;, 85]]);
+m.get(&#39;Michael&#39;); // 95</code></pre><p>Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key。</p>
+<p>要创建一个Set，需要提供一个Array作为输入，或者直接创建一个空Set：</p>
+<pre><code>var s1 = new Set(); // 空Set
+var s2 = new Set([1, 2, 3]); // 含1, 2, 3</code></pre><p>重复元素在Set中自动被过滤：</p>
+<pre><code>var s = new Set([1, 2, 3, 3, &#39;3&#39;]);
+s; // Set {1, 2, 3, &quot;3&quot;}</code></pre><p><strong>注意数字3和字符串’3’是不同的元素。</strong></p>
+<p>通过<code>add(key)</code>方法可以添加元素到Set中，可以重复添加，但不会有效果：</p>
+<pre><code>s.add(4);
+s; // Set {1, 2, 3, 4}
+s.add(4);
+s; // 仍然是 Set {1, 2, 3, 4}</code></pre><p>通过delete(key)方法可以删除元素：</p>
+<pre><code>var s = new Set([1, 2, 3]);
+s; // Set {1, 2, 3}
+s.delete(3);
+s; // Set {1, 2}
+</code></pre><h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>注释：//或者/**/</li>
+<li>js对字母大小写敏感</li>
+<li>每条语句以;结尾</li>
+<li>可以在文本字符串中使用 \ 对代码进行换行<br><code>document.write(&quot;你好 \
+世界!&quot;);</code><br>这样是可以的，但是<br><code>document.write \
+(&quot;你好世界!&quot;);</code><br>这样是不行的</li>
+<li>一条语句可以声明很多变量，而且可以跨行，以逗号分隔<br>但是像这样<code>var x,y,z=1</code>这里面的x和y都是undefined的变量，只有z赋了值</li>
+<li>还可以通过用new关键字来声明类型</li>
+</ul>
+<pre><code>var carname=new String;
+var x=      new Number;
+var y=      new Boolean;
+var cars=   new Array;
+var person= new Object;</code></pre><h3 id="js正则表达式"><a href="#js正则表达式" class="headerlink" title="js正则表达式"></a>js正则表达式</h3><p>其实正则都学了很久了，php的，python的，但是总感觉自己没有理解，争取在这里把他理解了，一通百通。<br>语法：<code>/正则表达式主体/修饰符(可选)</code><br><strong>eg</strong><code>：var pat = /runoob/i</code></p>
+<ul>
+<li>runoob  是一个正则表达式主体 (用于检索)。</li>
+<li>i  是一个修饰符 (搜索不区分大小写)。</li>
+</ul>
+<p>在 JavaScript 中，正则表达式通常用于两个字符串方法 : <code>search()</code> 和 <code>replace()</code>。</p>
+<ul>
+<li><code>search()</code> 方法: 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，并返回子串的起始位置。</li>
+<li><code>replace()</code> 方法：用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</li>
+</ul>
+<p><strong>例子</strong>：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p&gt;搜索字符串 &quot;Runoob&quot;, 并显示匹配的起始位置：&lt;/p&gt;
+&lt;button onclick=&quot;myFunction()&quot;&gt;点我&lt;/button&gt;
+&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+&lt;script&gt;
+function myFunction() {
+    var str = &quot;Visit Runoob!&quot;;
+    var n = str.search(/Runoob/i);
+    document.getElementById(&quot;demo&quot;).innerHTML = n;
+}
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+---------------------
+这是使用正则去搜索Runoob字符串，不区分大小写，然后搜索结果为6</code></pre><p>而<code>search()f</code>方法可以使用字符串作为参数，会自动转换为正则表达式</p>
+<pre><code>var str = &quot;Visit Runoob!&quot;;
+var n = str.search(&quot;Runoob&quot;);</code></pre><p>而<code>replace()</code>就是替换<br>例子：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;p&gt;替换 &quot;microsoft&quot; 为 &quot;Runoob&quot; :&lt;/p&gt;
+&lt;button onclick=&quot;myFunction()&quot;&gt;点我&lt;/button&gt;
+&lt;p id=&quot;demo&quot;&gt;Visit Microsoft!&lt;/p&gt;
+&lt;script&gt;
+function myFunction() {
+    var str = document.getElementById(&quot;demo&quot;).innerHTML;
+    var txt = str.replace(/microsoft/i,&quot;Runoob&quot;);
+    document.getElementById(&quot;demo&quot;).innerHTML = txt;
+}
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h4 id="正则表达式修饰符"><a href="#正则表达式修饰符" class="headerlink" title="正则表达式修饰符"></a>正则表达式修饰符</h4><p>关于前面提到的i，也就是正则表达式修饰符，有三个</p>
+<ul>
+<li>i:对大小写不敏感匹配</li>
+<li>g:全局匹配</li>
+<li>m:多行匹配</li>
+</ul>
+<h4 id="正则表达式模式"><a href="#正则表达式模式" class="headerlink" title="正则表达式模式"></a>正则表达式模式</h4><p>方括号用于查找某个范围内的字符</p>
+<ul>
+<li>[abc]:查找方括号之间的任何字符</li>
+<li>[0-9]:查找从0-9的数字</li>
+<li>(x|y):查找任何以|分割的选项</li>
+</ul>
+<p>元字符是拥有特殊含义的字符</p>
+<ul>
+<li>\d:查找数字</li>
+<li>\s:查找空白字符</li>
+<li>\b:匹配单词边界</li>
+<li>\uxxxx:查找以16进制数xxx规定的unicode字符</li>
+</ul>
+<p>量词</p>
+<ul>
+<li>n+:匹配任何包含至少一个n的字符串</li>
+<li>n*:匹配任何包含0或者多个n的字符串</li>
+<li>n?:匹配任何包含0或者1个n的字符串</li>
+</ul>
+<h4 id="使用RegExp对象"><a href="#使用RegExp对象" class="headerlink" title="使用RegExp对象"></a>使用RegExp对象</h4><p>RegExp对象是一个预定义了属性和方法的正则表达式</p>
+<h5 id="test"><a href="#test" class="headerlink" title="test()"></a>test()</h5><p>test() 方法是一个正则表达式方法。<br>test() 方法用于检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回 true，否则返回 false。</p>
+<p>以下实例用于搜索字符串中的字符 “e”：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;script&gt;
+var patt1=new RegExp(&quot;e&quot;);
+document.write(patt1.test(&quot;The best things in life are free&quot;));
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+-----------------------------
+结果：
+true</code></pre><h5 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h5><p>exec() 方法是一个正则表达式方法。<br>exec() 方法用于检索字符串中的正则表达式的匹配。<br>该函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。</p>
+<p>以下实例用于搜索字符串中的字母 “e b”:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;script&gt;
+var patt1=new RegExp(&quot;e b&quot;);
+document.write(patt1.exec(&quot;The best things in life are free&quot;));
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+-------------------
+结果：
+e b
+因为The best</code></pre><h3 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h3><p>直接上代码分析</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;script&gt;
+function validateForm() {
+    var x = document.forms[&quot;myForm&quot;][&quot;fname&quot;].value;
+    if (x == null || x == &quot;&quot;) {
+        alert(&quot;需要输入名字。&quot;);
+        return false;
+    }
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form name=&quot;myForm&quot; action=&quot;demo_form.php&quot;
+onsubmit=&quot;return validateForm()&quot; method=&quot;post&quot;&gt;
+名字: &lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>这里如果输入名字为空那么会弹窗提示输入名字，<code>var x = document.forms[&quot;myForm&quot;][&quot;fname&quot;].value</code>是关键，对应着下面表单中的<strong>Myform</strong>和<strong>fname</strong>，也就是说，网页的表单验证可以通过js来执行</p>
+<p>当然还有自动表单验证，就是用<code>required</code></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form action=&quot;demo_form.php&quot; method=&quot;post&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;fname&quot; required=&quot;required&quot;&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;/form&gt;
+
+&lt;p&gt;点击提交按钮，如果输入框是空的，浏览器会提示错误信息。&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>这个时候如果提交空表单，不会弹窗，但是会有提示</p>
+<h4 id="约束验证HTML输入属性"><a href="#约束验证HTML输入属性" class="headerlink" title="约束验证HTML输入属性"></a>约束验证HTML输入属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="right">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">disabled</td>
+<td align="right">规定输入的元素不可用</td>
+</tr>
+<tr>
+<td align="left">max</td>
+<td align="right">规定输入元素的最大值</td>
+</tr>
+<tr>
+<td align="left">min</td>
+<td align="right">….最小值</td>
+</tr>
+<tr>
+<td align="left">pattern</td>
+<td align="right">规定输入元素值的模式</td>
+</tr>
+<tr>
+<td align="left">required</td>
+<td align="right">规定输入元素字段是必须的</td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="right">规定输入元素的类型</td>
+</tr>
+</tbody></table>
+<h3 id="JS中的this"><a href="#JS中的this" class="headerlink" title="JS中的this"></a>JS中的this</h3><p>看到this这里，我觉得js的this和其他语言的this还有点不大一样，<br>JavaScript 中 this 不是固定不变的，它会随着执行环境的改变而改变。</p>
+<h4 id="在方法中，this-表示该方法所属的对象"><a href="#在方法中，this-表示该方法所属的对象" class="headerlink" title="在方法中，this 表示该方法所属的对象"></a>在方法中，this 表示该方法所属的对象</h4><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h2&gt;JavaScript &lt;b&gt;this&lt;/b&gt; 关键字&lt;/h2&gt;
+
+&lt;p&gt;实例中，&lt;b&gt;this&lt;/b&gt; 指向了 &lt;b&gt;person&lt;/b&gt; 对象。&lt;/p&gt;
+&lt;p&gt;因为 person 对象是 fullName 方法的所有者。&lt;/p&gt;
+
+&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+// 创建一个对象
+var person = {
+  firstName: &quot;John&quot;,
+  lastName : &quot;Doe&quot;,
+  id     : 5566,
+  fullName : function() {
+    return this.firstName + &quot; &quot; + this.lastName;
+  }
+};
+
+// 显示对象的数据
+document.getElementById(&quot;demo&quot;).innerHTML = person.fullName();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+-------------------------
+结果：
+JavaScript this 关键字
+实例中，this 指向了 person 对象。
+
+因为 person 对象是 fullName 方法的所有者。
+
+John Doe</code></pre><h4 id="如果单独使用，this-表示全局对象"><a href="#如果单独使用，this-表示全局对象" class="headerlink" title="如果单独使用，this 表示全局对象"></a>如果单独使用，this 表示全局对象</h4><p>单独使用就有点区别了，指向的是全局对象，而浏览器中的全局对象是<code>object window</code></p>
+<pre><code>&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+var x = this;
+document.getElementById(&quot;demo&quot;).innerHTML = x;
+&lt;/script&gt;
+---------------------------
+[object Window]</code></pre><h4 id="在函数中，this-表示全局对象"><a href="#在函数中，this-表示全局对象" class="headerlink" title="在函数中，this 表示全局对象"></a>在函数中，this 表示全局对象</h4><p>在函数中，this表示全局对象，但是在严格模式下，this 是未定义的(undefined)<br><strong>在函数中，函数所属者默认绑定到this上</strong>，这句话是菜鸟上的解释，不过，有点没看懂<br>但是看代码是这么写的</p>
+<pre><code>&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+document.getElementById(&quot;demo&quot;).innerHTML = myFunction();
+function myFunction() {
+  return this;
+}
+&lt;/script&gt;</code></pre><p>返回的仍然是<code>[object Window]</code>，这里this表示的就是myFunction函数的所有者<br>如果在严格模式下 也就是<code>use strict</code>，那么返回的结果就是<code>undefined</code></p>
+<h4 id="在事件中，this-表示接收事件的元素"><a href="#在事件中，this-表示接收事件的元素" class="headerlink" title="在事件中，this 表示接收事件的元素"></a>在事件中，this 表示接收事件的元素</h4><p><code>&lt;button onclick=&quot;this.style.display=&#39;none&#39;&quot;&gt;点我后我就消失了&lt;/button&gt;</code><br>点击一下<code>button</code>，就消失</p>
+<h4 id="类似-call-和-apply-方法可以将-this-引用到任何对象"><a href="#类似-call-和-apply-方法可以将-this-引用到任何对象" class="headerlink" title="类似 call() 和 apply() 方法可以将 this 引用到任何对象"></a>类似 call() 和 apply() 方法可以将 this 引用到任何对象</h4><pre><code>&lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+
+&lt;script&gt;
+var person1 = {
+  fullName: function() {
+    return this.firstName + &quot; &quot; + this.lastName;
+  }
+}
+var person2 = {
+  firstName:&quot;John&quot;,
+  lastName: &quot;Doe&quot;,
+}
+var x = person1.fullName.call(person2);
+document.getElementById(&quot;demo&quot;).innerHTML = x;
+&lt;/script&gt;
+--------------------------
+John Doe</code></pre><p>实例中 this 指向了 person2，即便它是 person1 的方法</p>
+<h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><p>JSON是JavaScript Object Notation的缩写，它是一种数据交换格式。其实json挺常见的，像博客中的配置文件</p>
+<p>json几种数据类型：</p>
+<ul>
+<li>number：和JavaScript的number完全一致；</li>
+<li>boolean：就是JavaScript的true或false；</li>
+<li>string：就是JavaScript的string；</li>
+<li>null：就是JavaScript的null；</li>
+<li>array：就是JavaScript的Array表示方式——[]；</li>
+<li>object：就是JavaScript的{ … }表示方式。</li>
+</ul>
+<p>为了统一解析，JSON的字符串规定必须用双引号””，Object的键也必须用双引号””<br>如果我们收到一个JSON格式的字符串，只需要把它反序列化成一个JavaScript对象，就可以在JavaScript中直接使用这个对象了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.Gsuhy.cn/2019/08/11/javascript part1/" data-id="cjzljifby002pioftqfqkycot" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/22/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/24/内网渗透/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">内网渗透思维导图</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSP/">JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Link/">Link</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/内网渗透/">内网渗透</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WP/">WP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jSP/">jSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sites/">sites</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网渗透/">内网渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/11/javascript part1/">JavaScript part 1</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/24/内网渗透/">内网渗透思维导图</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/21/ubuntu配置nginx+php+mysql/">ubuntu or centos中配置nginx+php+mysql</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sqli-labs训练(11-20)/">sqli-labs训练（less11-20）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Gsuhy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

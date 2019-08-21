@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>kali渗透 | Scorpio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一些基础的kali渗透小东西">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kali渗透">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/05/linux一些渗透/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="一些基础的kali渗透小东西">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T03:30:35.837Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kali渗透">
+<meta name="twitter:description" content="一些基础的kali渗透小东西">
+  
+    <link rel="alternate" href="/atom.xml" title="Scorpio" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Scorpio</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Gsuhy</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.Gsuhy.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux一些渗透" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/05/linux一些渗透/" class="article-date">
+  <time datetime="2018-02-05T15:04:30.000Z" itemprop="datePublished">2018-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      kali渗透
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一些基础的kali渗透小东西<a id="more"></a></p>
+<h3 id="0x01断网攻击"><a href="#0x01断网攻击" class="headerlink" title="0x01断网攻击"></a>0x01断网攻击</h3><p>实际上就是运用kali中的arpspoof这个东西来实现对其他电脑的断网</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
+<li>打开kali命令行<code>ifconfig</code>查看自己kali的网卡，我的是eth0</li>
+<li>然后查看一波主机的网关和IP地址<code>ipconfig</code></li>
+<li>输入命令<code>arpspoof -i eth0 -t 目标的IP 网关</code><h3 id="欺骗实战-看内网妹子的QQ相册照片"><a href="#欺骗实战-看内网妹子的QQ相册照片" class="headerlink" title="欺骗实战-看内网妹子的QQ相册照片"></a>欺骗实战-看内网妹子的QQ相册照片</h3>有点刺激<br>说点额外的：arp欺骗根据他的命令其实应该就是目标的IP流量经过我的网卡然后从网关出去，那断网攻击应该就是只经过了我的网卡，然后没出去就被断网了。。。。<h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4></li>
+<li>先进行IP流量的转发：<code>echo 1 &gt;/proc/sys/net/ipv4/ip_forward</code></li>
+<li>还是arpspoof那个命令</li>
+<li>echo写命令是不会有回显</li>
+<li>接上面的命令，在ping一下看看能不能上网，能的话那么就欺骗成功</li>
+<li>driftnet:获取本机网卡的图片，也就是欺骗目标的图片</li>
+<li>driftnet -i 网卡<h3 id="HTTP账号密码获取"><a href="#HTTP账号密码获取" class="headerlink" title="HTTP账号密码获取"></a>HTTP账号密码获取</h3></li>
+<li>工具：ettercap，可以进行欺骗、DNS欺骗、流量嗅探。</li>
+<li>也需要知道目标机器的IP、网关、和自己电脑的IP</li>
+<li>首先还是进行各流量转发</li>
+<li>然后arpspoof -i eth0……</li>
+<li>ettercap -Tq -i 网卡（-T是启动文本模式，-q启动安静模式）</li>
+<li>然后在登录一个用http的网站应该就可以hhhhhhhhhh<h3 id="HTTPS账号密码获取"><a href="#HTTPS账号密码获取" class="headerlink" title="HTTPS账号密码获取"></a>HTTPS账号密码获取</h3></li>
+<li>工具：sslstrip，吧https的链接还原为http</li>
+<li>用vim打开一个文本<code>vim /etc/ettercap/etter.comf</code></li>
+<li>这里就要简单说一下vim，vim打开文件很简单，如果想退出的话那么先按一下<code>esc</code>，然后在按下<code>shift+：</code>在下面输入<code>q!</code>就行了，不过<code>q！</code>是不保存退出，wq是保存退出</li>
+<li>然后找到LINUX的地方</li>
+<li>在下面iptables的在下面redir前面应该有#的，把下面两个redir的前面的#去掉</li>
+<li>wq退出vim</li>
+<li>sslstrip -a -f -k</li>
+<li>然后进行上面http的步骤应该就可以了<br>（不过HTTPS可能会遇到问题，比如有些浏览器会有证书的问题）<h3 id="会话劫持"><a href="#会话劫持" class="headerlink" title="会话劫持"></a>会话劫持</h3>也就是可以登录别人登录过的网站</li>
+<li>工具：wireshark、ferret(重新生成抓包后的文件)、hamster（用来重放流量）<h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4></li>
+<li>先流量转发</li>
+<li>在欺骗</li>
+<li>打开wireshark开始抓包</li>
+<li>登录一个网站</li>
+<li>把抓到的保存，注意保存为pcap文件</li>
+<li>接着就是用ferret -r +保存的文件，会出现一个txt文件</li>
+<li>然后就是hamster,敲回车会出现一些信息，把HTTP的端口改成1234并且访问127.0.0.1:1234</li>
+</ul>
+<p><strong>这里出现了点问题，访问127.0.0.1:1234没有什么反应，查了一波，说的是要把wireshark抓包的那个txt文件copy到root里面然后才可以。emmmmmm不过好像这种方法已经有点lowhhhhhh</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.Gsuhy.cn/2018/02/05/linux一些渗透/" data-id="cjzljifar000hioftyv9p1rxu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/05/变量覆盖/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          变量覆盖
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/05/python学习笔记(一)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python学习笔记(一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JSP/">JSP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Link/">Link</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/内网渗透/">内网渗透</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WP/">WP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jSP/">jSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sites/">sites</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网渗透/">内网渗透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/22/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/11/javascript part1/">JavaScript part 1</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/24/内网渗透/">内网渗透思维导图</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/21/ubuntu配置nginx+php+mysql/">ubuntu or centos中配置nginx+php+mysql</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/20/sqli-labs训练(11-20)/">sqli-labs训练（less11-20）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Gsuhy<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
