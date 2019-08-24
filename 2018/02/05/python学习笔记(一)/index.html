@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="python前期学习笔记- -Orz">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记(一）">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/05/python学习笔记(一)/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="python前期学习笔记- -Orz">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T03:30:35.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python学习笔记(一）">
+<meta name="twitter:description" content="python前期学习笔记- -Orz">
+  <link rel="canonical" href="https://www.Gsuhy.cn/2018/02/05/python学习笔记(一)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>python学习笔记(一） | Scorpio</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scorpio</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Gsuhy</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.Gsuhy.cn/2018/02/05/python学习笔记(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gsuhy">
+      <meta itemprop="description" content="每个人都应该拥有自己的梦想">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scorpio">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">python学习笔记(一）
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-02-05 23:04:30" itemprop="dateCreated datePublished" datetime="2018-02-05T23:04:30+08:00">2018-02-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-18 11:30:35" itemprop="dateModified" datetime="2019-08-18T11:30:35+08:00">2019-08-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>python前期学习笔记- -Orz<a id="more"></a></p>
+<h2 id="PY交易之一"><a href="#PY交易之一" class="headerlink" title="PY交易之一"></a>PY交易之一</h2><h3 id="修改字符串大小"><a href="#修改字符串大小" class="headerlink" title="修改字符串大小"></a>修改字符串大小</h3><ul>
+<li>title( ):首字符大写</li>
+<li>upper():全大写</li>
+<li>lower():全小写<h3 id="添加空白"><a href="#添加空白" class="headerlink" title="添加空白"></a>添加空白</h3></li>
+<li>\t:制表符</li>
+<li>\n:换行符</li>
+<li>\n\t:换到下一行同时在开头添加一个制表符<h3 id="删除空白"><a href="#删除空白" class="headerlink" title="删除空白"></a>删除空白</h3>比如<code>python</code>和<code>python&quot; &quot;</code>（这里冒号没有意义，只是为了说明后面有一个空格。）<br>删除空白就是在定义的变量后面加一个<code>.rstrip()</code>(删除右边的空格)和<code>.lstrip()</code>(删除左边的空格)<br>比如在python中输<pre><code>name=&#39;python &#39;
+name
+&#39;python &#39;
+name.rstrip()
+python</code></pre>但是由于这种操作是暂时的，所以需要把这个操作保存回变量中,在我看来也就是重新定义变量<br><code>name=name.rstrip()</code><h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><h4 id="加减乘除没什么区别，-表示乘方"><a href="#加减乘除没什么区别，-表示乘方" class="headerlink" title="加减乘除没什么区别，**表示乘方"></a>加减乘除没什么区别，**表示乘方</h4><h4 id="用str-函数避免类型错误"><a href="#用str-函数避免类型错误" class="headerlink" title="用str()函数避免类型错误"></a>用str()函数避免类型错误</h4>比如<blockquote>
+<p>age=23<br>message=”I am”+age</p>
+</blockquote>
+</li>
+</ul>
+<p>他会弹出这样的错误</p>
+<blockquote>
+<p>Traceback (most recent call last):<br>  File “&lt;pyshell#1&gt;”, line 1, in <module><br>    massage=”I am”+age<br>TypeError: must be str, not int<br>所以在输入的时候<br>age=23<br>message=”I am”+str(age)</module></p>
+</blockquote>
+<h4 id="Python中数字相除会有不同"><a href="#Python中数字相除会有不同" class="headerlink" title="Python中数字相除会有不同"></a>Python中数字相除会有不同</h4><p>比如<code>3/2</code>输出的是<code>1</code>但是<code>3.0/2</code>输出的是<code>1.5</code>,<code>3/2.0</code>或者<code>3.0/2.0</code>都是输出的<code>1.5</code></p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>python中注释用（#）标识</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Python中用（[]）来标识列表，然后用逗号分隔中间的元素</p>
+<h4 id="列表-之前的小小综合运用一下"><a href="#列表-之前的小小综合运用一下" class="headerlink" title="列表+之前的小小综合运用一下"></a>列表+之前的小小综合运用一下</h4><blockquote>
+<p>car=[‘tesla’,’bmw’,’trek’]<br>message=”my car is”+car[0].title()<br>输出的是<br>my car is tesla</p>
+</blockquote>
+<h3 id="修改、添加、删除元素"><a href="#修改、添加、删除元素" class="headerlink" title="修改、添加、删除元素"></a>修改、添加、删除元素</h3><h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><p>就运用之前的列表进行修改就行</p>
+<h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><p>运用一个函数，同样的在声明的变量后面加一个<code>append()</code>函数</p>
+<h4 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h4><p>运用<code>insert()</code>函数</p>
+<blockquote>
+<p>cars=[‘tesla’,’bmw’]<br>insert(0,2333)<br>print cars</p>
+</blockquote>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>就是用<code>del()</code>函数，跟<code>insert()</code>函数差不多<br>如果只知道元素的值那还可以用<code>remove()</code>函数</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h4><blockquote>
+<p>cars=[‘bmw’,’tesla’,’audi’]<br>cars.sort()<br>print(cars)<br>输出的是[‘audi’,’bmw’,’tesla’]</p>
+</blockquote>
+<p>如果要倒叙的话就<code>cars.sort(reverse=True)</code>就行或者直接<code>cars.reverse()</code></p>
+<h3 id="确定列表长度"><a href="#确定列表长度" class="headerlink" title="确定列表长度"></a>确定列表长度</h3><h4 id="len"><a href="#len" class="headerlink" title="len()"></a>len()</h4><h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>我觉得这里需要注意的就是print缩进问题<br>不过现在python应该都能自动缩进。。。但是有些在循环以后不必进行缩进就要注意了。。。还有就是循环语句后面的冒号。。。</p>
+<h3 id="创建数值列表"><a href="#创建数值列表" class="headerlink" title="创建数值列表"></a>创建数值列表</h3><h4 id="打印数字range-，list"><a href="#打印数字range-，list" class="headerlink" title="打印数字range()，list()"></a>打印数字range()，list()</h4><pre><code>for value in range(1,5):
+    print(value)
+1
+2
+3
+4</code></pre><p>这里只输出了1-4，不会输出5，而且还是要注意一下冒号问题。<br><code>list()</code>函数会将range打印的数字输出为一个数字列表。</p>
+<pre><code>number=list(range(1,6))
+print(number)
+[1, 2, 3, 4, 5]</code></pre><p>这里就没有冒号啦~</p>
+<h4 id="偶数even-number-py"><a href="#偶数even-number-py" class="headerlink" title="偶数even_number.py"></a>偶数even_number.py</h4><pre><code>even_number=list(range(2,11,2))
+print(even_number)
+[2, 4, 6, 8, 10]</code></pre><p>函数<code>range()</code>从2开始不断+2，直到超过11.。。</p>
+<h4 id="乘方squares-py"><a href="#乘方squares-py" class="headerlink" title="乘方squares.py"></a>乘方squares.py</h4><pre><code>squares=[]
+for value in range(1,11):
+    square=value**2
+    squares.append(square)
+print(squares)
+[1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre><p>创建一个空列表，然后用<code>range()</code>函数让python遍历<strong><em>1-10</em></strong>的值。在循环中去计算当前值的平方，然后再储存到变量<code>square</code>中,把计算的值附加到空列表的末尾。当然，还可以更简洁一点，就是不用中间的临时变量<code>square</code>，直接将计算的值附加到列表末尾。</p>
+<pre><code>squares=[]
+for value in range(1,11):
+    squares.append(value**2)         </code></pre><h3 id="对列表中的数字进行简单的统计计算"><a href="#对列表中的数字进行简单的统计计算" class="headerlink" title="对列表中的数字进行简单的统计计算"></a>对列表中的数字进行简单的统计计算</h3><pre><code>number=[1,2,3,4]       
+min(number)
+1
+max(number)
+4
+sum(number)
+10</code></pre><p>不说了，自己体会嘻嘻嘻嘻嘻</p>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p>前面列表是可以修改数据的，那么元组就是不可修改的，但是我觉得这句话又有那么点矛盾，因为元组可以通过重新赋值来修改semmmmm</p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>字典是一系列的<strong>键-值对</strong></p>
+<h4 id="遍历字典"><a href="#遍历字典" class="headerlink" title="遍历字典"></a>遍历字典</h4><h5 id="遍历所有的键-值对"><a href="#遍历所有的键-值对" class="headerlink" title="遍历所有的键-值对"></a>遍历所有的键-值对</h5><pre><code> user_0={
+    &#39;username&#39;:&#39;mark&#39;,
+    &#39;first&#39;:&#39;enrico&#39;,
+    &#39;last&#39;:&#39;fermi&#39;,
+    }
+for key, value in user_0.items():
+    print(&quot;\nkey:&quot;+ key)
+    print(&quot;value:&quot;+ value)
+
+key:username
+value:mark
+
+key:first
+value:enrico
+
+key:last
+value:fermi</code></pre><h5 id="遍历字典中所有的键"><a href="#遍历字典中所有的键" class="headerlink" title="遍历字典中所有的键"></a>遍历字典中所有的键</h5><pre><code>user_0={
+    &#39;username&#39;:&#39;mark&#39;,
+    &#39;first&#39;:&#39;enrico&#39;,
+    &#39;last&#39;:&#39;fermi&#39;,
+    }
+    for name in user_0.keys():
+        print(name.title())
+
+
+username
+first
+last</code></pre><p>其实这里好像将<code>for name in user_0.keys():</code>替换为<code>for name in user_0:</code>输出是不会变的<br>这样的输出是无序的，要有顺序的输出的话加一个<code>sorted()</code>函数，变成<code>for name in sorted(user_0.keys()):</code></p>
+<h5 id="遍历所有的值"><a href="#遍历所有的值" class="headerlink" title="遍历所有的值"></a>遍历所有的值</h5><p><code>for name in user_0.values():</code></p>
+<h4 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h4><p>就是可以把一系列的字典存储在列表中。</p>
+<h3 id="用户输入和while循环"><a href="#用户输入和while循环" class="headerlink" title="用户输入和while循环"></a>用户输入和while循环</h3><h4 id="input-函数"><a href="#input-函数" class="headerlink" title="input()函数"></a>input()函数</h4><p>这个函数就是让程序暂停运行，然后自己可以输入一些文本，然后python可以将其存储在一个变量中。</p>
+<pre><code>prompt=&quot;if you tell us who you are, we can personalize the messages you see.&quot;
+prompt+=&quot;\nwhat is your first name?&quot;
+
+name=input(prompt)
+print(&quot;\nhello,&quot; + name + &quot;!&quot;)
+--------------------------------
+what is your first name?wifi
+
+hello,wifi!</code></pre><p>运行前面的代码其实只会出现<code>what is your first name?</code>，在后面随便输个什么玩意儿就会出现<code>hello，****</code>。</p>
+<h4 id="int-函数"><a href="#int-函数" class="headerlink" title="int()函数"></a>int()函数</h4><p>先来看一段代码吧。。。</p>
+<pre><code>age = input(&quot;how old are you?&quot;)
+how old are you?18
+age
+&#39;18&#39;</code></pre><p>这里18的两边有两个单引号是字符串，如果我要进行比较的话是无法比较的。</p>
+<pre><code>how old are you?18
+age&gt;=20
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#2&gt;&quot;, line 1, in &lt;module&gt;
+    age&gt;=20
+TypeError: &#39;&gt;=&#39; not supported between instances of &#39;str&#39; and &#39;int&#39;</code></pre><p>就要用上<code>int()</code>函数了。</p>
+<pre><code>how old are you?18
+age=int(age)
+age&gt;=29
+False</code></pre><h4 id="求模运算符"><a href="#求模运算符" class="headerlink" title="求模运算符(%)"></a>求模运算符(%)</h4><p>也就是一个求余数的工具。</p>
+<pre><code>number=input(&quot;enter a number,and I will tell you if it is even or odd:&quot;)
+number=int(number)
+
+if number % 2==0:
+    print(&quot;\nThe number&quot; + str(number)+&quot;is even.&quot;)
+else:
+    print(&quot;\nThe number&quot;+str(number)+&quot;is odd.&quot;)
+--------------------------------
+enter a number,and I will tell you if it is even or odd:5
+
+The number5is odd.</code></pre><h4 id="while循环中的选择退出"><a href="#while循环中的选择退出" class="headerlink" title="while循环中的选择退出"></a>while循环中的选择退出</h4><p>感觉<code>while</code>和<code>if...else</code>稍微还是有那么点点不同，<code>while</code>是会一直循环一直循环一直循环…….直到满足停止的条件为止。。。其他的emmmm感觉基本是差不多的。。。。。</p>
+<pre><code>prompt=&quot;\nTell me something,and I will repeat it back to you:&quot;
+prompt+=&quot;\nEnter &#39;quit&#39; to end the program.&quot;
+message=&quot;&quot;
+while message != &#39;quit&#39;:
+    message=input(prompt)
+    print(message)
+
+-------------------------------
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.5555
+5555
+
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.66
+66
+
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.54843
+54843
+
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.dhioashdas
+dhioashdas
+
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.quit
+quit</code></pre><h4 id="while中使用标志"><a href="#while中使用标志" class="headerlink" title="while中使用标志"></a>while中使用标志</h4><p>标志是在要求很多条件都满足才能继续的运行程序中，可以定义一个变量，用于判断整个程序是否处于活动状态。下面我将标志命名为active，然后将这个变量设置成了True,让程序处于活动状态，可以看到下面部分代码最后一部分，如果输入<code>qiut</code>的话就直接停止，跟上面还是有点不同的</p>
+<pre><code>prompt=&quot;\nTell me something,and I will repeat it back to you:&quot;
+prompt+=&quot;\nEnter &#39;quit&#39; to end the program.&quot;
+
+active=True
+while active:
+    message=input(prompt)
+
+    if message ==&#39;quit&#39;:
+        active=False
+    else:
+        print(message)
+--------------------------------
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.5
+5
+
+Tell me something,and I will repeat it back to you:
+Enter &#39;quit&#39; to end the program.quit</code></pre><h4 id="用continu"><a href="#用continu" class="headerlink" title="用continu"></a>用continu</h4><p><code>continu</code>可以回到循环开头，并且根据条件测试结果决定是否据需执行循环。。最简单的就是可以输出一串奇数</p>
+<pre><code>current_number=0
+while current_number&lt;10:
+    current_number+=1
+    if current_number % 2 ==0:
+        continue
+    print(current_number)
+
+--------------------------------
+1
+3
+5
+7
+9</code></pre><h3 id="用循环来处理列表和字典"><a href="#用循环来处理列表和字典" class="headerlink" title="用循环来处理列表和字典"></a>用循环来处理列表和字典</h3><h4 id="在列表间移动元素"><a href="#在列表间移动元素" class="headerlink" title="在列表间移动元素"></a>在列表间移动元素</h4><pre><code>#首先，创建一个待验证用户列表
+# 和一个用于储存已验证用户的空列表
+unconfirmed_users=[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;]
+confirmed_users=[]
+
+#验证每个用户，直到没有未验证的用户为止
+# 将每个验证了的列表都移到已经验证的用户列表中
+while unconfirmed_users:
+    current_user=unconfirmed_users.pop()
+    print(current_user  +   &quot;,you are not pass.&quot;)
+    confirmed_users.append(current_user)
+
+#显示所有已经验证过的用户
+print(&quot;\nThe follwing users have been confirmed:&quot;)
+for confirmed_user in confirmed_users:
+    print(confirmed_user.title())
+-------
+C,you are not pass.
+B,you are not pass.
+A,you are not pass.
+
+The follwing users have been confirmed:
+C
+B
+A</code></pre><p>首先创建一个未验证用户列表，有A,B,C3个用户，然后在创建一个空列表，while循环会不断的循环，知道列表空了，<code>pop()</code>函数以每次一个的方式从类别<strong>末尾</strong>删除未验证的用户。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/python/" rel="tag"># python</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/02/05/HGAME2018WP/" rel="next" title="HGAME2018WP WEEK1">
+                  <i class="fa fa-chevron-left"></i> HGAME2018WP WEEK1
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/02/05/SQL注入/" rel="prev" title="SQL注入">
+                  SQL注入 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PY交易之一"><span class="nav-number">1.</span> <span class="nav-text">PY交易之一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字符串大小"><span class="nav-number">1.1.</span> <span class="nav-text">修改字符串大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加空白"><span class="nav-number">1.2.</span> <span class="nav-text">添加空白</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除空白"><span class="nav-number">1.3.</span> <span class="nav-text">删除空白</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字"><span class="nav-number">1.4.</span> <span class="nav-text">数字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加减乘除没什么区别，-表示乘方"><span class="nav-number">1.4.1.</span> <span class="nav-text">加减乘除没什么区别，**表示乘方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用str-函数避免类型错误"><span class="nav-number">1.4.2.</span> <span class="nav-text">用str()函数避免类型错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python中数字相除会有不同"><span class="nav-number">1.4.3.</span> <span class="nav-text">Python中数字相除会有不同</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">1.5.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表"><span class="nav-number">1.6.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表-之前的小小综合运用一下"><span class="nav-number">1.6.1.</span> <span class="nav-text">列表+之前的小小综合运用一下</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改、添加、删除元素"><span class="nav-number">1.7.</span> <span class="nav-text">修改、添加、删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改"><span class="nav-number">1.7.1.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加"><span class="nav-number">1.7.2.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入元素"><span class="nav-number">1.7.3.</span> <span class="nav-text">插入元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.7.4.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.8.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sort"><span class="nav-number">1.8.1.</span> <span class="nav-text">sort()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定列表长度"><span class="nav-number">1.9.</span> <span class="nav-text">确定列表长度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#len"><span class="nav-number">1.9.1.</span> <span class="nav-text">len()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">1.10.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数值列表"><span class="nav-number">1.11.</span> <span class="nav-text">创建数值列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打印数字range-，list"><span class="nav-number">1.11.1.</span> <span class="nav-text">打印数字range()，list()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#偶数even-number-py"><span class="nav-number">1.11.2.</span> <span class="nav-text">偶数even_number.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乘方squares-py"><span class="nav-number">1.11.3.</span> <span class="nav-text">乘方squares.py</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对列表中的数字进行简单的统计计算"><span class="nav-number">1.12.</span> <span class="nav-text">对列表中的数字进行简单的统计计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元组"><span class="nav-number">1.13.</span> <span class="nav-text">元组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典"><span class="nav-number">1.14.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历字典"><span class="nav-number">1.14.1.</span> <span class="nav-text">遍历字典</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#遍历所有的键-值对"><span class="nav-number">1.14.1.1.</span> <span class="nav-text">遍历所有的键-值对</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#遍历字典中所有的键"><span class="nav-number">1.14.1.2.</span> <span class="nav-text">遍历字典中所有的键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#遍历所有的值"><span class="nav-number">1.14.1.3.</span> <span class="nav-text">遍历所有的值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌套"><span class="nav-number">1.14.2.</span> <span class="nav-text">嵌套</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户输入和while循环"><span class="nav-number">1.15.</span> <span class="nav-text">用户输入和while循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#input-函数"><span class="nav-number">1.15.1.</span> <span class="nav-text">input()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#int-函数"><span class="nav-number">1.15.2.</span> <span class="nav-text">int()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求模运算符"><span class="nav-number">1.15.3.</span> <span class="nav-text">求模运算符(%)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while循环中的选择退出"><span class="nav-number">1.15.4.</span> <span class="nav-text">while循环中的选择退出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#while中使用标志"><span class="nav-number">1.15.5.</span> <span class="nav-text">while中使用标志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用continu"><span class="nav-number">1.15.6.</span> <span class="nav-text">用continu</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用循环来处理列表和字典"><span class="nav-number">1.16.</span> <span class="nav-text">用循环来处理列表和字典</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在列表间移动元素"><span class="nav-number">1.16.1.</span> <span class="nav-text">在列表间移动元素</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Gsuhy</p>
+  <div class="site-description motion-element" itemprop="description">每个人都应该拥有自己的梦想</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gsuhy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
