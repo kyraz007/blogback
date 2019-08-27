@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>python-socket - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="socket编程">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-socket">
+<meta property="og:url" content="https://www.Gsuhy.cn/2019/04/17/python之socket/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="socket编程">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T07:03:03.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-socket">
+<meta name="twitter:description" content="socket编程">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167569">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>python-socket</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2019年04月17日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.6k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/Python/">Python</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/python/">python</a>
+    
+  </div>
+  <article>
+    <p>socket编程<a id="more"></a></p>
+<h2 id="python之socket编程"><a href="#python之socket编程" class="headerlink" title="python之socket编程"></a>python之socket编程</h2><p>socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄，应用程序通常通过“套接字”向网络发出请求或者应答网络请求。socket模块是针对 服务器端 和 客户端Socket 进行【打开】【读写】【关闭】</p>
+<h2 id="一些常用功能"><a href="#一些常用功能" class="headerlink" title="一些常用功能"></a>一些常用功能</h2><h3 id="sk-bind-“ip’”port"><a href="#sk-bind-“ip’”port" class="headerlink" title="sk.bind((“ip’”port))"></a>sk.bind((“ip’”port))</h3><p>在默认的<code>AF_INET</code>下这样以元组的形式存在</p>
+<h3 id="sk-listen-backlog"><a href="#sk-listen-backlog" class="headerlink" title="sk.listen(backlog)"></a>sk.listen(backlog)</h3><p>开始监听传入连接。backlog指定在拒绝连接之前，可以挂起的最大连接数量<br>backlog等于5，表示内核已经接到了连接请求，但服务器还没有调用accept进行处理的连接个数最大为5<br>这个值不能无限大，因为需要在内核中维护连接队列</p>
+<h3 id="sk-setblocking-bool"><a href="#sk-setblocking-bool" class="headerlink" title="sk.setblocking(bool)"></a>sk.setblocking(bool)</h3><p>是否阻塞（默认为True），如果设置False，那么accept和recv时一旦无数据，就会报错</p>
+<h3 id="sk-accept"><a href="#sk-accept" class="headerlink" title="sk.accept()"></a>sk.accept()</h3><p>接收连接并返回（conn,address）,其中conn是新的套接字对象，可以用来接收和发送数据，address是连接客户端的地址<br>接收TCP客户端的连接（阻塞）等待连接的到来</p>
+<h3 id="sk-connect-address"><a href="#sk-connect-address" class="headerlink" title="sk.connect(address)"></a>sk.connect(address)</h3><p>连接到address处的套接字，一般，address的格式为元组<code>（hostname,port）</code>,如果连接出错，返回socket,error错误</p>
+<h3 id="sk-connect-ex-address"><a href="#sk-connect-ex-address" class="headerlink" title="sk.connect_ex(address"></a>sk.connect_ex(address</h3><p>同上的<code>sk.connect</code>只不过会有返回值，连接成功时返回0，连接失败时返回编码</p>
+<h3 id="sk-close"><a href="#sk-close" class="headerlink" title="sk.close()"></a>sk.close()</h3><p>闭套接字</p>
+<h3 id="sk-recv-bufsize-flag"><a href="#sk-recv-bufsize-flag" class="headerlink" title="sk.recv(bufsize[,flag])"></a>sk.recv(bufsize[,flag])</h3><p>接收套接字的数据，数据以字符串形式返回，bufsize指定最多可以接收的数量，flag提供有关消息的其他信息，通常可以忽略</p>
+<h3 id="sk-recvfrom-bufsize-flag"><a href="#sk-recvfrom-bufsize-flag" class="headerlink" title="sk.recvfrom(bufsize[.flag])"></a>sk.recvfrom(bufsize[.flag])</h3><p>与<code>recv（）</code>类似，但返回值是<code>（data,address）</code>其中data是包含接收数据的字符串，address是发送数据的套接字地址</p>
+<h3 id="sock-send-string-flag"><a href="#sock-send-string-flag" class="headerlink" title="sock.send(string[,flag])"></a>sock.send(string[,flag])</h3><p>将string中的数据发送到连接的套接字，返回值是要发送的字节数量，该数量可能小于string的字节大小，即：可能未将指定内容全部发送</p>
+<h3 id="sk-sendall-string-flag"><a href="#sk-sendall-string-flag" class="headerlink" title="sk.sendall(string[,flag])"></a>sk.sendall(string[,flag])</h3><p>将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有的数据，成功返回None,失败则抛出异常<br>内部通过递归调用send，将所有内容发送出去</p>
+<h3 id="sk-sendto-string-flag-address"><a href="#sk-sendto-string-flag-address" class="headerlink" title="sk.sendto(string[,flag],address)"></a>sk.sendto(string[,flag],address)</h3><p>将数据发送到套接字，address是形式为（ip地址，port）的元组，指定远程地址，返回值时发送的字节数，<strong>该函数主要用于UDP协议</strong></p>
+<h3 id="sk-settimeout-timeout"><a href="#sk-settimeout-timeout" class="headerlink" title="sk.settimeout(timeout)"></a>sk.settimeout(timeout)</h3><p>设置套接字操作的超时期，timeout是一个浮点数，但是为秒<br>值为None表示没有超时期，一般超时期应该在刚创建套接字时设置，因为他们可能用于连接的操作</p>
+<h3 id="sk-getpeername"><a href="#sk-getpeername" class="headerlink" title="sk.getpeername()"></a>sk.getpeername()</h3><p>返回连接套接字的远程地址。返回值通常是元组<code>（ipaddr,port）</code>。</p>
+<h3 id="sk-fileno"><a href="#sk-fileno" class="headerlink" title="sk.fileno()"></a>sk.fileno()</h3><p>套接字的文件描述符</p>
+<h3 id="一个socket例子"><a href="#一个socket例子" class="headerlink" title="一个socket例子"></a>一个socket例子</h3><p>机器人对话</p>
+<pre><code>服务端
+#!/usr/bin/python
+# -*-coding:utf-8-*-
+# Author:Gsuhy
+
+import socketserver
+
+class Myserver(socketserver.BaseRequestHandler):
+    def handle(self):
+        conn = self.request
+        conn.sendall(bytes(&quot;hello,我是Gsuhy&quot;,encoding=&quot;utf-8&quot;))
+        while True:
+            ret_bytes = conn.recv(1024)
+            ret_str = str(ret_bytes,encoding=&quot;utf-8&quot;)
+            if ret_str == &#39;q&#39;:
+                break
+            conn.sendall(bytes(ret_str + &quot;你好！&quot;,encoding=&quot;utf-8&quot;))
+
+if __name__ == &quot;__main__&quot;:
+    server = socketserver.ThreadingTCPServer((&quot;127.0.0.1&quot;,8080),Myserver)
+    server.serve_forever()
+
+----------------------
+客户端
+#!/usr/bin/python
+# -*-coding:utf-8-*-
+# Author:Gsuhy
+
+import socket
+
+obj = socket.socket()
+obj.connect((&#39;127.0.0.1&#39;,8080))
+
+ret_bytes = obj.recv(1204)
+ret_str = str(ret_bytes,encoding=&quot;utf-8&quot;)
+print(ret_str)
+
+while True:
+    inp = input(&quot;你要干什么？？？ \n&gt;&gt;&gt;&quot;)
+    if inp ==&quot;q&quot;:
+        obj.sendall(bytes(inp,encoding=&quot;utf-8&quot;))
+        break
+    else:
+        obj.sendall(bytes(inp,encoding=&quot;utf-8&quot;))
+        ret_bytes = obj.recv(1204)
+        ret_str = str(ret_bytes, encoding=&quot;utf-8&quot;)
+        print(ret_str)
+
+obj.close()
+----------------------
+先运行服务端，再运行客户端
+output：
+hello,我是Gsuhy
+你要干什么？？？
+&gt;&gt;&gt;123123
+123123你好！
+你要干什么？？？
+&gt;&gt;&gt;</code></pre><h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><p>I/O（input/output），即输入/输出端口。每个设备都会有一个专用的I/O地址，用来处理自己的输入输出信息首先什么是I/O：<br>I/O分为磁盘io和网络io，这里说的是网络io</p>
+<h3 id="IO多路复用-1"><a href="#IO多路复用-1" class="headerlink" title="IO多路复用:"></a>IO多路复用:</h3><p>I/O多路复用指：通过一种机制，可以监视多个描述符(socket)，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。</p>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>Linux中的 select，poll，epoll 都是IO多路复用的机制。<br>Linux下网络I/O使用socket套接字来通信，普通I/O模型只能监听一个socket，而I/O多路复用可同时监听多个socket.<br>I/O多路复用避免阻塞在io上，原本为多进程或多线程来接收多个连接的消息变为单进程或单线程保存多个socket的状态后轮询处理.</p>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p>Python中有一个select模块，其中提供了：select、poll、epoll三个方法，分别调用系统的 select，poll，epoll 从而实现IO多路复用。</p>
+<h2 id="socketserver"><a href="#socketserver" class="headerlink" title="socketserver"></a>socketserver</h2><p>SocketServer内部使用 IO多路复用 以及 “多线程” 和 “多进程” ，从而实现并发处理多个客户端请求的Socket服务端。即：每个客户端请求连接到服务器时，Socket服务端都会在服务器是创建一个“线程”或者“进程” 专门负责处理当前客户端的所有请求。</p>
+<h3 id="ThreadingTCPServer"><a href="#ThreadingTCPServer" class="headerlink" title="ThreadingTCPServer"></a>ThreadingTCPServer</h3><p>ThreadingTCPServer实现的Soket服务器内部会为每个client创建一个 “线程”，该线程用来和客户端进行交互。</p>
+<h4 id="ThreadingTCPServer基础"><a href="#ThreadingTCPServer基础" class="headerlink" title="ThreadingTCPServer基础"></a>ThreadingTCPServer基础</h4><p>使用<code>ThreadingTCPServer</code> ：</p>
+<ul>
+<li>创建一个继承自<code>SocketServer.BaseRequestHandle</code>的类</li>
+<li>类中必须定义一个名称为Handle的方法</li>
+<li>启动ThreadingTCPServer</li>
+</ul>
+<h4 id="ThreadingTCPServer内部调用流程"><a href="#ThreadingTCPServer内部调用流程" class="headerlink" title="ThreadingTCPServer内部调用流程"></a>ThreadingTCPServer内部调用流程</h4><ul>
+<li>启动服务端程序</li>
+<li>执行 <code>TCPServer.__init__</code> 方法，创建服务端Socket对象并绑定 IP 和 端口</li>
+<li>执行 <code>BaseServer.__init__</code> 方法，将自定义的继承自<code>SocketServer.BaseRequestHandler</code> 的类<code>MyRequestHandle</code>赋值给 <code>self.RequestHandlerClass</code></li>
+<li>执行 BaseServer.server_forever 方法，While 循环一直监听是否有客户端请求到达 …</li>
+<li>当客户端连接到达服务器</li>
+<li>执行 ThreadingMixIn.process_request 方法，创建一个 “线程” 用来处理请求</li>
+<li>执行 ThreadingMixIn.process_request_thread 方法</li>
+<li>执行 BaseServer.finish_request 方法，执行 self.RequestHandlerClass()  即：执行 自定义 MyRequestHandler 的构造方法（自动调用基类BaseRequestHandler的构造方法，在该构造方法中又会调用 MyRequestHandler的handle方法）</li>
+</ul>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2019/04/17/python之socket/" title="https://www.Gsuhy.cn/2019/04/17/python之socket/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2019/04/17/python之socket/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167573"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

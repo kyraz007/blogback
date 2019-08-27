@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>PHP命令执行 - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="PHP中的命令执行">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP命令执行">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/05/PHP命令执行/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="PHP中的命令执行">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T07:03:54.190Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP命令执行">
+<meta name="twitter:description" content="PHP中的命令执行">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167685">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>PHP命令执行</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2018年02月05日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/PHP/">PHP</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/PHP/">PHP</a>
+    
+  </div>
+  <article>
+    <p>PHP中的命令执行<a id="more"></a></p>
+<h2 id="PHP中命令执行漏洞"><a href="#PHP中命令执行漏洞" class="headerlink" title="PHP中命令执行漏洞"></a>PHP中命令执行漏洞</h2><h3 id="常见的危险函数"><a href="#常见的危险函数" class="headerlink" title="常见的危险函数"></a>常见的危险函数</h3><h4 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h4><p>这个是我目前见过最多的危险函数</p>
+<blockquote>
+<p>mixed eval(string $code)</p>
+</blockquote>
+<p>吧字符串<code>code</code>作为php代码执行<br><strong>eg.</strong></p>
+<pre><code>&lt;?php
+eval ($_GET[&#39;pass&#39;]);
+?&gt;</code></pre><h4 id="assert"><a href="#assert" class="headerlink" title="assert()"></a>assert()</h4><p>assert()函数会检查指定的assertion并在结果为false的时候才去适当的响应。ifassertion是字符串，它会被这个函数当做php代码执行</p>
+<blockquote>
+<p>php5<br>bool assert(mixed $assertion [, string $description])<br>php7<br>bool assert(mixed $assertion[,Throwable $exception])<br><strong>eg</strong></p>
+<pre><code>&lt;?php
+assert($_GET[&#39;pass&#39;]);
+?&gt;</code></pre></blockquote>
+<h4 id="preg-replace"><a href="#preg-replace" class="headerlink" title="preg_replace()"></a>preg_replace()</h4><p> 执行一个正则表达式的搜索和替换</p>
+<blockquote>
+<p>mixed preg_replace(mixed $pattern , mixed $replacement , mixed $subject[, int $limit=-1[,int &amp;$count]])</p>
+</blockquote>
+<p>搜索subject中匹配的pattern部分，<br>replacement进行代替。<br><strong>pattern</strong><br>要搜索的模式，可以使用字符串或者字符串数组<br><strong>replacement</strong><br>用于替换的字符串或者字符串数组。如果这个参数是一个字符串，并且<code>parttern</code>是一个数组，那么所有的模式都使用这个字符串进行替换。如果<code>pattern</code>and<code>replacemrnt</code>都是数组，每个<code>parttern</code>使用<code>replacement</code>中对应的元素进行替换。如果<code>replacement</code>中的元素比<code>pattern</code>中的少，那么多出来的<code>parttern</code>使用空字符串进行替换。</p>
+<p>当使用被启弃用的e修饰符时，这个函数会转义一些字符（’、‘’、\、NULL）然后进行<a href="http://php.net/manual/zh/regexp.reference.back-references.php" target="_blank" rel="noopener">后向引用替换</a>。当这些完成后请确保后向引用解析完后没有单引号或者双引号引起语法错误，确保符合PHP的<a href="http://php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">字符串语法</a>,还要符合eval语法。因为在完成替换后，引擎会将结果作为php代码使用eval方式进行评估并将返回值作为最终参与替换的字符。。。<br><strong>subjiect</strong><br>要进行搜索和替换的字符串或字符串数组。<br>如果<code>subject</code>是一个数组，搜素和替换会在<code>subject</code>的每一个元素上进行，返回值也是数组。<br><strong>limit</strong><br>每个模式在每个<code>subject</code>上进行替换的最大次数。默认是-1（无限）<br><strong>count</strong><br>如果指定，将会被填充为完成的替换次数。</p>
+<h4 id="call-user-func"><a href="#call-user-func" class="headerlink" title="call_user_func()"></a>call_user_func()</h4><p>`mixed call_user_func(callable $callback[, mixed $parameter[,miixed $…]])<br>其中第一个参数callback是被调用的回调函数，其余参数是回调函数的参数。传入call_user_func()的参数不能为引用传递.</p>
+<h4 id="call-user-func-array"><a href="#call-user-func-array" class="headerlink" title="call_user_func_array()"></a>call_user_func_array()</h4><blockquote>
+<p>mixed call_user_func_array(callable callback , array$param_arr)</p>
+</blockquote>
+<p>跟上面差不多，也就是把参数数组作为回调函数的参数传入。</p>
+<h4 id="create-function"><a href="#create-function" class="headerlink" title="create_function()"></a>create_function()</h4><blockquote>
+<p>string create_function(string $args , string $code)</p>
+</blockquote>
+<p>这个函数跟eval有关系，第一个参数args是后面定义函数的参数，第二个参数是函数的代码.</p>
+<pre><code>&lt;?php
+$a=$GET[`***`];
+#b=create_function(&#39;$a&#39;,&quot;echo $a&quot;);
+$b(&#39;&#39;)</code></pre><h4 id="array-map"><a href="#array-map" class="headerlink" title="array_map()"></a>array_map()</h4><blockquote>
+<p>array array_map(callable $callback , array $array1[,array $…])</p>
+</blockquote>
+<p>为数组的每个元素应用回调函数。返回值是数组，是为array1每个元素应用回调函数之后的数组。callback函数形参的数量和传给array_m ap()数组数量必须一样。</p>
+<pre><code>&lt;?php
+$array=array(0.1.2.3.4.5);
+array_map($_GET[`***`],$array);
+?&gt;</code></pre><h3 id="系统命令执行相关函数"><a href="#系统命令执行相关函数" class="headerlink" title="系统命令执行相关函数"></a>系统命令执行相关函数</h3><h4 id="sysytem"><a href="#sysytem" class="headerlink" title="sysytem()"></a>sysytem()</h4><blockquote>
+<p>string system(string $command[,int &amp;$return_var])</p>
+</blockquote>
+<p>command是要执行的命令。return_var是提供的参数，外部命令执行后的返回状态将会被设置到这个变量当中。</p>
+<pre><code>&lt;?php
+system(&quot;whoani&quot;);
+?&gt;</code></pre><p>运行shell命令，并打印回显到页面上。</p>
+<h4 id="passthru"><a href="#passthru" class="headerlink" title="passthru()"></a>passthru()</h4><blockquote>
+<p>void passthru(string $command[,int &amp;$return_var])</p>
+</blockquote>
+<p>前面跟<code>system()</code>一样，结果是UNIX返回状态会被记录到此参数</p>
+<h4 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h4><blockquote>
+<p>string exec(string  $command[,array &amp;$output[, int &amp;$return_var]])</p>
+</blockquote>
+<p>执行command参数所指定的命令</p>
+<h4 id="output"><a href="#output" class="headerlink" title="output"></a>output</h4><p>如果有参数，那么就会用命令执行的输出填充此数组，每行输出填充数组中的一个元素。数组中的数据不包含行尾的空白字符，比如像\n。如果数组中已经包含了部分元素，exec()函数会在数组末尾追加内容，如果不追加就要用unset()函数进行重置。<br>那么就补充一下unset()函数</p>
+<blockquote>
+<p>void unset(mixed $var[,mixed $***])</p>
+</blockquote>
+<p>销毁指定的变量，不过有些特别，unset()在函数中的行为会依赖于想要销毁的变量类型而有些不同。<br>如果函数unset()一个全局变量的话，那么只是局部变量被销毁（我也不知道为什么…….）而在调用环境中的变量将保持调用unset()之前一样的值。</p>
+<pre><code>&lt;?php
+function destroy_foo() {
+    global $foo;
+    unset($foo);
+}
+
+$foo = &#39;bar&#39;;
+destroy_foo();
+echo $foo;
+?&gt;</code></pre><p>这个输出的是<code>bar</code>,如果想要销毁一个全局变量，那就要用<code>$GLOBALS</code>这个数组</p>
+<pre><code>&lt;?php
+function foo()
+{
+    unset($GLOBALS[&#39;bar&#39;]);
+}
+
+$bar = &quot;something&quot;;
+foo();
+?&gt;</code></pre><h4 id="pcntl-exec"><a href="#pcntl-exec" class="headerlink" title="pcntl_exec()"></a>pcntl_exec()</h4><blockquote>
+<p>void pcntl_exec(string $path[,array $args[,array $envs]])</p>
+</blockquote>
+<p>path是可执行二进制文件的路径，args是一个要传递给程序的参数的字符串数组。</p>
+<pre><code>&lt;?php
+    pcntl_exec ( &quot;/bin/bash&quot; , array(&quot;whoami&quot;));
+?&gt;</code></pre><h4 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h4><blockquote>
+<p>string shell_exec(string $cmd)</p>
+</blockquote>
+<p>cmd是要执行的命令</p>
+<pre><code>&lt;?php
+    echo shell_exec(&quot;whoami&quot;);
+?&gt;</code></pre><h4 id="’反的单引号"><a href="#’反的单引号" class="headerlink" title="’反的单引号"></a>’反的单引号</h4><p>在php中称之为执行运算符，php尝试将反的单引号中的内容作为shell命令来执行，效果跟<code>shell_exec</code>是一样的。</p>
+<pre><code>&lt;?php
+    echo `whoami`;
+?&gt;</code></pre>
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2018/02/05/PHP命令执行/" title="https://www.Gsuhy.cn/2018/02/05/PHP命令执行/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2018/02/05/PHP命令执行/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167692"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>python学习笔记（二） - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="python入门之二">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记（二）">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/06/python学习笔记（二）/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="python入门之二">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T07:02:49.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python学习笔记（二）">
+<meta name="twitter:description" content="python入门之二">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167622">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>python学习笔记（二）</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2018年02月06日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 6 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/Python/">Python</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/python/">python</a>
+    
+  </div>
+  <article>
+    <p>python入门之二 <a id="more"></a></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h3><pre><code>def greet_user():
+    &quot;&quot;&quot;问候一下下&quot;&quot;&quot;
+    print(&quot;hello&quot;)
+-----------------------------   greet_user()
+hello</code></pre><p>这是一个打印问候语的简单函数。</p>
+<h4 id="向函数传递信息"><a href="#向函数传递信息" class="headerlink" title="向函数传递信息"></a>向函数传递信息</h4><pre><code>def greet_user(username):
+    &quot;&quot;&quot;问候一下下&quot;&quot;&quot;
+    print(&quot;hello,&quot;+username.title()+&quot;~&quot;)
+
+-----------------------
+greet_user(&#39;nike&#39;)
+hello,Nike~</code></pre><h4 id="实参和形参"><a href="#实参和形参" class="headerlink" title="实参和形参"></a>实参和形参</h4><p>就像在上面<code>greet_user(username)</code>中的<code>username</code>就是一个形参，后面输入的<code>nike</code>就是一个实参。。。其实吧可以理解为一个是抽象的一个是具体的。在这个函数<code>greet_user(&#39;nike&#39;)</code>中就是把<code>&#39;nike&#39;</code>传递给函数<code>greet_user()</code>然后被存储在形参<code>username</code>中。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>就是用一个return语句将值返回到调用函数的代码行，这样可以简化主程序。<br>先来看一段代码吧</p>
+<pre><code>def get_formatted_name(first_name, last_name):
+    &quot;&quot;&quot;返回完整的名字&quot;&quot;&quot;
+    full_name=first_name+&#39; &#39;+last_name
+    return full_name.title()
+
+player=get_formatted_name(&#39;stephen&#39;, &#39;curry&#39;)
+print(player)
+------------------
+Stephen Curry</code></pre><p>简单说明一下：前面几行代码就不说了，直接说<code>return</code>，调用这个函数，提供一个变量用来存储返回的值，也就是这里的<code>player</code>，顺便输出我最喜欢的一个篮球运动员库里嘻嘻嘻嘻嘻嘻。顺便说一下，这个函数可以返回任何东西，包括字典和列表。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="创建和使用类"><a href="#创建和使用类" class="headerlink" title="创建和使用类"></a>创建和使用类</h3><pre><code>class Dog:
+    &quot;&quot;&quot;
+    小狗
+    &quot;&quot;&quot;
+
+    def __init__(self, name=&quot;haha&quot;):
+        self.name = name   
+
+    def info(self):
+        &quot;&quot;&quot;信息&quot;&quot;&quot;         
+        print(&quot;dog&#39;s name is &quot; + self.name + &#39;.&#39;)
+
+# 实例化类
+mydog = Dog(&quot;astro&quot;)
+
+# 访问类的属性和方法
+print(mydog.name)
+mydog.info()</code></pre><h4 id="方法init"><a href="#方法init" class="headerlink" title="方法init()"></a>方法<strong>init</strong>()</h4><p>类中的函数称为方法，<strong>init</strong>()是一个特殊的方法，作用是初始化实例对象，和c++的构造函数作用相同，也是在实例化对象的时候自动执行。</p>
+<h4 id="创建实例"><a href="#创建实例" class="headerlink" title="创建实例"></a>创建实例</h4><p><code>mydog = Dog(“astro”)</code><br>这句话首先定义了一个变量mydog（变量是没有类型的，相当于一个指针，类型属于对象），然后使用实参”astro”调用Dog类中的方法<code>__init__(self, name)</code>创建一个实例，再将这个实例存储在变量mydog 中，最后mydog就可以访问属性和调用方法。</p>
+<h4 id="self用法"><a href="#self用法" class="headerlink" title="self用法"></a>self用法</h4><p>在方法中，形参self是必须的，而且必须位于第一个，创建实例和调用方法的时候都会自动传入实参self。<br>如果没有self，那么方法就具有了唯一性。假如说创建了两个对象，方法中会修改对象属性，这时调用方法打算修改一个对象的属性，而另外一个对象的属性不得不发生变化，这是不被允许的。所以说这个self是针对实例对象的，不同对象调用同一方法相互之间才不会产生影响。</p>
+<h4 id="属性指定默认值"><a href="#属性指定默认值" class="headerlink" title="属性指定默认值"></a>属性指定默认值</h4><p><code>name=”haha”</code>指定了name的默认值为haha，实例化对象时就可以省略实参。默认值要赋给最右侧的形参。我的理解是这样，编译器是从左到右依次赋值给形参，如果默认值在最左边，那么依次赋值就会覆盖掉默认值，导致默认值失去作用以及右侧实参不够的问题，这样理解默认值应该放到最右侧感觉很合理，哈哈。此外c++也是指定默认值放最右侧，这些是编译器内部的问题了，记住就好。</p>
+<h4 id="文档字符串"><a href="#文档字符串" class="headerlink" title="文档字符串"></a>文档字符串</h4><p>使用三引号括起来，和c语言里面/* */很像，起到注释作用，和c语言注释不同的是，它可以通过调用<code>print(mydog.__doc__)</code>和<code>print(mydog.info.__doc__)</code>打印注释信息。</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>先来看代码吧，用代码来理解一哈哈</p>
+<pre><code>class Hair:
+    def __init__(self, color):
+        self.color = color
+
+    def describe_hair(self):
+        print(&quot;hair color is &quot; + self.color)
+
+
+class Hsq(Dog):     # 子类(基类)
+    def __init__(self, name, color=&quot;blue&quot;):
+        super().__init__(name, age)
+        self.color = Hair(color)
+
+    def info(self):   # 重写父类方法
+        print(&quot;dog&#39;s hair is &quot; + self.color + &#39;.&#39;)
+
+mydog2 = Hsq(&quot;haha&quot;, &quot;white&quot;)
+mydog2.color.describe_hair()</code></pre><h4 id="子类init"><a href="#子类init" class="headerlink" title="子类init"></a>子类init</h4><p>创建子类实例后，首先要给父类的所有属性赋值。父类也称为超类(superclass)，<code>super()</code>可以将父类和子类关联起来。调用父类的初始化代码就是<code>super().__init__(name, age)</code>，注意这里没有self。</p>
+<h4 id="将实例用作属性"><a href="#将实例用作属性" class="headerlink" title="将实例用作属性"></a>将实例用作属性</h4><p>系统庞大之后，类的东西就会变得越来越多，比如说小狗喜欢吃什么口味的狗粮，早上几点起床之类的，这时就可以把相同类型的东西提取出来，包装成一个独立的类，使代码逻辑清晰，上述代码是把狗毛的颜色提取出来了，哈哈。</p>
+<h4 id="重写父类方法"><a href="#重写父类方法" class="headerlink" title="重写父类方法"></a>重写父类方法</h4><p>在子类中只要定义了与父类的同名方法，就可以对父类方法进行重写。</p>
+<h4 id="类属性与方法"><a href="#类属性与方法" class="headerlink" title="类属性与方法"></a>类属性与方法</h4><p>还是来看哈代码吧</p>
+<pre><code>class JustCounter:
+    __secretCount = 0  # 私有变量
+    publicCount = 0    # 公开变量
+
+    def __foo(self):          # 私有方法
+        print(&#39;这是私有方法&#39;)
+
+    def foo(self):            # 公共方法
+        print(&#39;这是公共方法&#39;)</code></pre><h4 id="私有属性"><a href="#私有属性" class="headerlink" title="私有属性"></a>私有属性</h4><p><code>__private_attrs</code>两个下划线开头，声明该属性为私有，不能在类地外部被使用或直接访问。在类内部的方法中使用时<code>self.__private_attrs</code>。</p>
+<h4 id="私有方法"><a href="#私有方法" class="headerlink" title="私有方法"></a>私有方法</h4><p><code>__private_method</code>两个下划线开头，声明该方法为私有方法，只能在类的内部调用 ，不能在类地外部调用。<code>self.__private_methods</code>。</p>
+<h4 id="类的专有方法"><a href="#类的专有方法" class="headerlink" title="类的专有方法"></a>类的专有方法</h4><p><strong>init</strong> : 构造函数，在生成对象时调用<br><strong>del</strong> : 析构函数，释放对象时使用<br><strong>repr</strong> : 打印，转换<br><strong>setitem</strong> : 按照索引赋值<br><strong>getitem</strong> : 按照索引获取值<br><strong>len</strong> : 获得长度<br><strong>cmp</strong> : 比较运算<br><strong>call</strong> : 函数调用<br><strong>add</strong> : 加运算<br><strong>sub</strong>: 减运算<br><strong>mul</strong>: 乘运算<br><strong>div</strong>: 除运算<br><strong>mod</strong>: 求余运算<br><strong>pow</strong>: 乘方</p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2018/02/06/python学习笔记（二）/" title="https://www.Gsuhy.cn/2018/02/06/python学习笔记（二）/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2018/02/06/python学习笔记（二）/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167627"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

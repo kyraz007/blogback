@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>python中进程、线程、协程 - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="进程，线程，协程，了解一下~~">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中进程、线程、协程">
+<meta property="og:url" content="https://www.Gsuhy.cn/2019/04/19/python中进程、线程、协程/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="进程，线程，协程，了解一下~~">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T07:03:11.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python中进程、线程、协程">
+<meta name="twitter:description" content="进程，线程，协程，了解一下~~">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167556">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>python中进程、线程、协程</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2019年04月19日</a>
+    <a><i class="nexmoefont icon-areachart"></i>4.5k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 20 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/Python/">Python</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/python/">python</a>
+    
+  </div>
+  <article>
+    <p>进程，线程，协程，了解一下~~<a id="more"></a></p>
+<h1 id="Python-进程、线程、协程"><a href="#Python-进程、线程、协程" class="headerlink" title="Python 进程、线程、协程"></a>Python 进程、线程、协程</h1><h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p>计算机是由硬件和软件组成的。硬件中的CPU是计算机的核心，它承担计算机的所有任务。 操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的调度。 程序是运行在系统上的具有某种功能的软件，比如说浏览器，音乐播放器等。 每次执行程序的时候，都会完成一定的功能，比如说浏览器帮我们打开网页，为了保证其独立性，就需要一个专门的管理和控制执行程序的数据结构——进程控制块。 进程就是一个程序在一个数据集上的一次动态执行过程。 进程一般由程序、数据集、进程控制块三部分组成。我们编写的程序用来描述进程要完成哪些功能以及如何完成；数据集则是程序在执行过程中所需要使用的资源；进程控制块用来记录进程的外部特征，描述进程的执行变化过程，系统可以利用它来控制和管理进程，它是系统感知进程存在的唯一标志。</p>
+<p>在早期的操作系统里，计算机只有一个核心，进程执行程序的最小单位，任务调度采用时间片轮转的抢占式方式进行进程调度。每个进程都有各自的一块独立的内存，保证进程彼此间的内存地址空间的隔离。 随着计算机技术的发展，进程出现了很多弊端，一是进程的创建、撤销和切换的开销比较大，二是由于对称多处理机（对称多处理机（SymmetricalMulti-Processing）又叫SMP，是指在一个计算机上汇集了一组处理器(多CPU)，各CPU之间共享内存子系统以及总线结构）的出现，可以满足多个运行单位，而多进程并行开销过大。 这个时候就引入了线程的概念。 线程也叫轻量级进程，它是一个基本的CPU执行单元，也是程序执行过程中的最小单元，由线程ID、程序计数器、寄存器集合 和堆栈共同组成。线程的引入减小了程序并发执行时的开销，提高了操作系统的并发性能。 线程没有自己的系统资源，只拥有在运行时必不可少的资源。但线程可以与同属与同一进程的其他线程共享进程所拥有的其他资源。</p>
+<h3 id="进程与线程之间的关系"><a href="#进程与线程之间的关系" class="headerlink" title="进程与线程之间的关系"></a>进程与线程之间的关系</h3><ul>
+<li>线程：是操作系统能够进行运算的调度的最小单位，它被包含在进程中，是进程中实际的运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程可以并发多个线程，每条线程并行执行不同的任务。<br>线程是一串指令的集合</li>
+<li>进程：程序要以一个整体的形式暴露给操作系统管理，里面包含对各种资源的调用，内存的管理，网络接口的调用等….即对各种资源的集合。</li>
+<li>进程要操作cpu，必须要先创建一个线程</li>
+<li>所有在同一个进程里的线程是共享同一块内存空间的，线程共享内存空间，进程的内存是独立的</li>
+<li>同一个进程的线程之间可以直接交流，两个进程想要通信，必须通过一个中间代理来实现</li>
+<li>创建新线程很简单，创建新进程需要对其父进程进行一次克隆</li>
+</ul>
+<p>一个线程可以控制和操作同一个进程里的其他线程，但是进程只能操作子进程<br>线程是属于进程的，线程运行在进程空间内，同一进程所产生的线程共享同一内存空间，当进程退出时该进程所产生的线程都会被强制退出并清除。线程可与属于同一进程的其它线程共享进程所拥有的全部资源，但是其本身基本上不拥有系统资源，只拥有一点在运行中必不可少的信息(如程序计数器、一组寄存器和栈)。</p>
+<h3 id="threading模块"><a href="#threading模块" class="headerlink" title="threading模块"></a>threading模块</h3><p>threading 模块建立在 _thread 模块之上。thread 模块以低级、原始的方式来处理和控制线程，而 threading 模块通过对 thread 进行二次封装，提供了更方便的 api 来处理线程。<br>Thread方法说明:</p>
+<ul>
+<li>t.start() : 激活线程，</li>
+<li>t.getName() : 获取线程的名称</li>
+<li>t.setName() ： 设置线程的名称</li>
+<li>t.name : 获取或设置线程的名称</li>
+<li>t.is_alive() ： 判断线程是否为激活状态</li>
+<li>t.isAlive() ：判断线程是否为激活状态</li>
+<li>t.setDaemon() 设置为后台线程或前台线程（默认：False）;通过一个布尔值设置线程是否为守护线程，必须在执行start()方法之后才可以使用。如果是后台线程，主线程执行过程中，后台线程也在进行，主线程执行完毕后，后台线程不论成功与否，均停止；如果是前台线程，主线程执行过程中，前台线程也在进行，主线程执行完毕后，等待前台线程也执行完成后，程序停止</li>
+<li>t.isDaemon() ： 判断是否为守护线程</li>
+<li>t.ident ：获取线程的标识符。线程标识符是一个非零整数，只有在调用了start()方法之后该属性才有效，否则它只返回None。</li>
+<li>t.join() ：逐个执行每个线程，执行完毕后继续往下执行，该方法使得多线程变得无意义</li>
+<li>t.run() ：线程被cpu调度后自动执行线程对象的run方法</li>
+</ul>
+<pre><code>import threading
+import time
+
+def worker(num):
+    time.sleep(1)
+    print(&quot;the num is %d&quot; %num)
+    return
+for i in range(20):
+    t = threading.Thread(target=worker,args=(i,),name=&quot;t.%d&quot; %i)
+    t.start()
+------------------------
+the num is 1
+the num is 0
+the num is 4the num is 3the num is 2
+
+
+the num is 7the num is 5
+the num is 6
+
+the num is 8
+the num is 10the num is 9
+
+the num is 12
+the num is 11
+the num is 14the num is 13
+
+the num is 15
+the num is 17the num is 19
+the num is 16the num is 18</code></pre><p>这段代码创建20个前台线程，然后由CPU根据一些算法，分片执行指令</p>
+<h3 id="线程锁threading-RLock和threading-Lock"><a href="#线程锁threading-RLock和threading-Lock" class="headerlink" title="线程锁threading.RLock和threading.Lock"></a>线程锁threading.RLock和threading.Lock</h3><p>由于线程之间是进行随机调度，并且每个线程可能只执行n条执行之后，CPU接着执行其他线程。为了保证数据的准确性，引入了锁的概念。所以，可能出现如下问题：</p>
+<p>例：假设列表A的所有元素就为0，当一个线程从前向后打印列表的所有元素，另外一个线程则从后向前修改列表的元素为1,那么输出的时候，列表的元素就会一部分为0，一部分为1,这就导致了数据的不一致。锁的出现解决了这个问题。<br><strong>eg</strong></p>
+<pre><code>#!/usr/bin/python
+# -*-coding:utf-8-*-
+# Author:Gsuhy
+
+import threading
+import time
+
+globals_num = 0
+lock = threading.RLock()
+
+def func():
+    lock.acquire() #获得锁
+    global globals_num
+    globals_num += 1
+    time.sleep(1)
+    print(globals_num)
+    lock.release() #释放锁
+
+for i in range(10):
+    t = threading.Thread(target=func)
+    t.start()
+----------------
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10</code></pre><h4 id="threading-RLock和threading-Lock-的区别"><a href="#threading-RLock和threading-Lock-的区别" class="headerlink" title="threading.RLock和threading.Lock 的区别"></a>threading.RLock和threading.Lock 的区别</h4><p>RLock允许在同一线程中被多次acquire。而Lock却不允许这种情况。 如果使用RLock，那么acquire和release必须成对出现，即调用了n次acquire，必须调用n次的release才能真正释放所占用的琐。</p>
+<pre><code>import threading
+lock = threading.Lock()    #Lock对象
+lock.acquire()
+lock.acquire()  #产生了死琐。
+lock.release()
+lock.release()　
+
+import threading
+rLock = threading.RLock()  #RLock对象
+rLock.acquire()
+rLock.acquire()    #在同一线程内，程序不会堵塞。
+rLock.release()
+rLock.release()</code></pre><h3 id="threading-Event"><a href="#threading-Event" class="headerlink" title="threading.Event"></a>threading.Event</h3><p>python线程的事件用于主线程控制其他线程的执行，事件主要提供了三个方法 set、wait、clear。</p>
+<p>事件处理的机制：全局定义了一个“Flag”，如果“Flag”值为 False，那么当程序执行 event.wait 方法时就会阻塞，如果“Flag”值为True，那么event.wait 方法时便不再阻塞。</p>
+<ul>
+<li>clear：将“Flag”设置为False</li>
+<li>set：将“Flag”设置为True</li>
+<li>Event.isSet() ：判断标识位是否为Ture。</li>
+</ul>
+<p>当线程执行的时候，如果flag为False，则线程会阻塞，当flag为True的时候，线程不会阻塞。它提供了本地和远程的并发性。</p>
+<pre><code>import threading
+
+def do(event):
+    print(&quot;start&quot;)
+    event.wait()
+    print(&quot;execute&quot;)
+
+event_obj = threading.Event()
+
+for i in range(10):
+    t = threading.Thread(target=do,args=(event_obj,))
+    t.start()
+
+event_obj.clear()
+inp = input(&quot;&gt;&gt;&gt;&quot;)
+if inp == &#39;true&#39;:
+    event_obj.set()
+-----------------
+如果输入的是true 那么就输出10个execute
+如果输入的是False，或者其他杂七杂八的，就阻塞</code></pre><p>当线程执行的时候，如果flag为False，则线程会阻塞，当flag为True的时候，线程不会阻塞。它提供了本地和远程的并发性。</p>
+<h3 id="threading-Condition"><a href="#threading-Condition" class="headerlink" title="threading.Condition"></a>threading.Condition</h3><p>一个condition变量总是与某些类型的锁相联系，这个可以使用默认的情况或创建一个，当几个condition变量必须共享和同一个锁的时候，是很有用的。锁是conditon对象的一部分：没有必要分别跟踪。<br>condition变量服从上下文管理协议：with语句块封闭之前可以获取与锁的联系。<code>acquire()</code>和 <code>release()</code>会调用与锁相关联的相应的方法。<br>其他和锁关联的方法必须被调用，<code>wait()</code>方法会释放锁，当另外一个线程使用 notify() or notify_all()唤醒它之前会一直阻塞。一旦被唤醒，<code>wait()</code>会重新获得锁并返回，<br>Condition类实现了一个conditon变量。 这个conditiaon变量允许一个或多个线程等待，直到他们被另一个线程通知。 <strong>如果lock参数，被给定一个非空的值，，那么他必须是一个lock或者Rlock对象，它用来做底层锁。否则，会创建一个新的Rlock对象，用来做底层锁。</strong></p>
+<h4 id="wait-timeout-None"><a href="#wait-timeout-None" class="headerlink" title="wait(timeout=None)"></a>wait(timeout=None)</h4><p> 等待通知，或者等到设定的超时时间。当调用这wait()方法时，如果调用它的线程没有得到锁，那么会抛出一个RuntimeError 异常。 wati()释放锁以后，在被调用相同条件的另一个进程用notify() or notify_all() 叫醒之前 会一直阻塞。wait() 还可以指定一个超时时间。<br> 如果有等待的线程，<code>notify()</code>方法会唤醒一个在等待conditon变量的线程。<code>notify_all()</code>则会唤醒所有在等待conditon变量的线程。</p>
+<p>注意： <code>notify()</code>和<code>notify_all()</code>不会释放锁，也就是说，线程被唤醒后不会立刻返回他们的<code>wait()</code>调用。除非线程调用<code>notify()</code>和<code>notify_all()</code>之后放弃了锁的所有权。</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h3 id="multiprocessing模块"><a href="#multiprocessing模块" class="headerlink" title="multiprocessing模块"></a>multiprocessing模块</h3><p>multiprocessing是python的多进程管理包，和threading.Thread类似。<br>直接从侧面用subprocesses替换线程使用GIL的方式，由于这一点，multiprocessing模块可以让程序员在给定的机器上充分的利用CPU。在multiprocessing中，通过创建Process对象生成进程，然后调用它的start()方法，</p>
+<h4 id="multiprocessing，Array-Value"><a href="#multiprocessing，Array-Value" class="headerlink" title="multiprocessing，Array,Value"></a>multiprocessing，Array,Value</h4><p>数据可以用Value或Array存储在一个共享内存地图里</p>
+<h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h2><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>IO操作不占用CPU<br>计算占用cpu<br>python多线程不适合cpu密集型操作的任务，适合IO操作密集型的任务<br>看个例子：</p>
+<pre><code>#!/usr/bin/python
+# -*-coding:utf-8-*-
+# Author:Gsuhy
+
+
+from multiprocessing import Process
+import os
+
+def info(title):
+    print(title)
+    print(&quot;module name:&quot;,__name__)
+    print(&quot;parent process:&quot;,os.getppid())
+    print(&quot;process id:&quot;,os.getpid())
+    print(&quot;\n&quot;)
+
+def f(name):
+    info(&#39;\033[31;1mcalled from child process function f\033[0m&#39;)
+    print(&quot;hello&quot;,name)
+
+if __name__ == &quot;__main__&quot;:
+    info(&#39;\033[32;1mmain process line\033[0m&#39;)
+    p = Process(target=f,args=(&#39;bobo&#39;,))
+    p.start()
+---------------------
+output:
+main process line
+module name: __main__
+parent process: 9608
+process id: 7188
+
+
+called from child process function f
+module name: __mp_main__
+parent process: 7188
+process id: 10232
+
+
+hello bobo
+</code></pre><p>这个程序run以后，会发现主函数的进程就是后台的<code>pycharm.exe</code>的进程id<code>9608</code>，而且不论运行多少次都是这个</p>
+<h3 id="进程间数据的交互"><a href="#进程间数据的交互" class="headerlink" title="进程间数据的交互"></a>进程间数据的交互</h3><p>通过Queue和Pipe可以实现进程间数据的传递，但是不同进程内存不能实现共享</p>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p>使用方法和<code>threading</code>里面的<code>queue</code>差不多</p>
+<p>线程之间的数据共享是这样的</p>
+<pre><code>import threading
+import queue
+
+def func():
+    q.put([22,&quot;dean&quot;,&#39;hello&#39;])
+
+if __name__==&quot;__main__&quot;:
+    q = queue.Queue()
+    t = threading.Thread(target=func)
+    t.start()
+    print(q.get(q))
+-----------------
+[22, &#39;dean&#39;, &#39;hello&#39;]</code></pre><p>进程之间的共享：</p>
+<pre><code>from multiprocessing import Process,Queue
+
+def f(data):
+    data.put([11,None,&quot;Gsuhy&quot;])
+
+if __name__ == &quot;__main__&quot;:
+    q = Queue() #进程q
+    p = Process(target=f,args=(q,))
+    p.start()
+    print(q.get())
+-----------------------
+[11, None, &#39;Gsuhy&#39;]</code></pre><p>这里可以看到父进程可以调用到子程序放入的数据<br>这里的q其实是被克隆了一个q，然后将子线程序列化的内容传入的克隆q，然后再反序列化给q从而海鲜进程之间的数据的传递。<br>如果这里吧<code>q = Queue()</code>改成<code>q = queue.Queue()</code>线程q的话是不行的。</p>
+<h3 id="Pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe</h3><p>直接上代码</p>
+<pre><code>from multiprocessing import Process,Pipe
+
+def f(conn):
+    conn.send([22,None,&quot;Gsuhy&quot;])
+    conn.send([21, None, &quot;w1mps&quot;])
+    conn.send([20, None, &quot;mmmGsuhy&quot;])
+    print(conn.recv())
+    conn.close()
+
+
+if __name__ == &quot;__main__&quot;:
+    left_conn,right_conn = Pipe()
+    p = Process(target=f,args=(right_conn,))
+    p.start()
+    print(left_conn.recv())
+    print(left_conn.recv())
+    print(left_conn.recv())
+    left_conn.send(&quot;I am Gsuhy&quot;)
+--------------------------------
+[22, None, &#39;Gsuhy&#39;]
+[21, None, &#39;w1mps&#39;]
+[20, None, &#39;mmmGsuhy&#39;]
+I am Gsuhy</code></pre><p>开始<code>Pipe()</code>生成两个值，一个用来发送，一个用来接收，上面f函数send多少下面就可以接受多少，也可以接受少于send的数量</p>
+<h3 id="Manager实现不同进程间的数据共享"><a href="#Manager实现不同进程间的数据共享" class="headerlink" title="Manager实现不同进程间的数据共享"></a>Manager实现不同进程间的数据共享</h3><p>上代码</p>
+<pre><code>from multiprocessing import Process,Manager
+import os
+
+def f(d,l):
+    d[1] = &quot;1&quot;
+    d[&quot;2&quot;] = 2
+    d[0.25] = None
+    l.append(os.getpid())
+    print(l)
+
+if __name__ == &quot;__main__&quot;:
+    with Manager() as manager:#这种方式等价于 manager=Manager()
+        d = manager.dict() #生成一个可以在多个进程间共享的字典
+        l = manager.list(range(5)) #生成一个可以在多个进程间共享的列表
+        p_list = []
+        for i in range(10):
+            p = Process(target=f,args=(d,1))
+            p.start()
+            p_list.append(p)
+        for res in p_list:
+            res.join()
+
+        print(d)
+        print(l)
+-------------------------
+[0, 1, 2, 3, 4, 16404]
+[0, 1, 2, 3, 4, 16404, 13160]
+[0, 1, 2, 3, 4, 16404, 13160, 12440]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936, 2876]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936, 2876, 14388]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936, 2876, 14388, 1840]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936, 2876, 14388, 1840, 13604]
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936, 2876, 14388, 1840, 13604, 17732]
+{1: &#39;1&#39;, &#39;2&#39;: 2, 0.25: None}
+[0, 1, 2, 3, 4, 16404, 13160, 12440, 15180, 17936, 2876, 14388, 1840, 13604, 17732]</code></pre><h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><p>协程，又称微线程，纤程(Coroutine)。协程是一种用户态的轻量级线程。<br>协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。<br>故，协程能保留上一次调用时的状态(即所有局部状态的一个特定组合)，每次过程重入时，就相当于进入上一次调用的状态，也就是进入上一次离开时所处逻辑流的位置。</p>
+<h4 id="协程的好处"><a href="#协程的好处" class="headerlink" title="协程的好处"></a>协程的好处</h4><ul>
+<li>无需线程上下文切换的开销</li>
+<li>无需原子操作锁定及同步的开销</li>
+<li>方便切换控制流，简化编程模型</li>
+<li>高并发，高扩展性，低成本：一个CPU支持上完的协程，适合高并发处理</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>无法利用多核资源，协程的本质是单线程，不能同时将单个CPU的多个核用上，协程需要和进程配合才能运行在多CPU上。<br>进行阻塞（Blocking）操作会阻塞掉整个程序</p>
+<h3 id="yield实现简单的协程"><a href="#yield实现简单的协程" class="headerlink" title="yield实现简单的协程"></a>yield实现简单的协程</h3><pre><code>#!/usr/bin/python
+# -*-coding:utf-8-*-
+# Author:Gsuhy
+
+
+import time
+import queue
+
+def consumer(name):
+     print(&quot;---&gt;starting eating baozi...&quot;)
+     while True:
+         new_baozi = yield
+         print(&quot;[%s] is eating baozi %s&quot; % (name, new_baozi))
+         time.sleep(2)
+def producer():
+
+    r = con.__next__()
+    r = con2.__next__()
+    n = 0
+    n += 1
+    con.send(n)
+    con2.send(n)
+    print(&quot;\033[32;1m[producer]\033[0m is making baozi %s&quot; % n)
+if __name__ == &#39;__main__&#39;:
+
+    con = consumer(&quot;Gsuhy&quot;)
+    con2 = consumer(&quot;嘤嘤嘤&quot;)
+    p = producer()
+-----------------------
+
+---&gt;starting eating baozi...
+---&gt;starting eating baozi...
+[Gsuhy] is eating baozi 1
+[嘤嘤嘤] is eating baozi 1
+[producer] is making baozi 1</code></pre><h3 id="Gevent"><a href="#Gevent" class="headerlink" title="Gevent"></a>Gevent</h3><p>Gevent 是一个第三方库，可以轻松通过gevent实现并发同步或异步编程，在gevent中用到的主要模式是Greenlet, 它是以C扩展模块形式接入Python的轻量级协程。 Greenlet全部运行在主程序操作系统进程的内部，但它们被协作式地调度.</p>
+<h4 id="用协程gevent写一个简单并发爬网页"><a href="#用协程gevent写一个简单并发爬网页" class="headerlink" title="用协程gevent写一个简单并发爬网页"></a>用协程gevent写一个简单并发爬网页</h4><pre><code>#!/usr/bin/python
+# -*-coding:utf-8-*-
+# Author:Gsuhy
+
+from urllib import request
+import gevent,time
+from gevent import monkey
+
+monkey.patch_all()
+def f(url):
+    print(&quot;get:%s&quot; %url)
+    resp = request.urlopen(url)
+    data = resp.read()
+    print(&quot;%d bytes received from %s&quot; %(len(data),url))
+
+urls = [
+    &quot;http://sina.com.cn&quot;,
+    &quot;http://www.cnblogs.com/&quot;,
+    &quot;https://news.cnblogs.com/&quot;
+]
+time_start = time.time()
+for url in urls:
+    f(url)
+
+print(&quot;同步串行cost：&quot;,time.time()-time_start)
+
+async_time = time.time()
+
+gevent.joinall([
+    gevent.spawn(f,&quot;http://sina.com.cn&quot;),
+    gevent.spawn(f, &quot;http://www.cnblogs.com/&quot;),
+    gevent.spawn(f, &quot;https://news.cnblogs.com/&quot;)
+])
+print(&quot;异步cost：&quot;,time.time()-async_time)
+---------------------------
+get:http://sina.com.cn
+572279 bytes received from http://sina.com.cn
+get:http://www.cnblogs.com/
+48414 bytes received from http://www.cnblogs.com/
+get:https://news.cnblogs.com/
+78889 bytes received from https://news.cnblogs.com/
+同步串行cost： 0.9885585308074951
+get:http://sina.com.cn
+get:http://www.cnblogs.com/
+get:https://news.cnblogs.com/
+572279 bytes received from http://sina.com.cn
+78889 bytes received from https://news.cnblogs.com/
+48414 bytes received from http://www.cnblogs.com/
+异步cost： 0.4312920570373535</code></pre><p>可以看出异步的确比同步要快一点<br>这里要注意一下，在开头我导入了<code>from gevent import monkey</code>，如果不加这个模块的话，运行这个py那么同步和异步时间看起来是差不多的。</p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2019/04/19/python中进程、线程、协程/" title="https://www.Gsuhy.cn/2019/04/19/python中进程、线程、协程/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2019/04/19/python中进程、线程、协程/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167562"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

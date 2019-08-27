@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>PHP弱类型问题 - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="php弱类型">
+<meta name="keywords" content="PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP弱类型问题">
+<meta property="og:url" content="https://www.Gsuhy.cn/2018/02/05/PHP弱类型问题/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="php弱类型">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T07:03:36.318Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP弱类型问题">
+<meta name="twitter:description" content="php弱类型">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167671">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+        <img src="true">
+        
+        <h1>PHP弱类型问题</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2018年02月05日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/PHP/">PHP</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/PHP/">PHP</a>
+    
+  </div>
+  <article>
+    <p>php弱类型<a id="more"></a></p>
+<h2 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h2><h3 id="变量类型（8种）"><a href="#变量类型（8种）" class="headerlink" title="变量类型（8种）"></a>变量类型（8种）</h3><ul>
+<li><p>标准类型：boolen(布尔),integer(整型),float,string</p>
+</li>
+<li><p>复杂类型：array,object</p>
+</li>
+<li><p>特殊类型：resource,null</p>
+<h3 id="类型转换问题"><a href="#类型转换问题" class="headerlink" title="类型转换问题"></a>类型转换问题</h3>  <?php
+  $a='abc'
+  if($a==0){
+  echo'is 0';
+  }else{
+  echo 'is not 0';
+  }
+  ?>
+<p>这里输出的是<code>is 0</code>,而不是<code>is not 0</code>。因为在最开始的时候定义<code>a==&#39;abc&#39;</code>为字符串类型，但是在下面比较的时候是和数字进行比较，这时候执行的相当于<code>if(intval($a)==0)</code>,</p>
+<blockquote>
+<p>获取变量的整数值，允许以使用特定的进制返回。默认10进制<br>注:如果参数为整数，则不做任何处理。<br>&lt;语法&gt;<br>intval(var,base)<br>其中<code>var</code>是必须的,<code>base</code>不是</p>
+</blockquote>
+</li>
+</ul>
+<pre><code>echo intval(&quot;0x1a&quot;, 0), &quot;\n&quot;; // 使用16进制。 结果 &quot;26&quot;
+echo intval(&quot;057&quot;, 0), &quot;\n&quot;; // 使用8进制。 结果 &quot;47&quot;
+ echo intval(&quot;57&quot;),&quot;\n&quot;; // 使用10进制。结果57
+ echo intval(&quot;42&quot;, 0), &quot;\n&quot;; //  结果 &quot;42&quot;</code></pre><h3 id="松散比较"><a href="#松散比较" class="headerlink" title="松散比较"></a>松散比较</h3><p>$var1==$var2</p>
+<blockquote>
+<p>1.$var1=flase;$var2=ture;//ture<br>2.$var1=<code></code>;$var2=null;//ture</p>
+</blockquote>
+<p>还有一些其他的也是相等的：</p>
+<blockquote>
+<p>0==’0’<br>0==’abc’<br>1==‘1abc‘</p>
+</blockquote>
+<h3 id="hash比较"><a href="#hash比较" class="headerlink" title="hash比较"></a>hash比较</h3><p>在进行比较运算的时候，如果遇到<code>0e\d+</code>这种字符串，其被解析为科学计数法，所有的都为0.<a href="https://baike.baidu.com/item/MD5/212708" target="_blank" rel="noopener">0e文章</a></p>
+<blockquote>
+<p>1.’’0e123456789’’==’’0e54684815318’’//true</p>
+</blockquote>
+<h3 id="十六进制转换"><a href="#十六进制转换" class="headerlink" title="十六进制转换"></a>十六进制转换</h3><p>php会将十六进制解析为十进制然后再进行比较</p>
+<blockquote>
+<p>‘’0x1e240’’==’’132456’’//true<br>这里<code>0x1e240</code>的十进制就是<code>132456</code>，所以这里int型和string型都是相等的。</p>
+</blockquote>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><ul>
+<li>转换为整型：(int),(integer)</li>
+<li>浮点型：(float),(double),(real)</li>
+<li>字符串：(string)</li>
+<li>布尔型：(bool),(boolean)</li>
+<li>数组：(array)</li>
+<li>对象：(object)<h3 id="转换方式"><a href="#转换方式" class="headerlink" title="转换方式"></a>转换方式</h3></li>
+</ul>
+<p>1.具体函数：intval(),floatval(),strval()….<br>2.通用类型转换函数：settype(mixed var,string type)<br>查阅资料得知，intval()在转换类型的时候，会从字符串开始进行转换直到遇到第一个非数字的字符。但是即使出现了无法转换的字符串，也不会报错，而是返回0.</p>
+<blockquote>
+<p>var_dump(intval(<code>abc</code>))//0<br>var_dump(intval(<code>1abc</code>))//1、</p>
+</blockquote>
+<h3 id="内置函数的松散型"><a href="#内置函数的松散型" class="headerlink" title="内置函数的松散型"></a>内置函数的松散型</h3><h4 id="in-array"><a href="#in-array" class="headerlink" title="in_array()"></a>in_array()</h4><p>检查数组中是否存在某个值</p>
+<blockquote>
+<p>bool in_array(mixed $needle,array $haystack[,bool $strict =FALSE])</p>
+</blockquote>
+<p>大海捞针，在大海(haystack)中搜索针(needle),如果没有设置strict则使用宽松比较。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
+<li>needle：待搜索的值，如果是字符串，则比较是区分大小写的。</li>
+<li>haystack：待搜索的数组。</li>
+<li>strickt：如果第三个参数strict的值为true则In_arrray()还会检查needle的类型是否和haystack相同。</li>
+</ul>
+<pre><code>&lt;?php
+$os=array(&quot;Mac&quot;,&quot;MT&quot;,&quot;Irix&quot;,&quot;Linux&quot;);
+if(in_array(&quot;Irix&quot;,$os)){
+echo&quot;Got Irix;
+}
+if (in_array(&quot;Mac&quot;,$os)){
+echo &quot;Got Mac&quot;;
+}
+?&gt;</code></pre><p>注意：in_array()函数是区分大小写的。</p>
+<h3 id="md5"><a href="#md5" class="headerlink" title="md5"></a>md5</h3><p>md5()需要的是一个string型的参数，但是当传递一个array给它时，它将无法正确求得array的md5值，这样会导致任意两个array的md5值相等</p>
+<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><p>原始字符串</p>
+<h4 id="raw-output"><a href="#raw-output" class="headerlink" title="raw_output"></a>raw_output</h4><p>如果可选的raw_output被设置为true，那么MD5报文摘要将以16字节长度的原始二进制格式返回</p>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>以32字符十六进制数字形式返回散列值</p>
+<pre><code>&lt;?php
+$str=`apple`;
+if(md5($str)===`1f387***************`){
+echo&quot;你真是一个睿智的人；
+}
+?&gt;</code></pre><h3 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp"></a>strcmp</h3><p>二进制安全字符串比较</p>
+<pre><code>strcmp(&quot;5&quot;, 5) =&gt; 0
+strcmp(&quot;15&quot;, 0xf) =&gt; 0
+strcmp(61529519452809720693702583126814, 61529519452809720000000000000000) =&gt; 0
+strcmp(NULL, false) =&gt; 0
+strcmp(NULL, &quot;&quot;) =&gt; 0
+strcmp(NULL, 0) =&gt; -1
+strcmp(false, -1) =&gt; -2
+strcmp(&quot;15&quot;, NULL) =&gt; 2
+strcmp(NULL, &quot;foo&quot;) =&gt; -3
+strcmp(&quot;foo&quot;, NULL) =&gt; 3
+strcmp(&quot;foo&quot;, false) =&gt; 3
+strcmp(&quot;foo&quot;, 0) =&gt; 1
+strcmp(&quot;foo&quot;, 5) =&gt; 1
+strcmp(&quot;foo&quot;, array()) =&gt; NULL + PHP Warning
+strcmp(&quot;foo&quot;, new stdClass) =&gt; NULL + PHP Warning
+strcmp(function(){}, &quot;&quot;) =&gt; NULL + PHP Warning</code></pre><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>switch 语句类似于具有同一个表达式的一系列 if 语句。很多场合下需要把同一个变量（或表达式）与很多不同的值比较，并根据它等于哪个值来执行不同的代码。这正是 switch 语句的用途。</p>
+<blockquote>
+<p>NOTE：注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch 并希望 continue 到外层循环中的下一轮循环，用 continue 2</p>
+</blockquote>
+<p>example:</p>
+<pre><code>&lt;?php
+if($i==0){
+echo&quot;i equeals 0&quot;;
+}elseif($i==1){
+echo&quot;&quot;i equels 1&quot;;
+}elseif($i==2){
+echo&quot;&quot;i equals 2&quot;;
+}
+switch ($i) {
+    case 0:
+        echo &quot;i equals 0&quot;;
+        break;
+    case 1:
+        echo &quot;i equals 1&quot;;
+        break;
+    case 2:
+        echo &quot;i equals 2&quot;;
+        break;
+}
+?&gt;</code></pre>
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2018/02/05/PHP弱类型问题/" title="https://www.Gsuhy.cn/2018/02/05/PHP弱类型问题/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2018/02/05/PHP弱类型问题/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167677"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

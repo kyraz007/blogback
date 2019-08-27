@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  
+  <title>JSP学习笔记&lt;一&gt; - Scorpio</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="每个人都应该拥有自己的梦想">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png">
+  <meta name="description" content="初步学习一下JSP">
+<meta name="keywords" content="jSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP学习笔记&lt;一&gt;">
+<meta property="og:url" content="https://www.Gsuhy.cn/2019/03/03/JSP学习笔记/index.html">
+<meta property="og:site_name" content="Scorpio">
+<meta property="og:description" content="初步学习一下JSP">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T07:04:21.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSP学习笔记&lt;一&gt;">
+<meta name="twitter:description" content="初步学习一下JSP">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.15.8/styles/atom-one-dark.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1038733_0xvrvpg9c0r.css">
+  <link rel="stylesheet" href="/css/style.css?v=1566894167575">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://i.loli.net/2019/01/13/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="Gsuhy" class="mdui-btn mdui-btn-icon"><img src="/images/avatar.png"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Gsuhy">
+            <img src="/images/avatar.png" alt="Gsuhy">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>30</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>13</div>
+    </div>
+    <ul class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </ul>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">社交按钮</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CTF/">CTF</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JAVA/">JAVA</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JSP/">JSP</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Link/">Link</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Linux/">Linux</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nginx/">Nginx</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/PHP/">PHP</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Python/">Python</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SQL/">SQL</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/内网渗透/">内网渗透</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">标签云</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 12.5px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Nginx/" style="font-size: 12.5px;">Nginx</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/jSP/" style="font-size: 10px;">jSP</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/sites/" style="font-size: 10px;">sites</a> <a href="/tags/sql/" style="font-size: 15px;">sql</a> <a href="/tags/内网渗透/" style="font-size: 10px;">内网渗透</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2019 Gsuhy
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    <div class="nexmoe-post-cover"> 
+        
+            <img src="https://i.loli.net/2019/01/13/5c3aec85a4343.jpg">
+        
+        <h1>JSP学习笔记&lt;一&gt;</h1>
+    </div>
+  <div class="nexmoe-post-meta">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2019年03月03日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 10 分钟</a>
+    
+      <a class="nexmoefont icon-appstore-fill -link" href="/categories/JSP/">JSP</a>
+    
+    
+      <a class="nexmoefont icon-tag-fill -link" href="/tags/jSP/">jSP</a>
+    
+  </div>
+  <article>
+    <p>初步学习一下JSP<a id="more"></a></p>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="包含脚本程序"><a href="#包含脚本程序" class="headerlink" title="包含脚本程序"></a>包含脚本程序</h3><p>脚本程序可以包含java语法<br><code>&lt;% code %&gt;</code><br>或者也可以用等价的XML语句：</p>
+<pre><code>&lt;jsp:scrptlet&gt;
+code
+&lt;jsp:scrptlet&gt;</code></pre><h3 id="JSP声明"><a href="#JSP声明" class="headerlink" title="JSP声明"></a>JSP声明</h3><p><code>&lt;%! declaration;[declaration;]+.....%&gt;</code><br>等价的XML语句：</p>
+<pre><code>&lt;jsp:declaration&gt;
+code
+&lt;jsp:declaration&gt;</code></pre><h4 id="eg"><a href="#eg" class="headerlink" title="eg"></a><strong>eg</strong></h4><pre><code>&lt;%! int i = 0; %&gt;
+&lt;%! int a, b, c; %&gt;
+&lt;%! Circle a = new Circle(2.0); %&gt;</code></pre><h3 id="JSP表达式"><a href="#JSP表达式" class="headerlink" title="JSP表达式"></a>JSP表达式</h3><p>一个JSP表达式中包含的脚本语言表达式，先被转化为String，然后插入到表达式出现的地方。<br>由于被转化为了String，所以可以在一个文本行中使用表达式而不去管他是否是HTML标签。<br><code>&lt;%= 表达式 %&gt;</code><br>等价的XML语句：</p>
+<pre><code>&lt;jsp:expression&gt;
+表达式
+&lt;jsp:expression&gt;</code></pre><h4 id="eg-1"><a href="#eg-1" class="headerlink" title="eg"></a>eg</h4><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;this is a jsp&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello world&lt;/h1&gt;
+今天的日期是: &lt;%= (new java.util.Date()).toLocaleString()%&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+---------------------
+Hello world
+今天的日期是: 2019年2月24日 下午4:48:24</code></pre><h3 id="JSP注释"><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h3><p><code>&lt;%-- 注释的东西 --%&gt;</code><br>这里要区别一下HTML的注释<br>HTML的注释是：<code>&lt;!-- 注释 --&gt;</code></p>
+<h3 id="JSP行为"><a href="#JSP行为" class="headerlink" title="JSP行为"></a>JSP行为</h3><p>JSP行为标签使用XML语法结构来控制<strong>servlet</strong>引擎。能够动态插入一个文件，重用JavaBean组件，引导用户去另一个页面，为java插件产生相关的HTML等<br>行为标签严格遵守XML标准：<br><code>&lt;jsp:action_name attribute=&quot;value&quot;/&gt;</code></p>
+<p>下面给出一些可用的JSP行为标签：</p>
+<table>
+<thead>
+<tr>
+<th align="left">语法</th>
+<th align="right">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">jsp:include</td>
+<td align="right">用于在当前页面中包含静态或动态资源</td>
+</tr>
+<tr>
+<td align="left">jsp:useBean</td>
+<td align="right">寻找和初始化一个JavaBean组件</td>
+</tr>
+<tr>
+<td align="left">jsp:setProperty</td>
+<td align="right">设置JavaBean组件的值</td>
+</tr>
+<tr>
+<td align="left">jsp:getProperty</td>
+<td align="right">将JavaBean组件的值插入到output中</td>
+</tr>
+<tr>
+<td align="left">jsp:forward</td>
+<td align="right">从一个JSP文件向另一个文件传递一个包含用户请求的request对象</td>
+</tr>
+<tr>
+<td align="left">jsp:plugin</td>
+<td align="right">用于在生成的HTML页面中包含Apple和JavaBean对象</td>
+</tr>
+<tr>
+<td align="left">jsp:element</td>
+<td align="right">动态创建一个XML元素</td>
+</tr>
+<tr>
+<td align="left">jsp:attribute</td>
+<td align="right">定义动态创建的XML元素的属性</td>
+</tr>
+<tr>
+<td align="left">jsp:body</td>
+<td align="right">定义动态创建的XML元素的主体</td>
+</tr>
+<tr>
+<td align="left">jsp:text</td>
+<td align="right">用于封装模板数据</td>
+</tr>
+</tbody></table>
+<h3 id="JSP隐含对象"><a href="#JSP隐含对象" class="headerlink" title="JSP隐含对象"></a>JSP隐含对象</h3><p>JSP支持九个自动定义的变量，称为隐含对象：</p>
+<table>
+<thead>
+<tr>
+<th align="left">对象</th>
+<th align="right">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">request</td>
+<td align="right">HttpServletRequest类的实例</td>
+</tr>
+<tr>
+<td align="left">response</td>
+<td align="right">HttpServletResponse类的实例</td>
+</tr>
+<tr>
+<td align="left">out</td>
+<td align="right">PrintWriter类的实例，用于把结果输出至网页上</td>
+</tr>
+<tr>
+<td align="left">session</td>
+<td align="right">HttpSession类的实例</td>
+</tr>
+<tr>
+<td align="left">application</td>
+<td align="right">ServletContext类的实例，与应用上下文有关</td>
+</tr>
+<tr>
+<td align="left">config</td>
+<td align="right">ServletConfig类的实例</td>
+</tr>
+<tr>
+<td align="left">pageContext</td>
+<td align="right">PageContext类的实例，提供对JSP页面所有对象以及命名空间的访问</td>
+</tr>
+<tr>
+<td align="left">page</td>
+<td align="right">类似于Java类中的this关键字</td>
+</tr>
+<tr>
+<td align="left">Exception</td>
+<td align="right">Exception类的对象，代表发生错误的JSP页面中对应的异常对象</td>
+</tr>
+</tbody></table>
+<h3 id="JSP控制流语句"><a href="#JSP控制流语句" class="headerlink" title="JSP控制流语句"></a>JSP控制流语句</h3><p>包括判断，循环等</p>
+<h4 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h4><pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+    &lt;% int day = 2; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;this is a jsp&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello world&lt;/h1&gt;
+&lt;% if (day == 1 | day ==7) { %&gt;
+    &lt;p&gt;今天是周末&lt;/p&gt;
+&lt;% } else { %&gt;
+    &lt;p&gt;今天不是周末&lt;/P&gt;
+&lt;% } %&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+--------------
+output:
+Hello world
+今天不是周末</code></pre><p>而switch…case的用法与if…else 有点不同，输出用的是<code>out,println()</code>，并且整个都装在脚本程序的标签中</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%! int day = 3; %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;this is a jsp&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello world&lt;/h1&gt;
+&lt;%
+switch(day) {
+case 0:
+   out.println(&quot;星期天&quot;);
+   break;
+case 1:
+   out.println(&quot;星期一&quot;);
+   break;
+case 2:
+   out.println(&quot;星期二&quot;);
+   break;
+case 3:
+   out.println(&quot;星期三&quot;);
+   break;
+case 4:
+   out.println(&quot;星期四&quot;);
+   break;
+case 5:
+   out.println(&quot;星期五&quot;);
+   break;
+default:
+   out.println(&quot;星期六&quot;);
+}
+%&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```请
+
+
+### JSP指令
+JSP指令是用来设置整个JSP页面相关的属性。
+`&lt;%@ directive attribute=&quot;value&quot; %&gt;`
+
+三种指令标签：</code></pre><p>&lt;%@ page .. %&gt;—-定义页面的依赖属性，比如脚本语言，error页面，缓存需求等</p>
+<p>&lt;$@ include .. %&gt;—-包含其他文件</p>
+<p>&lt;%@ taglib .. %&gt;—-引入标签库的定义，可以是自定义标签</p>
+<pre><code>#### page指令
+page指令为容器提供当前页面的使用说明。
+语法为`&lt;%@ page attribute=&quot;value&quot; %&gt;`
+或者XML：
+`&lt;jsp:directive.page attribute=&quot;value&quot; /&gt;`
+下面是一些page属性：
+
+| 属性      |     描述 |
+| :-------- | --------:|
+| buffer    |   指定out对象使用缓冲区的大小 |
+| autoFlush    |   控制out对象的缓存区 |
+| contentType    |   指定当前JSP页面的MIME类型和字符编码 |
+| errorPage    |   指定当JSP页面发生异常时需要转向的错误处理页面 |
+| isErrorPage    |   指定当前页面是否可以作为另一个JSP页面的错误处理页面 |
+| extends    |   指定servlet从哪一个类继承 |
+| import    |   导入要使用的java类 |
+| info    |   定义JSP页面的描述信息 |
+| language    |   定义JSP页面所用的脚本语言，默认是java |
+| session    |   指定JSP页面是否用session |
+
+#### Include指令
+JSP可以通过include指令来包含其他文件，像上面JSP文件，HTML文件或者文本文件都行。语法：
+`&lt;%@ include file=&quot;文件相对url地址&quot; %&gt;`
+或者XML：
+`&lt;jsp:directive.include file=&quot;文件相对 url 地址&quot; /&gt;`
+
+#### Taglib指令
+JSP API允许用户自定义标签，一个自定义标签库就是自定义标签的集合。
+
+Taglib指令引入一个自定义标签集合的定义，包括库路径、自定义标签。语法：
+
+`&lt;%@ taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; %&gt;`
+uri属性确定标签库的位置，prefix属性指定标签库的前缀。
+XML：
+`&lt;jsp:directive.taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; /&gt;`
+
+### JSP动作元素
+与指令元素不同，JSP动作元素在请求处理阶段起作用，而且JSP动作元素时用XML语法写的，利用JSP动作可以动态地插入文件，重用JavaBean组件，把用户重定向到另外的页面，为Java插件生成HTML代码。只有XML语法：
+`&lt;jsp:action_name attribute=&quot;value&quot; /&gt;`
+动作元素基本上都是预定义的函数，JSP规范定义了一系列的标准动作，它用JSP作为前缀，可用的标准动作元素如下：
+
+| 语法      |     描述 |
+| :-------- | --------:|
+|  jsp:inlude   | 在页面被请求的时候引入一个文件   |
+| jsp:useBean    | 寻找或者实例化一个JavaBean   |
+|  jsp:setProperty   | 设置JavaBean的属性   |
+|  jsp:getProperty    | 输出某个JavaBean的属性   |
+|  jsp:forward   | 把请求转到一个新的页面   |
+|  jsp:plugin   |  根据浏览器类型为Java插件生成OBJECT或EMBED标记  |
+|  jsp:element   | 定义动态XML元素   |
+|  jsp:attribute   | 设置动态定义的XML元素属性   |
+|  jsp:body   | 设置动态定义的XML元素内容   |
+|  jsp:text   | 在JSP页面和文档中使用写入文本的模板   |
+#### 常见的属性
+所有的动作要素都有两个属性：id属性和scope属性。
+
+- id属性：
+id属性是动作元素的唯一标识，可以在JSP页面中引用。动作元素创建的id值可以通过PageContext来调用。
+
+- scope属性：
+该属性用于识别动作元素的生命周期。 id属性和scope属性有直接关系，scope属性定义了相关联id对象的寿命。 scope属性有四个可能的值：` (a) page, (b)request, (c)session, 和 (d) application`
+#### &lt;jsp:include&gt;动作元素
+`&lt;jsp:include&gt;`动作元素用来包含静态和动态文件，把指定的文件插入正在生成的页面。语法：
+`&lt;jsp:include page=&quot;相对 URL 地址&quot; flush=&quot;true&quot; /&gt;`
+后面这个`flush=&quot;true&quot;`是一个布尔属性，定义在包含资源前是否刷新缓存区
+
+下面是一个例子：
+定义了一个date.jsp：
+</code></pre><p>
+Today's date:<%= (new java.util.date()).tolocalestring()%>
+</%=></p>
+```
+
+<p>虽然这里有一个报错，提示<code>toLocaleString()</code>方法以及过时，不过没关系，还是可以跑的<br>再定义了另一个main.jsp：</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;include example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;center&gt;
+&lt;h2&gt;include action example&lt;/h2&gt;
+&lt;jsp:include page=&quot;date.jsp&quot; flush=&quot;true&quot; /&gt;
+&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>结果会显示实时的时间</p>
+
+  </article>
+  
+    
+<div class="nexmoe-post-copyright">
+<i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+<strong>本文作者：</strong>Gsuhy<br>
+<strong>本文链接：</strong><a href="https://www.Gsuhy.cn/2019/03/03/JSP学习笔记/" title="https://www.Gsuhy.cn/2019/03/03/JSP学习笔记/" target="_blank" rel="noopener">https://www.Gsuhy.cn/2019/03/03/JSP学习笔记/</a><br>
+
+  <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+</div>
+
+
+  
+  <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@0.4.3/dist/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+ 
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/smoothscroll-for-websites@1.4.9/SmoothScroll.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/js/app.js?v=1566894167583"></script>
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.1.0/lazysizes.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+  
+
+
+
+
+
+</body>
+
+</html>
