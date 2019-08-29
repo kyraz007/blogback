@@ -319,20 +319,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 </a>
                 
                 
-                <a href="/categories/PHP/" title="PHP: 4">
+                <a href="/categories/Python/" title="Python: 11">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F5EEF8;">PHP
-                        <span class="tag-length">4</span>
+                             chip-default "
+                            style="background-color: #F5EEF8;">Python
+                        <span class="tag-length">11</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/Python/" title="Python: 11">
+                <a href="/categories/PHP/" title="PHP: 4">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">Python
-                        <span class="tag-length">11</span>
+                             chip-active "
+                            style="background-color: #D5F5E3;">PHP
+                        <span class="tag-length">4</span>
                     </span>
                 </a>
                 
@@ -355,19 +355,28 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 </a>
                 
                 
+                <a href="/categories/Link/" title="Link: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F8F9F9;">Link
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/SQL/" title="SQL: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8F9F9;">SQL
+                            style="background-color: #82E0AA;">SQL
                         <span class="tag-length">3</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/Link/" title="Link: 1">
+                <a href="/categories/内网渗透/" title="内网渗透: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">Link
+                            style="background-color: #D7BDE2;">内网渗透
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -376,16 +385,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <a href="/categories/生活/" title="生活: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D7BDE2;">生活
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/内网渗透/" title="内网渗透: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">内网渗透
+                            style="background-color: #A3E4D7;">生活
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -524,26 +524,27 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2018/02/05/PHP命令执行/">
+                    <a href="/2018/02/05/PHP弱类型问题/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="PHP命令执行">
+                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="PHP弱类型问题">
                             
-                            <span class="card-title">PHP命令执行</span>
+                            <span class="card-title">PHP弱类型问题</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                PHP中的命令执行
-PHP中命令执行漏洞常见的危险函数eval()这个是我目前见过最多的危险函数
+                                php弱类型
+PHP弱类型变量类型（8种）
+标准类型：boolen(布尔),integer(整型),float,string
 
-mixed eval(string $code)
+复杂类型：array,object
 
-吧字符串code作为php代码执行eg.
-&lt;?php
-eval ($_GET[&#
+特殊类型：resource,null
+类型转换问题  
+这里输出的是is 
                             
                         </div>
                         <div class="publish-info">
@@ -577,27 +578,26 @@ eval ($_GET[&#
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2018/02/05/PHP弱类型问题/">
+                    <a href="/2018/02/05/PHP命令执行/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="PHP弱类型问题">
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="PHP命令执行">
                             
-                            <span class="card-title">PHP弱类型问题</span>
+                            <span class="card-title">PHP命令执行</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                php弱类型
-PHP弱类型变量类型（8种）
-标准类型：boolen(布尔),integer(整型),float,string
+                                PHP中的命令执行
+PHP中命令执行漏洞常见的危险函数eval()这个是我目前见过最多的危险函数
 
-复杂类型：array,object
+mixed eval(string $code)
 
-特殊类型：resource,null
-类型转换问题  
-这里输出的是is 
+吧字符串code作为php代码执行eg.
+&lt;?php
+eval ($_GET[&#
                             
                         </div>
                         <div class="publish-info">

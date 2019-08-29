@@ -1022,27 +1022,26 @@ main()</code></pre><h3 id="less10-GET-–-Blind-–-Time-based-–-double-quotes
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2018/02/05/PHP弱类型问题/">
+                <a href="/2018/02/05/PHP命令执行/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="PHP弱类型问题">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="PHP命令执行">
                         
-                        <span class="card-title">PHP弱类型问题</span>
+                        <span class="card-title">PHP命令执行</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            php弱类型
-PHP弱类型变量类型（8种）
-标准类型：boolen(布尔),integer(整型),float,string
+                            PHP中的命令执行
+PHP中命令执行漏洞常见的危险函数eval()这个是我目前见过最多的危险函数
 
-复杂类型：array,object
+mixed eval(string $code)
 
-特殊类型：resource,null
-类型转换问题  
-这里输出的是is 
+吧字符串code作为php代码执行eg.
+&lt;?php
+eval ($_GET[&#
                         
                     </div>
                     <div class="publish-info">
