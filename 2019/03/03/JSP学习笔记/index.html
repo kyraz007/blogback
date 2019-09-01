@@ -5,11 +5,10 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="JSP学习笔记&lt;一&gt;, Scorpio">
-    <meta name="description" content="初步学习一下JSP
-基础语法包含脚本程序脚本程序可以包含java语法&amp;lt;% code %&amp;gt;或者也可以用等价的XML语句：
+    <meta name="description" content="基础语法包含脚本程序脚本程序可以包含java语法&amp;lt;% code %&amp;gt;或者也可以用等价的XML语句：
 &amp;lt;jsp:scrptlet&amp;gt;
 code
-&amp;lt;jsp:scrptlet&amp;gt;JSP声明&amp;lt">
+&amp;lt;jsp:scrptlet&amp;gt;JSP声明&amp;lt;%! declar">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -449,8 +448,7 @@ code
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>初步学习一下JSP<a id="more"></a></p>
-<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="包含脚本程序"><a href="#包含脚本程序" class="headerlink" title="包含脚本程序"></a>包含脚本程序</h3><p>脚本程序可以包含java语法<br><code>&lt;% code %&gt;</code><br>或者也可以用等价的XML语句：</p>
+                <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="包含脚本程序"><a href="#包含脚本程序" class="headerlink" title="包含脚本程序"></a>包含脚本程序</h3><p>脚本程序可以包含java语法<br><code>&lt;% code %&gt;</code><br>或者也可以用等价的XML语句：</p>
 <pre><code>&lt;jsp:scrptlet&gt;
 code
 &lt;jsp:scrptlet&gt;</code></pre><h3 id="JSP声明"><a href="#JSP声明" class="headerlink" title="JSP声明"></a>JSP声明</h3><p><code>&lt;%! declaration;[declaration;]+.....%&gt;</code><br>等价的XML语句：</p>
@@ -632,91 +630,133 @@ default:
 }
 %&gt;
 &lt;/body&gt;
-&lt;/html&gt;
-```请
+&lt;/html&gt;</code></pre><h3 id="JSP指令"><a href="#JSP指令" class="headerlink" title="JSP指令"></a>JSP指令</h3><p>JSP指令是用来设置整个JSP页面相关的属性。<br><code>&lt;%@ directive attribute=&quot;value&quot; %&gt;</code></p>
+<p>三种指令标签：</p>
+<pre><code>&lt;%@ page .. %&gt;----定义页面的依赖属性，比如脚本语言，error页面，缓存需求等
 
+&lt;$@ include .. %&gt;----包含其他文件
 
-### JSP指令
-JSP指令是用来设置整个JSP页面相关的属性。
-`&lt;%@ directive attribute=&quot;value&quot; %&gt;`
-
-三种指令标签：</code></pre><p>&lt;%@ page .. %&gt;—-定义页面的依赖属性，比如脚本语言，error页面，缓存需求等</p>
-<p>&lt;$@ include .. %&gt;—-包含其他文件</p>
-<p>&lt;%@ taglib .. %&gt;—-引入标签库的定义，可以是自定义标签</p>
-<pre><code>#### page指令
-page指令为容器提供当前页面的使用说明。
-语法为`&lt;%@ page attribute=&quot;value&quot; %&gt;`
-或者XML：
-`&lt;jsp:directive.page attribute=&quot;value&quot; /&gt;`
-下面是一些page属性：
-
-| 属性      |     描述 |
-| :-------- | --------:|
-| buffer    |   指定out对象使用缓冲区的大小 |
-| autoFlush    |   控制out对象的缓存区 |
-| contentType    |   指定当前JSP页面的MIME类型和字符编码 |
-| errorPage    |   指定当JSP页面发生异常时需要转向的错误处理页面 |
-| isErrorPage    |   指定当前页面是否可以作为另一个JSP页面的错误处理页面 |
-| extends    |   指定servlet从哪一个类继承 |
-| import    |   导入要使用的java类 |
-| info    |   定义JSP页面的描述信息 |
-| language    |   定义JSP页面所用的脚本语言，默认是java |
-| session    |   指定JSP页面是否用session |
-
-#### Include指令
-JSP可以通过include指令来包含其他文件，像上面JSP文件，HTML文件或者文本文件都行。语法：
-`&lt;%@ include file=&quot;文件相对url地址&quot; %&gt;`
-或者XML：
-`&lt;jsp:directive.include file=&quot;文件相对 url 地址&quot; /&gt;`
-
-#### Taglib指令
-JSP API允许用户自定义标签，一个自定义标签库就是自定义标签的集合。
-
-Taglib指令引入一个自定义标签集合的定义，包括库路径、自定义标签。语法：
-
-`&lt;%@ taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; %&gt;`
-uri属性确定标签库的位置，prefix属性指定标签库的前缀。
-XML：
-`&lt;jsp:directive.taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; /&gt;`
-
-### JSP动作元素
-与指令元素不同，JSP动作元素在请求处理阶段起作用，而且JSP动作元素时用XML语法写的，利用JSP动作可以动态地插入文件，重用JavaBean组件，把用户重定向到另外的页面，为Java插件生成HTML代码。只有XML语法：
-`&lt;jsp:action_name attribute=&quot;value&quot; /&gt;`
-动作元素基本上都是预定义的函数，JSP规范定义了一系列的标准动作，它用JSP作为前缀，可用的标准动作元素如下：
-
-| 语法      |     描述 |
-| :-------- | --------:|
-|  jsp:inlude   | 在页面被请求的时候引入一个文件   |
-| jsp:useBean    | 寻找或者实例化一个JavaBean   |
-|  jsp:setProperty   | 设置JavaBean的属性   |
-|  jsp:getProperty    | 输出某个JavaBean的属性   |
-|  jsp:forward   | 把请求转到一个新的页面   |
-|  jsp:plugin   |  根据浏览器类型为Java插件生成OBJECT或EMBED标记  |
-|  jsp:element   | 定义动态XML元素   |
-|  jsp:attribute   | 设置动态定义的XML元素属性   |
-|  jsp:body   | 设置动态定义的XML元素内容   |
-|  jsp:text   | 在JSP页面和文档中使用写入文本的模板   |
-#### 常见的属性
-所有的动作要素都有两个属性：id属性和scope属性。
-
-- id属性：
-id属性是动作元素的唯一标识，可以在JSP页面中引用。动作元素创建的id值可以通过PageContext来调用。
-
-- scope属性：
-该属性用于识别动作元素的生命周期。 id属性和scope属性有直接关系，scope属性定义了相关联id对象的寿命。 scope属性有四个可能的值：` (a) page, (b)request, (c)session, 和 (d) application`
-#### &lt;jsp:include&gt;动作元素
-`&lt;jsp:include&gt;`动作元素用来包含静态和动态文件，把指定的文件插入正在生成的页面。语法：
-`&lt;jsp:include page=&quot;相对 URL 地址&quot; flush=&quot;true&quot; /&gt;`
-后面这个`flush=&quot;true&quot;`是一个布尔属性，定义在包含资源前是否刷新缓存区
-
-下面是一个例子：
-定义了一个date.jsp：
-</code></pre><p>
-Today's date:<%= (new java.util.date()).tolocalestring()%>
-</%=></p>
-```
-
-<p>虽然这里有一个报错，提示<code>toLocaleString()</code>方法以及过时，不过没关系，还是可以跑的<br>再定义了另一个main.jsp：</p>
+&lt;%@ taglib .. %&gt;----引入标签库的定义，可以是自定义标签</code></pre><h4 id="page指令"><a href="#page指令" class="headerlink" title="page指令"></a>page指令</h4><p>page指令为容器提供当前页面的使用说明。<br>语法为<code>&lt;%@ page attribute=&quot;value&quot; %&gt;</code><br>或者XML：<br><code>&lt;jsp:directive.page attribute=&quot;value&quot; /&gt;</code><br>下面是一些page属性：</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="right">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">buffer</td>
+<td align="right">指定out对象使用缓冲区的大小</td>
+</tr>
+<tr>
+<td align="left">autoFlush</td>
+<td align="right">控制out对象的缓存区</td>
+</tr>
+<tr>
+<td align="left">contentType</td>
+<td align="right">指定当前JSP页面的MIME类型和字符编码</td>
+</tr>
+<tr>
+<td align="left">errorPage</td>
+<td align="right">指定当JSP页面发生异常时需要转向的错误处理页面</td>
+</tr>
+<tr>
+<td align="left">isErrorPage</td>
+<td align="right">指定当前页面是否可以作为另一个JSP页面的错误处理页面</td>
+</tr>
+<tr>
+<td align="left">extends</td>
+<td align="right">指定servlet从哪一个类继承</td>
+</tr>
+<tr>
+<td align="left">import</td>
+<td align="right">导入要使用的java类</td>
+</tr>
+<tr>
+<td align="left">info</td>
+<td align="right">定义JSP页面的描述信息</td>
+</tr>
+<tr>
+<td align="left">language</td>
+<td align="right">定义JSP页面所用的脚本语言，默认是java</td>
+</tr>
+<tr>
+<td align="left">session</td>
+<td align="right">指定JSP页面是否用session</td>
+</tr>
+</tbody></table>
+<h4 id="Include指令"><a href="#Include指令" class="headerlink" title="Include指令"></a>Include指令</h4><p>JSP可以通过include指令来包含其他文件，像上面JSP文件，HTML文件或者文本文件都行。语法：<br><code>&lt;%@ include file=&quot;文件相对url地址&quot; %&gt;</code><br>或者XML：<br><code>&lt;jsp:directive.include file=&quot;文件相对 url 地址&quot; /&gt;</code></p>
+<h4 id="Taglib指令"><a href="#Taglib指令" class="headerlink" title="Taglib指令"></a>Taglib指令</h4><p>JSP API允许用户自定义标签，一个自定义标签库就是自定义标签的集合。</p>
+<p>Taglib指令引入一个自定义标签集合的定义，包括库路径、自定义标签。语法：</p>
+<p><code>&lt;%@ taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; %&gt;</code><br>uri属性确定标签库的位置，prefix属性指定标签库的前缀。<br>XML：<br><code>&lt;jsp:directive.taglib uri=&quot;uri&quot; prefix=&quot;prefixOfTag&quot; /&gt;</code></p>
+<h3 id="JSP动作元素"><a href="#JSP动作元素" class="headerlink" title="JSP动作元素"></a>JSP动作元素</h3><p>与指令元素不同，JSP动作元素在请求处理阶段起作用，而且JSP动作元素时用XML语法写的，利用JSP动作可以动态地插入文件，重用JavaBean组件，把用户重定向到另外的页面，为Java插件生成HTML代码。只有XML语法：<br><code>&lt;jsp:action_name attribute=&quot;value&quot; /&gt;</code><br>动作元素基本上都是预定义的函数，JSP规范定义了一系列的标准动作，它用JSP作为前缀，可用的标准动作元素如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">语法</th>
+<th align="right">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">jsp:inlude</td>
+<td align="right">在页面被请求的时候引入一个文件</td>
+</tr>
+<tr>
+<td align="left">jsp:useBean</td>
+<td align="right">寻找或者实例化一个JavaBean</td>
+</tr>
+<tr>
+<td align="left">jsp:setProperty</td>
+<td align="right">设置JavaBean的属性</td>
+</tr>
+<tr>
+<td align="left">jsp:getProperty</td>
+<td align="right">输出某个JavaBean的属性</td>
+</tr>
+<tr>
+<td align="left">jsp:forward</td>
+<td align="right">把请求转到一个新的页面</td>
+</tr>
+<tr>
+<td align="left">jsp:plugin</td>
+<td align="right">根据浏览器类型为Java插件生成OBJECT或EMBED标记</td>
+</tr>
+<tr>
+<td align="left">jsp:element</td>
+<td align="right">定义动态XML元素</td>
+</tr>
+<tr>
+<td align="left">jsp:attribute</td>
+<td align="right">设置动态定义的XML元素属性</td>
+</tr>
+<tr>
+<td align="left">jsp:body</td>
+<td align="right">设置动态定义的XML元素内容</td>
+</tr>
+<tr>
+<td align="left">jsp:text</td>
+<td align="right">在JSP页面和文档中使用写入文本的模板</td>
+</tr>
+<tr>
+<td align="left">#### 常见的属性</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left">所有的动作要素都有两个属性：id属性和scope属性。</td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>id属性：<br>id属性是动作元素的唯一标识，可以在JSP页面中引用。动作元素创建的id值可以通过PageContext来调用。</p>
+</li>
+<li><p>scope属性：<br>该属性用于识别动作元素的生命周期。 id属性和scope属性有直接关系，scope属性定义了相关联id对象的寿命。 scope属性有四个可能的值：<code>(a) page, (b)request, (c)session, 和 (d) application</code></p>
+<h4 id="jsp-include动作元素"><a href="#jsp-include动作元素" class="headerlink" title="jsp:include动作元素"></a><a href="jsp:include" target="_blank" rel="noopener">jsp:include</a>动作元素</h4><p><code>&lt;jsp:include&gt;</code>动作元素用来包含静态和动态文件，把指定的文件插入正在生成的页面。语法：<br><code>&lt;jsp:include page=&quot;相对 URL 地址&quot; flush=&quot;true&quot; /&gt;</code><br>后面这个<code>flush=&quot;true&quot;</code>是一个布尔属性，定义在包含资源前是否刷新缓存区</p>
+</li>
+</ul>
+<p>下面是一个例子：<br>定义了一个date.jsp：</p>
+<pre><code>&lt;p&gt;
+Today&#39;s date:&lt;%= (new java.util.Date()).toLocaleString()%&gt;
+&lt;/p&gt;</code></pre><p>虽然这里有一个报错，提示<code>toLocaleString()</code>方法以及过时，不过没关系，还是可以跑的<br>再定义了另一个main.jsp：</p>
 <pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
     pageEncoding=&quot;UTF-8&quot;%&gt;
 &lt;!DOCTYPE html&gt;
@@ -949,7 +989,6 @@ Today's date:<%= (new java.util.date()).tolocalestring()%>
                     <div class="summary block-with-text">
                         
                             socket编程
-python之socket编程socket通常也称作“套接字”，用于描述IP地址和端口，是一个通信链的句柄，应用程序通常通过“套接字”向网络发出请求或者应答网络请求。socket模块是针对 服务器端 和 客户端Socket
                         
                     </div>
                     <div class="publish-info">
@@ -999,8 +1038,6 @@ python之socket编程socket通常也称作“套接字”，用于描述IP地址
                     <div class="summary block-with-text">
                         
                             requests的学习
-python-requests为啥不用urllib用requests，因为requests比urllib方便，requests是python实现的最简单的HTTP库。
-各种请求方式GET请求import reques
                         
                     </div>
                     <div class="publish-info">
@@ -1181,7 +1218,7 @@ python-requests为啥不用urllib用requests，因为requests比urllib方便，r
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">49.1k</span>
+                <span class="white-color">48.8k</span>
             
 
             

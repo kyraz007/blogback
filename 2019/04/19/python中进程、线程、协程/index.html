@@ -5,8 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="python中进程、线程、协程, Scorpio">
-    <meta name="description" content="进程，线程，协程，了解一下~~
-Python 进程、线程、协程进程和线程计算机是由硬件和软件组成的。硬件中的CPU是计算机的核心，它承担计算机的所有任务。 操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的调度">
+    <meta name="description" content="Python 进程、线程、协程进程和线程计算机是由硬件和软件组成的。硬件中的CPU是计算机的核心，它承担计算机的所有任务。 操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的调度。 程序是运行在系统上的具有某种">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -446,8 +445,7 @@ Python 进程、线程、协程进程和线程计算机是由硬件和软件组�
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>进程，线程，协程，了解一下~~<a id="more"></a></p>
-<h1 id="Python-进程、线程、协程"><a href="#Python-进程、线程、协程" class="headerlink" title="Python 进程、线程、协程"></a>Python 进程、线程、协程</h1><h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p>计算机是由硬件和软件组成的。硬件中的CPU是计算机的核心，它承担计算机的所有任务。 操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的调度。 程序是运行在系统上的具有某种功能的软件，比如说浏览器，音乐播放器等。 每次执行程序的时候，都会完成一定的功能，比如说浏览器帮我们打开网页，为了保证其独立性，就需要一个专门的管理和控制执行程序的数据结构——进程控制块。 进程就是一个程序在一个数据集上的一次动态执行过程。 进程一般由程序、数据集、进程控制块三部分组成。我们编写的程序用来描述进程要完成哪些功能以及如何完成；数据集则是程序在执行过程中所需要使用的资源；进程控制块用来记录进程的外部特征，描述进程的执行变化过程，系统可以利用它来控制和管理进程，它是系统感知进程存在的唯一标志。</p>
+                <h1 id="Python-进程、线程、协程"><a href="#Python-进程、线程、协程" class="headerlink" title="Python 进程、线程、协程"></a>Python 进程、线程、协程</h1><h2 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h2><p>计算机是由硬件和软件组成的。硬件中的CPU是计算机的核心，它承担计算机的所有任务。 操作系统是运行在硬件之上的软件，是计算机的管理者，它负责资源的管理和分配、任务的调度。 程序是运行在系统上的具有某种功能的软件，比如说浏览器，音乐播放器等。 每次执行程序的时候，都会完成一定的功能，比如说浏览器帮我们打开网页，为了保证其独立性，就需要一个专门的管理和控制执行程序的数据结构——进程控制块。 进程就是一个程序在一个数据集上的一次动态执行过程。 进程一般由程序、数据集、进程控制块三部分组成。我们编写的程序用来描述进程要完成哪些功能以及如何完成；数据集则是程序在执行过程中所需要使用的资源；进程控制块用来记录进程的外部特征，描述进程的执行变化过程，系统可以利用它来控制和管理进程，它是系统感知进程存在的唯一标志。</p>
 <p>在早期的操作系统里，计算机只有一个核心，进程执行程序的最小单位，任务调度采用时间片轮转的抢占式方式进行进程调度。每个进程都有各自的一块独立的内存，保证进程彼此间的内存地址空间的隔离。 随着计算机技术的发展，进程出现了很多弊端，一是进程的创建、撤销和切换的开销比较大，二是由于对称多处理机（对称多处理机（SymmetricalMulti-Processing）又叫SMP，是指在一个计算机上汇集了一组处理器(多CPU)，各CPU之间共享内存子系统以及总线结构）的出现，可以满足多个运行单位，而多进程并行开销过大。 这个时候就引入了线程的概念。 线程也叫轻量级进程，它是一个基本的CPU执行单元，也是程序执行过程中的最小单元，由线程ID、程序计数器、寄存器集合 和堆栈共同组成。线程的引入减小了程序并发执行时的开销，提高了操作系统的并发性能。 线程没有自己的系统资源，只拥有在运行时必不可少的资源。但线程可以与同属与同一进程的其他线程共享进程所拥有的其他资源。</p>
 <h3 id="进程与线程之间的关系"><a href="#进程与线程之间的关系" class="headerlink" title="进程与线程之间的关系"></a>进程与线程之间的关系</h3><ul>
 <li>线程：是操作系统能够进行运算的调度的最小单位，它被包含在进程中，是进程中实际的运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程可以并发多个线程，每条线程并行执行不同的任务。<br>线程是一串指令的集合</li>
@@ -1018,8 +1016,6 @@ get:https://news.cnblogs.com/
                     <div class="summary block-with-text">
                         
                             突然看见的2个小问题关于不定长参数and匿名函数~~
-python中关于函数的2个小知识不定长参数你可能需要一个函数能处理比当初声明时更多的参数。这些参数叫做不定长参数。基本语法如下：
-def functionname([formal_ar
                         
                     </div>
                     <div class="publish-info">
@@ -1068,8 +1064,7 @@ def functionname([formal_ar
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            今天遇到一个小问题，了解一下
-python中 if __name__=”__main__”最近看很多代码，都发现了if __name__=”__main__”这个语句，突然有点不理解，所以搜一波理解一下。通俗一点理解：假如我是Gsuhy.p
+                            今天看书想到一个小问题，了解一下
                         
                     </div>
                     <div class="publish-info">
@@ -1250,7 +1245,7 @@ python中 if __name__=”__main__”最近看很多代码，都发现了if __nam
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">49.1k</span>
+                <span class="white-color">48.8k</span>
             
 
             

@@ -5,10 +5,12 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="CTF中一些PHP问题小结, Scorpio">
-    <meta name="description" content="总算是在网上找到了一篇比较全的有关php问题在CTF中的运用与绕过，记录一下来自https://hackfun.org/  Orz
+    <meta name="description" content="来自https://hackfun.org/  Orz
 CTF中一些PHP问题小结# 1  extract变量覆盖code
 &amp;lt;?php
-$flag=&amp;#39;">
+$flag=&amp;#39;xxx&amp;#39;;
+extract($_GET);
+ if(isset($s">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -452,7 +454,7 @@ $flag=&amp;#39;">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>总算是在网上找到了一篇比较全的有关php问题在CTF中的运用与绕过，记录一下<br>来自<a href="https://hackfun.org/" target="_blank" rel="noopener">https://hackfun.org/</a>  Orz<a id="more"></a></p>
+                <p>来自<a href="https://hackfun.org/" target="_blank" rel="noopener">https://hackfun.org/</a>  Orz</p>
 <h2 id="CTF中一些PHP问题小结"><a href="#CTF中一些PHP问题小结" class="headerlink" title="CTF中一些PHP问题小结"></a>CTF中一些PHP问题小结</h2><h3 id="1-extract变量覆盖"><a href="#1-extract变量覆盖" class="headerlink" title="# 1  extract变量覆盖"></a># 1  extract变量覆盖</h3><p><strong>code</strong></p>
 <pre><code>&lt;?php
 $flag=&#39;xxx&#39;;
@@ -1318,9 +1320,7 @@ echo $g;
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            接前一篇CTF中PHP问题   嘤嘤嘤~
-md5绕过（hash比较缺陷）&lt;?php
-if (isset($_GET[&#39;username&#39;]) &amp;&amp; isset($_GET[&#39;password&#
+                            接前一篇CTF中PHP问题
                         
                     </div>
                     <div class="publish-info">
@@ -1374,7 +1374,6 @@ if (isset($_GET[&#39;username&#39;]) &amp;&amp; isset($_GET[&#39;password&#
                     <div class="summary block-with-text">
                         
                             python模块之re
-re的简介使用python的re模块，尽管不能满足所有复杂的匹配情况，但足够在绝大多数情况下能够有效地实现对复杂字符串的分析并提取出相关信息。python 会将正则表达式转化为字节码，利用 C 语言的匹配引擎进行深度
                         
                     </div>
                     <div class="publish-info">
@@ -1555,7 +1554,7 @@ re的简介使用python的re模块，尽管不能满足所有复杂的匹配情�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">49.1k</span>
+                <span class="white-color">48.8k</span>
             
 
             
