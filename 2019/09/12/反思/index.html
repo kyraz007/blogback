@@ -4,12 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="kali渗透, Scorpio">
-    <meta name="description" content="0x01断网攻击实际上就是运用kali中的arpspoof这个东西来实现对其他电脑的断网
-步骤
-打开kali命令行ifconfig查看自己kali的网卡，我的是eth0
-然后查看一波主机的网关和IP地址ipconfig
-输入命令arpspo">
+    <meta name="keywords" content="反思, Scorpio">
+    <meta name="description" content="今天查资料，然后就翻到了好几个大牛的博客，发现他们博客里面的东西我几乎看不懂再回过头来看看自己的博客，这都是些啥？？？都是一些什么学习笔记啊，什么什么乱七八糟的没有一点技术含量，突然感觉这两年时间真的在荒废，别人对我的评价是，知识深度不行，">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>kali渗透 | Scorpio</title>
+    <title>反思 | Scorpio</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +256,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        kali渗透
+                        反思
                     </div>
                 </div>
             </div>
@@ -377,8 +373,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/linux/" target="_blank">
-                                <span class="chip bg-color">linux</span>
+                            <a href="/tags/Daily/" target="_blank">
+                                <span class="chip bg-color">Daily</span>
                             </a>
                         
                     </div>
@@ -389,8 +385,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Linux/" class="post-category" target="_blank">
-                                Linux
+                            <a href="/categories/Daily/" class="post-category" target="_blank">
+                                Daily
                             </a>
                         
                     </div>
@@ -401,21 +397,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-02-05
+                    2019-09-12
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        702
+                        228
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        1 分
                     </div>
                     
                 
@@ -431,41 +427,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="0x01断网攻击"><a href="#0x01断网攻击" class="headerlink" title="0x01断网攻击"></a>0x01断网攻击</h3><p>实际上就是运用kali中的arpspoof这个东西来实现对其他电脑的断网</p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ul>
-<li>打开kali命令行<code>ifconfig</code>查看自己kali的网卡，我的是eth0</li>
-<li>然后查看一波主机的网关和IP地址<code>ipconfig</code></li>
-<li>输入命令<code>arpspoof -i eth0 -t 目标的IP 网关</code><h3 id="欺骗实战-看内网妹子的QQ相册照片"><a href="#欺骗实战-看内网妹子的QQ相册照片" class="headerlink" title="欺骗实战-看内网妹子的QQ相册照片"></a>欺骗实战-看内网妹子的QQ相册照片</h3>有点刺激<br>说点额外的：arp欺骗根据他的命令其实应该就是目标的IP流量经过我的网卡然后从网关出去，那断网攻击应该就是只经过了我的网卡，然后没出去就被断网了。。。。<h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4></li>
-<li>先进行IP流量的转发：<code>echo 1 &gt;/proc/sys/net/ipv4/ip_forward</code></li>
-<li>还是arpspoof那个命令</li>
-<li>echo写命令是不会有回显</li>
-<li>接上面的命令，在ping一下看看能不能上网，能的话那么就欺骗成功</li>
-<li>driftnet:获取本机网卡的图片，也就是欺骗目标的图片</li>
-<li>driftnet -i 网卡<h3 id="HTTP账号密码获取"><a href="#HTTP账号密码获取" class="headerlink" title="HTTP账号密码获取"></a>HTTP账号密码获取</h3></li>
-<li>工具：ettercap，可以进行欺骗、DNS欺骗、流量嗅探。</li>
-<li>也需要知道目标机器的IP、网关、和自己电脑的IP</li>
-<li>首先还是进行各流量转发</li>
-<li>然后arpspoof -i eth0……</li>
-<li>ettercap -Tq -i 网卡（-T是启动文本模式，-q启动安静模式）</li>
-<li>然后在登录一个用http的网站应该就可以hhhhhhhhhh<h3 id="HTTPS账号密码获取"><a href="#HTTPS账号密码获取" class="headerlink" title="HTTPS账号密码获取"></a>HTTPS账号密码获取</h3></li>
-<li>工具：sslstrip，吧https的链接还原为http</li>
-<li>用vim打开一个文本<code>vim /etc/ettercap/etter.comf</code></li>
-<li>这里就要简单说一下vim，vim打开文件很简单，如果想退出的话那么先按一下<code>esc</code>，然后在按下<code>shift+：</code>在下面输入<code>q!</code>就行了，不过<code>q！</code>是不保存退出，wq是保存退出</li>
-<li>然后找到LINUX的地方</li>
-<li>在下面iptables的在下面redir前面应该有#的，把下面两个redir的前面的#去掉</li>
-<li>wq退出vim</li>
-<li>sslstrip -a -f -k</li>
-<li>然后进行上面http的步骤应该就可以了<br>（不过HTTPS可能会遇到问题，比如有些浏览器会有证书的问题）<h3 id="会话劫持"><a href="#会话劫持" class="headerlink" title="会话劫持"></a>会话劫持</h3>也就是可以登录别人登录过的网站</li>
-<li>工具：wireshark、ferret(重新生成抓包后的文件)、hamster（用来重放流量）<h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4></li>
-<li>先流量转发</li>
-<li>在欺骗</li>
-<li>打开wireshark开始抓包</li>
-<li>登录一个网站</li>
-<li>把抓到的保存，注意保存为pcap文件</li>
-<li>接着就是用ferret -r +保存的文件，会出现一个txt文件</li>
-<li>然后就是hamster,敲回车会出现一些信息，把HTTP的端口改成1234并且访问127.0.0.1:1234</li>
-</ul>
-<p><strong>这里出现了点问题，访问127.0.0.1:1234没有什么反应，查了一波，说的是要把wireshark抓包的那个txt文件copy到root里面然后才可以。emmmmmm不过好像这种方法已经有点lowhhhhhh</strong></p>
+                <p>今天查资料，然后就翻到了好几个大牛的博客，发现他们博客里面的东西我几乎看不懂<br>再回过头来看看自己的博客，这都是些啥？？？都是一些什么学习笔记啊，什么什么乱七八糟的<br>没有一点技术含量，突然感觉这两年时间真的在荒废，别人对我的评价是，知识深度不行，但是动手能力还行<br>但是自己都觉得，动手能力也不咋地，看起来看的东西挺多，但是好像都没有进脑子，洞也没挖到过，站也没拿过<br>打CTF也没啥成就，编程也不咋样，也没什么拿得出手的项目源码，说到底还是自己太懒了，真的应该改变了，这都大三了，真不能再荒废下去。<br>反思，反思，反思<br>努力学习。</p>
 
             </div>
             <hr/>
@@ -624,9 +586,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《kali渗透》
+                    《反思》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2018/02/05/linux一些渗透/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/12/反思/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Gsuhy
             </a> 采用
@@ -666,29 +628,80 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2018/02/06/python学习笔记（二）/">
+                <a href="/2019/09/12/反思/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="python学习笔记（二）">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="反思">
                         
-                        <span class="card-title">python学习笔记（二）</span>
+                        <span class="card-title">反思</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            python入门part (2)
+                            应该反思自己
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-06
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Daily/" class="post-category" target="_blank">
+                                    Daily
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Daily/" target="_blank">
+                        <span class="chip bg-color">Daily</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/08/关于线程一个小知识/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="关于线程一个小细节">
+                        
+                        <span class="card-title">关于线程一个小细节</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            今天在看《python核心编程》的时候，看到了以前学线程的时候没有看到过的一个小细节，是关于节省时间？或者说节省资源的吧，记录一下
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -706,55 +719,6 @@
                     
                     <a href="/tags/python/" target="_blank">
                         <span class="chip bg-color">python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2018/02/05/SQL注入/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="SQL注入">
-                        
-                        <span class="card-title">SQL注入</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            学习一波SQL注入
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-05
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/SQL/" class="post-category" target="_blank">
-                                    SQL
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/sql/" target="_blank">
-                        <span class="chip bg-color">sql</span>
                     </a>
                     
                 </div>
